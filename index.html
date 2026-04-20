@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print3D Manager</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ac:#1D9E75;--ac-l:#E1F5EE;--ac-d:#0F6E56;--warn:#BA7517;--warn-l:#FAEEDA;--danger:#A32D2D;--danger-l:#FCEBEB;--info:#185FA5;--info-l:#E6F1FB;--bg:#f5f5f3;--bg2:#ffffff;--bg3:#f0f0ed;--text:#1a1a1a;--text2:#6b6b6b;--text3:#a0a0a0;--border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);--radius:8px;--radius-lg:12px}
+@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg2:#242424;--bg3:#2e2e2e;--text:#f0f0f0;--text2:#a0a0a0;--text3:#606060;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2)}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:14px;height:100vh;overflow:hidden}
+#app{display:flex;height:100vh}
+#sb{width:210px;background:var(--bg2);border-right:0.5px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+#sb-head{padding:16px 14px 12px;border-bottom:0.5px solid var(--border)}
+.logo{display:flex;align-items:center;gap:9px}
+.logo-box{width:30px;height:30px;border-radius:8px;background:var(--ac);display:flex;align-items:center;justify-content:center}
+.logo-box svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2}
+.brand{font-size:14px;font-weight:600;color:var(--text)}
+.sub{font-size:11px;color:var(--text2)}
+nav{flex:1;padding:8px;overflow-y:auto}
+.nl{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:10px 8px 4px}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--radius);cursor:pointer;color:var(--text2);font-size:13px;transition:background .12s;user-select:none}
+.ni:hover{background:var(--bg3);color:var(--text)}
+.ni.on{background:var(--ac-l);color:var(--ac-d);font-weight:600}
+.ni svg{width:15px;height:15px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+#tb{height:52px;background:var(--bg2);border-bottom:0.5px solid var(--border);display:flex;align-items:center;padding:0 20px;gap:10px;flex-shrink:0}
+#tb h1{font-size:15px;font-weight:600;color:var(--text);flex:1}
+.btn{padding:7px 14px;border-radius:var(--radius);border:0.5px solid var(--border2);background:var(--bg2);color:var(--text);font-size:12px;cursor:pointer;transition:background .12s}
+.btn:hover{background:var(--bg3)}
+.btn-p{background:var(--ac);color:white;border-color:var(--ac)}
+.btn-p:hover{background:var(--ac-d)}
+.btn-sm{padding:5px 10px;font-size:11px}
+.btn-danger{background:var(--danger-l);color:var(--danger);border-color:var(--danger)}
+#cont{flex:1;overflow-y:auto;padding:20px}
+.sec{display:none}.sec.on{display:block}
+.kgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kgrid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kgrid6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.kcard{background:var(--bg3);border-radius:var(--radius);padding:14px 16px}
+.klbl{font-size:11px;color:var(--text2);margin-bottom:5px}
+.kval{font-size:21px;font-weight:600;color:var(--text)}
+.kdelta{font-size:11px;margin-top:3px;color:var(--text2)}
+.kdelta.up{color:var(--ac)}.kdelta.dn{color:var(--danger)}
+.card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.ch{padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:13px;font-weight:600;color:var(--text)}
+.cb{padding:14px 16px}
+.tbl-wrap{overflow-x:auto}
+table.dt{width:100%;border-collapse:collapse}
+table.dt th{text-align:left;font-size:11px;color:var(--text2);padding:7px 8px 6px 0;border-bottom:0.5px solid var(--border);font-weight:500;white-space:nowrap}
+table.dt td{padding:9px 8px 9px 0;border-bottom:0.5px solid var(--border);color:var(--text);vertical-align:middle;white-space:nowrap}
+table.dt tr:last-child td{border-bottom:none}
+table.dt tr:hover td{background:var(--bg3)}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.b-g{background:var(--ac-l);color:var(--ac-d)}
+.b-a{background:var(--warn-l);color:var(--warn)}
+.b-r{background:var(--danger-l);color:var(--danger)}
+.b-b{background:var(--info-l);color:var(--info)}
+.b-gr{background:var(--bg3);color:var(--text2)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.bar-wrap{height:5px;background:var(--bg3);border-radius:3px;margin-top:7px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--bg2);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:22px;width:460px;max-height:90vh;overflow-y:auto}
+.modal h2{font-size:15px;font-weight:600;margin-bottom:16px;color:var(--text)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.frow1{margin-bottom:12px}
+label.fl{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:500}
+input,select,textarea{width:100%;font-size:13px;padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(29,158,117,.15)}
+textarea{resize:vertical;min-height:60px}
+.fbtns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.empty{text-align:center;padding:36px;color:var(--text3);font-size:13px}
+.act-item{display:flex;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border)}
+.act-item:last-child{border-bottom:none}
+.act-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:var(--bg2);padding:10px 18px;border-radius:var(--radius);font-size:13px;z-index:2000;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+#loading{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:3000;flex-direction:column;gap:12px}
+#loading .spin{width:32px;height:32px;border:3px solid var(--border2);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loading p{font-size:13px;color:var(--text2)}
+.pr-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="logo-box" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" style="width:22px;height:22px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+  <div class="spin"></div>
+  <p>Cargando Print3D Manager...</p>
+</div>
+
+<div id="app" style="display:none">
+<div id="sb">
+  <div id="sb-head">
+    <div class="logo">
+      <div class="logo-box"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+      <div><div class="brand">Print3D</div><div class="sub">Mi taller</div></div>
+    </div>
+  </div>
+  <nav>
+    <div class="nl">Principal</div>
+    <div class="ni on" onclick="nav('dash',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+    <div class="nl">Inventario</div>
+    <div class="ni" onclick="nav('insumos',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Filamentos</div>
+    <div class="ni" onclick="nav('productos',this)"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Productos</div>
+    <div class="nl">Operaciones</div>
+    <div class="ni" onclick="nav('impresoras',this)"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Impresoras</div>
+    <div class="ni" onclick="nav('produccion',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Producción</div>
+    <div class="ni" onclick="nav('compras',this)"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Compras</div>
+    <div class="ni" onclick="nav('ventas',this)"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Ventas</div>
+    <div class="nl">Análisis</div>
+    <div class="ni" onclick="nav('costos',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Calculadora</div>
+    <div class="ni" onclick="nav('reportes',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Reportes</div>
+  </nav>
+</div>
+
+<div id="main">
+  <div id="tb">
+    <h1 id="page-title">Dashboard</h1>
+    <button class="btn btn-p btn-sm" id="tb-btn" onclick="tbAction()">+ Nueva venta</button>
+  </div>
+  <div id="cont">
+
+    <div id="sec-dash" class="sec on">
+      <div class="kgrid" id="dash-kpis"></div>
+      <div class="row2">
+        <div class="card"><div class="ch"><span class="ct">Impresoras</span></div><div class="cb" id="dash-printers"></div></div>
+        <div class="card"><div class="ch"><span class="ct">Actividad reciente</span></div><div class="cb" style="padding:0 16px" id="dash-activity"></div></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Alertas de stock</span></div><div class="cb" id="dash-alerts"></div></div>
+    </div>
+
+    <div id="sec-insumos" class="sec">
+      <div class="card"><div class="ch"><span class="ct">Stock de filamentos</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Material</th><th>Color</th><th>Marca</th><th>Stock (kg)</th><th>Mínimo</th><th>Costo/kg</th><th>Estado</th><th></th></tr></thead><tbody id="tb-insumos"></tbody></table></div></div>
+    </div>
+
+    <div id="sec-productos" class="sec">
+      <div class="card"><div class="ch"><span class="ct">Catálogo de productos</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Producto</th><th>Tipo</th><th>Stock u.</th><th>Costo</th><th>Precio</th><th>Margen</th><th></th></tr></thead><tbody id="tb-productos"></tbody></table></div></div>
+    </div>
+
+    <div id="sec-impresoras" class="sec">
+      <div class="card"><div class="ch"><span class="ct">Mis impresoras</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Nombre</th><th>Modelo</th><th>Colores</th><th>Estado</th><th>Horas</th><th></th></tr></thead><tbody id="tb-impresoras"></tbody></table></div></div>
+    </div>
+
+    <div id="sec-produccion" class="sec">
+      <div class="card"><div class="ch"><span class="ct">Órdenes de producción</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>#</th><th>Producto</th><th>Impresora</th><th>Material</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody id="tb-produccion"></tbody></table></div></div>
+    </div>
+
+    <div id="sec-compras" class="sec">
+      <div class="card"><div class="ch"><span class="ct">Historial de compras</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Proveedor</th><th>Insumo</th><th>Cantidad</th><th>Total ARS</th><th>Método</th><th></th></tr></thead><tbody id="tb-compras"></tbody></table></div></div>
+    </div>
+
+    <div id="sec-ventas" class="sec">
+      <div class="card"><div class="ch"><span class="ct">Registro de ventas</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Cliente</th><th>Producto</th><th>Cant.</th><th>Total</th><th>Canal</th><th>Estado</th><th></th></tr></thead><tbody id="tb-ventas"></tbody></table></div></div>
+    </div>
+
+    <div id="sec-costos" class="sec">
+      <div class="card" style="margin-bottom:16px">
+        <div class="ch"><span class="ct">Calculadora de costo por pieza</span></div>
+        <div class="cb">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div><label class="fl">Peso filamento (g)</label><input type="number" id="c-peso" value="85" oninput="calcCosto()"></div>
+            <div><label class="fl">Costo filamento ($/kg)</label><input type="number" id="c-kg" value="18500" oninput="calcCosto()"></div>
+            <div><label class="fl">Tiempo impresión (hs)</label><input type="number" id="c-hs" value="3.5" step="0.5" oninput="calcCosto()"></div>
+            <div><label class="fl">Costo energía ($/kWh)</label><input type="number" id="c-kwh" value="120" oninput="calcCosto()"></div>
+            <div><label class="fl">Consumo impresora (W)</label><input type="number" id="c-w" value="200" oninput="calcCosto()"></div>
+            <div><label class="fl">Margen deseado (%)</label><input type="number" id="c-margen" value="65" oninput="calcCosto()"></div>
+            <div><label class="fl">Tiempo diseño/prep (hs)</label><input type="number" id="c-labor" value="0.5" step="0.5" oninput="calcCosto()"></div>
+            <div><label class="fl">Valor hora trabajo ($/h)</label><input type="number" id="c-hrp" value="2000" oninput="calcCosto()"></div>
+          </div>
+        </div>
+      </div>
+      <div class="kgrid kgrid6" id="calc-results"></div>
+    </div>
+
+    <div id="sec-reportes" class="sec">
+      <div class="kgrid" id="rep-kpis"></div>
+      <div class="row2">
+        <div class="card"><div class="ch"><span class="ct">Ventas por canal</span></div><div class="cb" id="rep-canales"></div></div>
+        <div class="card"><div class="ch"><span class="ct">Materiales más comprados</span></div><div class="cb" id="rep-mats"></div></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Productos más vendidos</span></div><div class="cb" id="rep-prods"></div></div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div class="modal"><h2 id="modal-title"></h2><div id="modal-body"></div><div class="fbtns"><button class="btn btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-p btn-sm" onclick="saveModal()">Guardar</button></div></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPA_URL = 'https://funnlrfennavtpdprnbo.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1bm5scmZlbm5hdnRwZHBybmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2OTI2OTUsImV4cCI6MjA5MjI2ODY5NX0.g_8yqdYFR7P9ao9QhYJ5XONA2JCa-fYgh9YBIy3wRZA';
+const { createClient } = supabase;
+const db = createClient(SUPA_URL, SUPA_KEY);
+
+let DATA = { filamentos:[], productos:[], impresoras:[], produccion:[], compras:[], ventas:[] };
+let modalMode='', modalId=null, curSec='dash';
+
+const ars = n => '$' + Math.round(n||0).toLocaleString('es-AR');
+const fdate = d => { if(!d) return '—'; const p=d.split('-'); return p[2]+'/'+p[1]+'/'+p[0].slice(2); };
+const today = () => new Date().toISOString().slice(0,10);
+const gv = id => { const el=document.getElementById(id); return el?el.value:''; };
+const gn = id => parseFloat(gv(id))||0;
+
+function toast(msg, ok=true) {
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.background=ok?'var(--ac)':'var(--danger)';
+  t.className='toast show'; setTimeout(()=>t.className='toast',2500);
+}
+
+async function loadAll() {
+  try {
+    const [fil,pro,imp,ope,com,ven] = await Promise.all([
+      db.from('filamentos').select('*').order('id'),
+      db.from('productos').select('*').order('id'),
+      db.from('impresoras').select('*').order('id'),
+      db.from('produccion').select('*').order('id',{ascending:false}),
+      db.from('compras').select('*').order('fecha',{ascending:false}),
+      db.from('ventas').select('*').order('fecha',{ascending:false})
+    ]);
+    DATA.filamentos = fil.data||[];
+    DATA.productos = pro.data||[];
+    DATA.impresoras = imp.data||[];
+    DATA.produccion = ope.data||[];
+    DATA.compras = com.data||[];
+    DATA.ventas = ven.data||[];
+
+    if(!DATA.impresoras.length) await seedImpresoras();
+    renderAll();
+  } catch(e) {
+    toast('Error al conectar con la base de datos', false);
+  }
+  document.getElementById('loading').style.display='none';
+  document.getElementById('app').style.display='flex';
+}
+
+async function seedImpresoras() {
+  const imp = [
+    {nombre:'K2 Plus',modelo:'Creality K2 Plus',colores:8,estado:'libre',horas:0},
+    {nombre:'Bambu A1 #1',modelo:'Bambu Lab A1',colores:4,estado:'libre',horas:0},
+    {nombre:'Bambu A1 #2',modelo:'Bambu Lab A1',colores:4,estado:'libre',horas:0},
+    {nombre:'Ender V3 KE',modelo:'Creality Ender V3 KE',colores:1,estado:'libre',horas:0},
+    {nombre:'K1C',modelo:'Creality K1C',colores:1,estado:'libre',horas:0}
+  ];
+  const {data} = await db.from('impresoras').insert(imp).select();
+  DATA.impresoras = data||[];
+}
+
+function nav(id, el) {
+  document.querySelectorAll('.sec').forEach(s=>s.className='sec');
+  document.getElementById('sec-'+id).className='sec on';
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
+  el.classList.add('on');
+  curSec=id;
+  const titles={dash:'Dashboard',insumos:'Filamentos',productos:'Catálogo',impresoras:'Impresoras',produccion:'Producción',compras:'Compras',ventas:'Ventas',costos:'Calculadora de costos',reportes:'Reportes'};
+  const btns={dash:'+ Nueva venta',insumos:'+ Agregar filamento',productos:'+ Nuevo producto',impresoras:'+ Agregar impresora',produccion:'+ Nueva orden',compras:'+ Registrar compra',ventas:'+ Nueva venta',costos:'',reportes:''};
+  document.getElementById('page-title').textContent=titles[id]||id;
+  const bb=document.getElementById('tb-btn');
+  bb.textContent=btns[id]||'';
+  bb.style.display=btns[id]?'':'none';
+  if(id==='costos') calcCosto();
+  if(id==='reportes') renderReportes();
+  renderAll();
+}
+
+function tbAction() {
+  const map={dash:'venta',insumos:'filamento',productos:'producto',impresoras:'impresora',produccion:'produccion',compras:'compra',ventas:'venta'};
+  openModal(map[curSec]||'venta','new');
+}
+
+function renderAll() {
+  renderDash();
+  renderTbInsumos();
+  renderTbProductos();
+  renderTbImpresoras();
+  renderTbProduccion();
+  renderTbCompras();
+  renderTbVentas();
+}
+
+function renderDash() {
+  const tv=DATA.ventas.reduce((a,v)=>a+(v.total||0),0);
+  const tc=DATA.compras.reduce((a,c)=>a+(c.total||0),0);
+  const mg=tv?Math.round((tv-tc)/tv*100):0;
+  const act=DATA.produccion.filter(p=>p.estado==='en curso').length;
+  document.getElementById('dash-kpis').innerHTML=`
+    <div class="kcard"><div class="klbl">Ventas registradas</div><div class="kval">${ars(tv)}</div><div class="kdelta">${DATA.ventas.length} operaciones</div></div>
+    <div class="kcard"><div class="klbl">Órdenes activas</div><div class="kval">${act}</div><div class="kdelta">En producción</div></div>
+    <div class="kcard"><div class="klbl">Costo insumos</div><div class="kval">${ars(tc)}</div><div class="kdelta">${tv?Math.round(tc/tv*100):0}% de ventas</div></div>
+    <div class="kcard"><div class="klbl">Margen estimado</div><div class="kval">${mg}%</div><div class="kdelta ${mg>=50?'up':'dn'}">${mg>=50?'Saludable':'Revisar costos'}</div></div>`;
+
+  const dotColor=s=>s==='imprimiendo'?'var(--ac)':s==='pausa'?'#EF9F27':'var(--border2)';
+  const badgeCls=s=>s==='imprimiendo'?'b-g':s==='pausa'?'b-a':s==='mantenimiento'?'b-r':'b-gr';
+  document.getElementById('dash-printers').innerHTML=DATA.impresoras.map(p=>`
+    <div class="pr-row">
+      <div class="pr-dot" style="background:${dotColor(p.estado)}"></div>
+      <span style="flex:1;font-size:13px">${p.nombre}</span>
+      <span class="badge ${badgeCls(p.estado)}">${p.estado}</span>
+    </div>`).join('') || '<div class="empty">Sin impresoras</div>';
+
+  const acts=[
+    ...DATA.ventas.slice(0,3).map(v=>({text:`Venta — ${v.producto}`,sub:fdate(v.fecha)+' · '+ars(v.total),color:'var(--ac)'})),
+    ...DATA.compras.slice(0,2).map(c=>({text:`Compra — ${c.insumo}`,sub:fdate(c.fecha)+' · '+ars(c.total),color:'#378ADD'})),
+    ...DATA.produccion.filter(p=>p.estado==='en curso').slice(0,2).map(p=>({text:`Producción — ${p.producto}`,sub:fdate(p.fecha)+' · '+p.impresora,color:'#EF9F27'}))
+  ].slice(0,6);
+  document.getElementById('dash-activity').innerHTML=acts.length?acts.map(a=>`
+    <div class="act-item">
+      <div class="act-dot" style="background:${a.color}"></div>
+      <div><div style="font-size:12px">${a.text}</div><div style="font-size:11px;color:var(--text3)">${a.sub}</div></div>
+    </div>`).join(''):'<div class="empty">Sin actividad reciente</div>';
+
+  const alerts=DATA.filamentos.filter(f=>f.stock<f.minimo);
+  document.getElementById('dash-alerts').innerHTML=alerts.length
+    ?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`+alerts.map(f=>`
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px">
+        <div style="font-size:12px;font-weight:600">${f.material} ${f.color}</div>
+        <div style="font-size:20px;font-weight:600;color:var(--danger);margin:4px 0">${f.stock} kg</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.min(100,Math.round(f.stock/f.minimo*100))}%;background:var(--danger)"></div></div>
+        <div style="font-size:10px;color:var(--text3);margin-top:4px">Mínimo: ${f.minimo} kg</div>
+      </div>`).join('')+'</div>'
+    :'<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">Sin alertas de stock — todo OK</div>';
+}
+
+function renderTbInsumos() {
+  const ok=f=>f.stock>=f.minimo;
+  const cls=f=>f.stock<f.minimo?'b-r':f.stock<f.minimo*1.5?'b-a':'b-g';
+  const lbl=f=>f.stock<f.minimo?'Crítico':f.stock<f.minimo*1.5?'Bajo':'OK';
+  document.getElementById('tb-insumos').innerHTML=DATA.filamentos.map(f=>`<tr>
+    <td>${f.material}</td><td>${f.color}</td><td>${f.marca}</td>
+    <td>${f.stock}</td><td>${f.minimo}</td><td>${ars(f.costo_kg)}</td>
+    <td><span class="badge ${cls(f)}">${lbl(f)}</span></td>
+    <td><button class="btn btn-sm" onclick="openModal('filamento','edit',${f.id})">Editar</button></td>
+  </tr>`).join('') || '<tr><td colspan="8" class="empty">Sin filamentos registrados</td></tr>';
+}
+
+function renderTbProductos() {
+  document.getElementById('tb-productos').innerHTML=DATA.productos.map(p=>{
+    const mg=p.precio&&p.costo?Math.round((p.precio-p.costo)/p.precio*100):null;
+    return`<tr>
+      <td>${p.nombre}</td>
+      <td><span class="badge ${p.tipo==='catalogo'?'b-b':'b-a'}">${p.tipo==='catalogo'?'Catálogo':'A medida'}</span></td>
+      <td>${p.tipo==='catalogo'?p.stock:'—'}</td>
+      <td>${p.costo?ars(p.costo):'—'}</td><td>${ars(p.precio)}</td>
+      <td>${mg!==null?mg+'%':'—'}</td>
+      <td><button class="btn btn-sm" onclick="openModal('producto','edit',${p.id})">Editar</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="7" class="empty">Sin productos</td></tr>';
+}
+
+function renderTbImpresoras() {
+  const bc=s=>s==='imprimiendo'?'b-g':s==='pausa'?'b-a':s==='mantenimiento'?'b-r':'b-gr';
+  document.getElementById('tb-impresoras').innerHTML=DATA.impresoras.map(p=>`<tr>
+    <td>${p.nombre}</td><td>${p.modelo}</td><td>${p.colores}</td>
+    <td><span class="badge ${bc(p.estado)}">${p.estado}</span></td>
+    <td>${p.horas} hs</td>
+    <td><button class="btn btn-sm" onclick="openModal('impresora','edit',${p.id})">Editar</button></td>
+  </tr>`).join('') || '<tr><td colspan="6" class="empty">Sin impresoras</td></tr>';
+}
+
+function renderTbProduccion() {
+  const bc=s=>s==='en curso'?'b-g':s==='pausa'?'b-a':s==='terminado'?'b-b':'b-r';
+  document.getElementById('tb-produccion').innerHTML=DATA.produccion.map(p=>`<tr>
+    <td>#${p.id}</td><td>${p.producto}</td><td>${p.impresora}</td>
+    <td>${p.material}</td><td>${fdate(p.fecha)}</td>
+    <td><span class="badge ${bc(p.estado)}">${p.estado}</span></td>
+    <td><button class="btn btn-sm" onclick="openModal('produccion','edit',${p.id})">Editar</button></td>
+  </tr>`).join('') || '<tr><td colspan="7" class="empty">Sin órdenes de producción</td></tr>';
+}
+
+function renderTbCompras() {
+  document.getElementById('tb-compras').innerHTML=DATA.compras.map(c=>`<tr>
+    <td>${fdate(c.fecha)}</td><td>${c.proveedor}</td><td>${c.insumo}</td>
+    <td>${c.cantidad}</td><td>${ars(c.total)}</td><td>${c.metodo}</td>
+    <td><button class="btn btn-sm btn-danger" onclick="deleteItem('compras',${c.id})">✕</button></td>
+  </tr>`).join('') || '<tr><td colspan="7" class="empty">Sin compras registradas</td></tr>';
+}
+
+function renderTbVentas() {
+  const bc=s=>s==='pagada'?'b-g':s==='seña'?'b-a':'b-r';
+  document.getElementById('tb-ventas').innerHTML=DATA.ventas.map(v=>`<tr>
+    <td>${fdate(v.fecha)}</td><td>${v.cliente||'—'}</td><td>${v.producto}</td>
+    <td>${v.cantidad}</td><td>${ars(v.total)}</td><td>${v.canal}</td>
+    <td><span class="badge ${bc(v.estado)}">${v.estado}</span></td>
+    <td><button class="btn btn-sm btn-danger" onclick="deleteItem('ventas',${v.id})">✕</button></td>
+  </tr>`).join('') || '<tr><td colspan="8" class="empty">Sin ventas registradas</td></tr>';
+}
+
+function renderReportes() {
+  const tv=DATA.ventas.reduce((a,v)=>a+(v.total||0),0);
+  const tc=DATA.compras.reduce((a,c)=>a+(c.total||0),0);
+  const mg=tv?Math.round((tv-tc)/tv*100):0;
+  document.getElementById('rep-kpis').innerHTML=`
+    <div class="kcard"><div class="klbl">Total ventas</div><div class="kval">${ars(tv)}</div></div>
+    <div class="kcard"><div class="klbl">Total compras</div><div class="kval">${ars(tc)}</div></div>
+    <div class="kcard"><div class="klbl">Ganancia bruta</div><div class="kval">${ars(tv-tc)}</div></div>
+    <div class="kcard"><div class="klbl">Margen</div><div class="kval">${mg}%</div></div>`;
+
+  const bar=(data,color)=>{
+    const keys=Object.keys(data).sort((a,b)=>data[b]-data[a]);
+    const max=keys.length?data[keys[0]]:1;
+    return keys.length?keys.map(k=>`
+      <div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${k}</span><span>${ars(data[k])}</span></div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(data[k]/max*100)}%;background:${color}"></div></div>
+      </div>`).join(''):'<div class="empty">Sin datos</div>';
+  };
+
+  const canales={};
+  DATA.ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+(v.total||0)});
+  document.getElementById('rep-canales').innerHTML=bar(canales,'var(--ac)');
+
+  const mats={};
+  DATA.compras.forEach(c=>{const k=c.insumo;mats[k]=(mats[k]||0)+(c.total||0)});
+  document.getElementById('rep-mats').innerHTML=bar(mats,'#378ADD');
+
+  const prods={};
+  DATA.ventas.forEach(v=>{prods[v.producto]=(prods[v.producto]||0)+(v.total||0)});
+  document.getElementById('rep-prods').innerHTML=bar(prods,'#7F77DD');
+}
+
+function calcCosto() {
+  const peso=gn('c-peso'),kg=gn('c-kg'),hs=gn('c-hs'),kwh=gn('c-kwh'),w=gn('c-w'),margen=gn('c-margen'),labor=gn('c-labor'),hrp=gn('c-hrp');
+  const fil=(peso/1000)*kg, ener=(w/1000)*hs*kwh, lab=labor*hrp, total=fil+ener+lab;
+  const sug=margen<100?total/(1-margen/100):total*2;
+  document.getElementById('calc-results').innerHTML=`
+    <div class="kcard"><div class="klbl">Filamento</div><div class="kval">${ars(fil)}</div></div>
+    <div class="kcard"><div class="klbl">Energía</div><div class="kval">${ars(ener)}</div></div>
+    <div class="kcard"><div class="klbl">Mano de obra</div><div class="kval">${ars(lab)}</div></div>
+    <div class="kcard"><div class="klbl">Costo total</div><div class="kval">${ars(total)}</div></div>
+    <div class="kcard"><div class="klbl">Precio mínimo</div><div class="kval">${ars(total*1.1)}</div></div>
+    <div class="kcard"><div class="klbl">Precio sugerido</div><div class="kval" style="color:var(--ac)">${ars(sug)}</div><div class="kdelta up">Margen ${margen}%</div></div>`;
+}
+
+const MODALS = {
+  venta: ()=>`
+    <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Cliente</label><input type="text" id="m-cliente" placeholder="Nombre o —"></div></div>
+    <div class="frow1"><label class="fl">Producto</label><input type="text" id="m-producto" placeholder="Nombre del producto"></div>
+    <div class="frow"><div><label class="fl">Cantidad</label><input type="number" id="m-cantidad" value="1" min="1"></div><div><label class="fl">Total ARS</label><input type="number" id="m-total" placeholder="0"></div></div>
+    <div class="frow"><div><label class="fl">Canal</label><select id="m-canal"><option>Instagram</option><option>WhatsApp</option><option>Feria</option><option>Directo</option><option>MercadoLibre</option><option>Otro</option></select></div><div><label class="fl">Estado</label><select id="m-estado"><option value="pagada">Pagada</option><option value="seña">Seña</option><option value="pendiente">Pendiente</option></select></div></div>`,
+  compra: ()=>`
+    <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Proveedor</label><input type="text" id="m-proveedor" placeholder="Nombre proveedor"></div></div>
+    <div class="frow1"><label class="fl">Insumo</label><input type="text" id="m-insumo" placeholder="Ej: PLA+ Negro 1kg"></div>
+    <div class="frow"><div><label class="fl">Cantidad</label><input type="text" id="m-cantidad" placeholder="Ej: 2 kg"></div><div><label class="fl">Total ARS</label><input type="number" id="m-total" placeholder="0"></div></div>
+    <div class="frow1"><label class="fl">Método de pago</label><select id="m-metodo"><option>Transferencia</option><option>Efectivo</option><option>Tarjeta</option><option>Débito</option></select></div>`,
+  producto: ()=>`
+    <div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Nombre del producto"></div>
+    <div class="frow"><div><label class="fl">Tipo</label><select id="m-tipo"><option value="catalogo">Catálogo</option><option value="medida">A medida</option></select></div><div><label class="fl">Stock (u.)</label><input type="number" id="m-stock" value="0" min="0"></div></div>
+    <div class="frow"><div><label class="fl">Costo ARS</label><input type="number" id="m-costo" placeholder="0"></div><div><label class="fl">Precio venta ARS</label><input type="number" id="m-precio" placeholder="0"></div></div>`,
+  filamento: ()=>`
+    <div class="frow"><div><label class="fl">Material</label><input type="text" id="m-material" placeholder="PLA+, PETG, ABS..."></div><div><label class="fl">Color</label><input type="text" id="m-color" placeholder="Negro, Blanco..."></div></div>
+    <div class="frow"><div><label class="fl">Marca</label><input type="text" id="m-marca" placeholder="Polymaker, Bambu..."></div><div><label class="fl">Stock actual (kg)</label><input type="number" id="m-stock" step="0.01" value="1"></div></div>
+    <div class="frow"><div><label class="fl">Stock mínimo (kg)</label><input type="number" id="m-minimo" step="0.01" value="0.5"></div><div><label class="fl">Costo por kg (ARS)</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
+  impresora: ()=>`
+    <div class="frow"><div><label class="fl">Nombre corto</label><input type="text" id="m-nombre" placeholder="Ej: Bambu A1 #1"></div><div><label class="fl">Modelo</label><input type="text" id="m-modelo" placeholder="Ej: Bambu Lab A1"></div></div>
+    <div class="frow"><div><label class="fl">Colores disponibles</label><input type="number" id="m-colores" value="1" min="1" max="16"></div><div><label class="fl">Horas acumuladas</label><input type="number" id="m-horas" value="0" min="0"></div></div>
+    <div class="frow1"><label class="fl">Estado</label><select id="m-estado"><option value="libre">Libre</option><option value="imprimiendo">Imprimiendo</option><option value="pausa">En pausa</option><option value="mantenimiento">Mantenimiento</option></select></div>`,
+  produccion: ()=>`
+    <div class="frow1"><label class="fl">Producto / descripción</label><input type="text" id="m-producto" placeholder="Ej: Maceta geométrica S (x4)"></div>
+    <div class="frow"><div><label class="fl">Impresora</label><select id="m-impresora">${DATA.impresoras.map(i=>`<option value="${i.nombre}">${i.nombre}</option>`).join('')}</select></div><div><label class="fl">Material</label><input type="text" id="m-material" placeholder="PLA+ Negro"></div></div>
+    <div class="frow"><div><label class="fl">Fecha inicio</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Estado</label><select id="m-estado"><option value="en curso">En curso</option><option value="pausa">En pausa</option><option value="terminado">Terminado</option><option value="cancelado">Cancelado</option></select></div></div>`
+};
+
+const typeLabel = t => ({venta:'venta',compra:'compra',producto:'producto',filamento:'filamento',impresora:'impresora',produccion:'orden de producción'}[t]||t);
+const tableOf = t => ({venta:'ventas',compra:'compras',producto:'productos',filamento:'filamentos',impresora:'impresoras',produccion:'produccion'}[t]);
+
+function openModal(type, mode, id=null) {
+  modalMode=type; modalId=id;
+  document.getElementById('modal-title').textContent=(mode==='new'?'Nuevo ':'Editar ')+typeLabel(type);
+  document.getElementById('modal-body').innerHTML=MODALS[type]?MODALS[type]():'';
+  if(mode==='edit'&&id) {
+    const arr=DATA[tableOf(type)];
+    const item=arr&&arr.find(x=>x.id===id);
+    if(item) fillForm(type,item);
+  }
+  document.getElementById('modal-bg').className='modal-bg open';
+}
+
+function fillForm(type, item) {
+  const s=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v??'';};
+  if(type==='venta'){s('m-fecha',item.fecha);s('m-cliente',item.cliente);s('m-producto',item.producto);s('m-cantidad',item.cantidad);s('m-total',item.total);s('m-canal',item.canal);s('m-estado',item.estado);}
+  if(type==='compra'){s('m-fecha',item.fecha);s('m-proveedor',item.proveedor);s('m-insumo',item.insumo);s('m-cantidad',item.cantidad);s('m-total',item.total);s('m-metodo',item.metodo);}
+  if(type==='producto'){s('m-nombre',item.nombre);s('m-tipo',item.tipo);s('m-stock',item.stock);s('m-costo',item.costo);s('m-precio',item.precio);}
+  if(type==='filamento'){s('m-material',item.material);s('m-color',item.color);s('m-marca',item.marca);s('m-stock',item.stock);s('m-minimo',item.minimo);s('m-costo',item.costo_kg);}
+  if(type==='impresora'){s('m-nombre',item.nombre);s('m-modelo',item.modelo);s('m-colores',item.colores);s('m-horas',item.horas);s('m-estado',item.estado);}
+  if(type==='produccion'){s('m-producto',item.producto);s('m-impresora',item.impresora);s('m-material',item.material);s('m-fecha',item.fecha);s('m-estado',item.estado);}
+}
+
+async function saveModal() {
+  const type=modalMode, id=modalId;
+  const tbl=tableOf(type);
+  let obj={};
+  if(type==='venta') obj={fecha:gv('m-fecha'),cliente:gv('m-cliente')||'—',producto:gv('m-producto'),cantidad:gn('m-cantidad'),total:gn('m-total'),canal:gv('m-canal'),estado:gv('m-estado')};
+  if(type==='compra') obj={fecha:gv('m-fecha'),proveedor:gv('m-proveedor'),insumo:gv('m-insumo'),cantidad:gv('m-cantidad'),total:gn('m-total'),metodo:gv('m-metodo')};
+  if(type==='producto') obj={nombre:gv('m-nombre'),tipo:gv('m-tipo'),stock:gn('m-stock'),costo:gn('m-costo'),precio:gn('m-precio')};
+  if(type==='filamento') obj={material:gv('m-material'),color:gv('m-color'),marca:gv('m-marca'),stock:parseFloat(gv('m-stock'))||0,minimo:parseFloat(gv('m-minimo'))||0,costo_kg:gn('m-costo')};
+  if(type==='impresora') obj={nombre:gv('m-nombre'),modelo:gv('m-modelo'),colores:gn('m-colores'),horas:gn('m-horas'),estado:gv('m-estado')};
+  if(type==='produccion') obj={producto:gv('m-producto'),impresora:gv('m-impresora'),material:gv('m-material'),fecha:gv('m-fecha'),estado:gv('m-estado')};
+
+  let err;
+  if(id) {
+    const {error}=await db.from(tbl).update(obj).eq('id',id);
+    err=error;
+  } else {
+    const {error}=await db.from(tbl).insert(obj);
+    err=error;
+  }
+  if(err){toast('Error al guardar: '+err.message,false);return;}
+  toast('Guardado correctamente');
+  closeModal();
+  const {data}=await db.from(tbl).select('*').order(tbl==='compras'||tbl==='ventas'?'fecha':'id',{ascending:tbl!=='compras'&&tbl!=='ventas'&&tbl!=='produccion'});
+  DATA[tbl]=data||[];
+  renderAll();
+  if(curSec==='reportes') renderReportes();
+}
+
+async function deleteItem(tbl, id) {
+  if(!confirm('¿Eliminar este registro? Esta acción no se puede deshacer.')) return;
+  const {error}=await db.from(tbl).delete().eq('id',id);
+  if(error){toast('Error al eliminar',false);return;}
+  toast('Eliminado');
+  const {data}=await db.from(tbl).select('*').order('fecha',{ascending:false});
+  DATA[tbl]=data||[];
+  renderAll();
+}
+
+function closeModal(){document.getElementById('modal-bg').className='modal-bg';}
+
+loadAll();
+</script>
+</body>
+</html>
