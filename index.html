@@ -85,9 +85,30 @@ textarea{resize:vertical;min-height:60px}
 #loading p{font-size:13px;color:var(--text2)}
 .pr-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .pr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+#lock{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center}
+.lock-box{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:32px;width:320px;text-align:center}
+.lock-box .logo-box{margin:0 auto 16px;width:44px;height:44px;border-radius:12px}
+.lock-box h2{font-size:16px;font-weight:600;margin-bottom:6px;color:var(--text)}
+.lock-box p{font-size:12px;color:var(--text2);margin-bottom:20px}
+.lock-box input{margin-bottom:10px;text-align:center;letter-spacing:2px}
+.lock-err{font-size:12px;color:var(--danger);margin-top:8px;display:none}
 </style>
 </head>
 <body>
+
+<div id="lock">
+  <div class="lock-box">
+    <div class="logo-box" style="width:44px;height:44px;border-radius:12px;background:var(--ac);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+      <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:white;fill:none;stroke-width:2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    </div>
+    <h2>Print3D Manager</h2>
+    <p>Ingresá tu contraseña para continuar</p>
+    <input type="password" id="lock-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')unlock()">
+    <button class="btn btn-p" style="width:100%" onclick="unlock()">Ingresar</button>
+    <div class="lock-err" id="lock-err">Contraseña incorrecta</div>
+  </div>
+</div>
+
 
 <div id="loading">
   <div class="logo-box" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" style="width:22px;height:22px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
@@ -535,6 +556,25 @@ async function deleteItem(tbl, id) {
 }
 
 function closeModal(){document.getElementById('modal-bg').className='modal-bg';}
+
+
+const PASS_HASH = '7a2f4b8c9e1d3f6a5b0c2e4d7f9a1b3c8e5d2f7a4b6c9e1d3f5a8b0c2e4d7f';
+function simpleHash(s){let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return Math.abs(h).toString(16);}
+function unlock(){
+  const val=document.getElementById('lock-input').value;
+  const correct='Siro0525!';
+  if(val===correct){
+    sessionStorage.setItem('p3d-auth','1');
+    document.getElementById('lock').style.display='none';
+  } else {
+    document.getElementById('lock-err').style.display='block';
+    document.getElementById('lock-input').value='';
+    document.getElementById('lock-input').focus();
+  }
+}
+if(sessionStorage.getItem('p3d-auth')==='1'){
+  document.getElementById('lock').style.display='none';
+}
 
 loadAll();
 </script>
