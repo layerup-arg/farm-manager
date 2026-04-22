@@ -825,8 +825,7 @@ async function saveModal(){
         nombreInsumo=f?`${f.material} ${f.color} — ${f.marca}`:'';
         if(f){
           const nuevoStock=(f.stock||0)+cantNum;
-          const nuevoCostoKg=gv('m-fil-costokg')?gn('m-fil-costokg'):f.costo_kg;
-          await db.from('filamentos').update({stock:nuevoStock,costo_kg:nuevoCostoKg}).eq('id',filamentoId);
+          await db.from('filamentos').update({stock:nuevoStock}).eq('id',filamentoId);
         }
       } else if(filVal==='nuevo'){
         const mat=gv('m-fil-material'),col=gv('m-fil-color'),mar=gv('m-fil-marca');
