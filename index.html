@@ -49,7 +49,7 @@ nav{flex:1;padding:8px;overflow-y:auto}
 .kdelta{font-size:11px;margin-top:3px;color:var(--text2)}
 .kdelta.up{color:var(--ac)}.kdelta.dn{color:var(--danger)}
 .card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
-.ch{padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ch{padding:12px 16px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .ct{font-size:13px;font-weight:600;color:var(--text)}
 .cb{padding:14px 16px}
 .tbl-wrap{overflow-x:auto}
@@ -64,8 +64,9 @@ table.dt tr:hover td{background:var(--bg3)}
 .b-r{background:var(--danger-l);color:var(--danger)}
 .b-b{background:var(--info-l);color:var(--info)}
 .b-gr{background:var(--bg3);color:var(--text2)}
+.b-dark{background:var(--bg3);color:var(--text3)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-.bar-wrap{height:5px;background:var(--bg3);border-radius:3px;margin-top:7px;overflow:hidden}
+.bar-wrap{height:5px;background:var(--bg3);border-radius:3px;margin-top:6px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:flex-start;justify-content:center;padding-top:40px;overflow-y:auto}
 .modal-bg.open{display:flex}
@@ -76,7 +77,6 @@ table.dt tr:hover td{background:var(--bg3)}
 label.fl{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:500}
 input,select,textarea{width:100%;font-size:13px;padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(29,158,117,.15)}
-textarea{resize:vertical;min-height:60px}
 .fbtns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 .empty{text-align:center;padding:36px;color:var(--text3);font-size:13px}
 .act-item{display:flex;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border)}
@@ -84,26 +84,25 @@ textarea{resize:vertical;min-height:60px}
 .act-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:var(--bg2);padding:10px 18px;border-radius:var(--radius);font-size:13px;z-index:2000;opacity:0;transition:opacity .3s;pointer-events:none}
 .toast.show{opacity:1}
-#loading{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:3000;flex-direction:column;gap:12px}
+#loading{display:none;position:fixed;inset:0;background:var(--bg);align-items:center;justify-content:center;z-index:3000;flex-direction:column;gap:12px}
 .spin{width:32px;height:32px;border:3px solid var(--border2);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-#loading p{font-size:13px;color:var(--text2)}
 .pr-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .pr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-
-/* venta items */
 .venta-items{border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
 .venta-item-head{display:grid;grid-template-columns:1fr 80px 110px 32px;gap:8px;padding:7px 10px;background:var(--bg3);font-size:11px;font-weight:500;color:var(--text2)}
 .venta-item-row{display:grid;grid-template-columns:1fr 80px 110px 32px;gap:8px;padding:8px 10px;border-top:0.5px solid var(--border);align-items:center}
 .venta-item-row select,.venta-item-row input{padding:5px 8px;font-size:12px}
-.venta-subtotal{font-size:12px;font-weight:600;color:var(--ac);text-align:right}
 .venta-total-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;border-top:0.5px solid var(--border);margin-top:4px}
-.venta-total-label{font-size:13px;color:var(--text2)}
 .venta-total-val{font-size:18px;font-weight:600;color:var(--text)}
-
-.detalle-items{font-size:12px}
-.detalle-item{display:flex;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid var(--border)}
+.detalle-item{display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--border);font-size:12px}
 .detalle-item:last-child{border-bottom:none}
+.info-box{background:var(--ac-l);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--ac-d);margin-bottom:12px}
+.filter-tabs{display:flex;gap:6px}
+.ftab{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2);transition:background .12s}
+.ftab.on{background:var(--ac-l);color:var(--ac-d);border-color:var(--ac-l)}
+.consumo-bar{height:6px;background:var(--bg3);border-radius:3px;margin-top:5px;overflow:hidden;min-width:80px}
+.consumo-fill{height:100%;border-radius:3px;transition:width .3s}
 </style>
 </head>
 <body>
@@ -121,10 +120,10 @@ textarea{resize:vertical;min-height:60px}
   </div>
 </div>
 
-<div id="loading" style="display:none">
+<div id="loading">
   <div class="logo-box" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" style="width:22px;height:22px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
   <div class="spin"></div>
-  <p>Cargando Print3D Manager...</p>
+  <p style="font-size:13px;color:var(--text2)">Cargando...</p>
 </div>
 
 <div id="app" style="display:none">
@@ -139,7 +138,8 @@ textarea{resize:vertical;min-height:60px}
     <div class="nl">Principal</div>
     <div class="ni on" onclick="nav('dash',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
     <div class="nl">Inventario</div>
-    <div class="ni" onclick="nav('insumos',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Filamentos</div>
+    <div class="ni" onclick="nav('filamentos',this)"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>Filamentos</div>
+    <div class="ni" onclick="nav('insumos',this)"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Insumos</div>
     <div class="ni" onclick="nav('productos',this)"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Productos</div>
     <div class="nl">Operaciones</div>
     <div class="ni" onclick="nav('impresoras',this)"><svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Impresoras</div>
@@ -165,11 +165,33 @@ textarea{resize:vertical;min-height:60px}
         <div class="card"><div class="ch"><span class="ct">Impresoras</span></div><div class="cb" id="dash-printers"></div></div>
         <div class="card"><div class="ch"><span class="ct">Actividad reciente</span></div><div class="cb" style="padding:0 16px" id="dash-activity"></div></div>
       </div>
-      <div class="card"><div class="ch"><span class="ct">Alertas de stock</span></div><div class="cb" id="dash-alerts"></div></div>
+      <div class="card"><div class="ch"><span class="ct">Alertas de inventario</span></div><div class="cb" id="dash-alerts"></div></div>
+    </div>
+
+    <div id="sec-filamentos" class="sec">
+      <div class="card">
+        <div class="ch">
+          <span class="ct">Filamentos</span>
+          <div class="filter-tabs">
+            <div class="ftab on" id="fil-f-disp" onclick="setFilter('fil','disponible',this)">Con stock</div>
+            <div class="ftab" id="fil-f-agot" onclick="setFilter('fil','agotado',this)">Agotados</div>
+          </div>
+        </div>
+        <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Material</th><th>Color</th><th>Marca</th><th>Stock (kg)</th><th>Mínimo</th><th>Costo/kg</th><th>Estado</th><th></th></tr></thead><tbody id="tb-filamentos"></tbody></table></div>
+      </div>
     </div>
 
     <div id="sec-insumos" class="sec">
-      <div class="card"><div class="ch"><span class="ct">Stock de filamentos</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Material</th><th>Color</th><th>Marca</th><th>Stock (kg)</th><th>Mínimo</th><th>Costo/kg</th><th>Estado</th><th></th></tr></thead><tbody id="tb-insumos"></tbody></table></div></div>
+      <div class="card">
+        <div class="ch">
+          <span class="ct">Insumos</span>
+          <div class="filter-tabs">
+            <div class="ftab on" id="ins-f-disp" onclick="setFilter('ins','disponible',this)">Disponibles</div>
+            <div class="ftab" id="ins-f-agot" onclick="setFilter('ins','agotado',this)">Acabados</div>
+          </div>
+        </div>
+        <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Nombre</th><th>Categoría</th><th>Marca</th><th>Cantidad</th><th>Consumido</th><th>Disponible</th><th>Costo</th><th>Estado</th><th></th></tr></thead><tbody id="tb-insumos"></tbody></table></div>
+      </div>
     </div>
 
     <div id="sec-productos" class="sec">
@@ -181,11 +203,11 @@ textarea{resize:vertical;min-height:60px}
     </div>
 
     <div id="sec-produccion" class="sec">
-      <div class="card"><div class="ch"><span class="ct">Órdenes de producción</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>#</th><th>Producto</th><th>Impresora</th><th>Material</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody id="tb-produccion"></tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">Órdenes de producción</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>#</th><th>Producto</th><th>Cant.</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody id="tb-produccion"></tbody></table></div></div>
     </div>
 
     <div id="sec-compras" class="sec">
-      <div class="card"><div class="ch"><span class="ct">Historial de compras</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Proveedor</th><th>Insumo</th><th>Cantidad</th><th>Total ARS</th><th>Método</th><th></th></tr></thead><tbody id="tb-compras"></tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">Historial de compras</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Tipo</th><th>Proveedor</th><th>Insumo</th><th>Cantidad</th><th>Total ARS</th><th>Método</th><th></th></tr></thead><tbody id="tb-compras"></tbody></table></div></div>
     </div>
 
     <div id="sec-ventas" class="sec">
@@ -225,9 +247,8 @@ textarea{resize:vertical;min-height:60px}
 </div>
 
 <div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()">
-  <div class="modal"><h2 id="modal-title"></h2><div id="modal-body"></div><div class="fbtns"><button class="btn btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-p btn-sm" onclick="saveModal()">Guardar</button></div></div>
+  <div class="modal"><h2 id="modal-title"></h2><div id="modal-body"></div><div class="fbtns" id="modal-btns"></div></div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
@@ -236,9 +257,10 @@ const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const {createClient}=supabase;
 const db=createClient(SUPA_URL,SUPA_KEY);
 
-let DATA={filamentos:[],productos:[],impresoras:[],produccion:[],compras:[],ventas:[]};
+let DATA={filamentos:[],insumos:[],productos:[],impresoras:[],produccion:[],compras:[],ventas:[]};
 let modalMode='',modalId=null,curSec='dash';
-let ventaItems=[]; // lineas de la venta actual en el modal
+let ventaLineIdx=0;
+let filters={fil:'disponible',ins:'disponible'};
 
 const ars=n=>'$'+Math.round(n||0).toLocaleString('es-AR');
 const fdate=d=>{if(!d)return'—';const p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0].slice(2);};
@@ -262,13 +284,14 @@ function unlock(){
 function toast(msg,ok=true){
   const t=document.getElementById('toast');
   t.textContent=msg;t.style.background=ok?'var(--ac)':'var(--danger)';
-  t.className='toast show';setTimeout(()=>t.className='toast',2500);
+  t.className='toast show';setTimeout(()=>t.className='toast',2800);
 }
 
 async function loadAll(){
   try{
-    const [fil,pro,imp,ope,com,ven]=await Promise.all([
+    const [fil,ins,pro,imp,ope,com,ven]=await Promise.all([
       db.from('filamentos').select('*').order('id'),
+      db.from('insumos').select('*').order('id'),
       db.from('productos').select('*').order('id'),
       db.from('impresoras').select('*').order('id'),
       db.from('produccion').select('*').order('id',{ascending:false}),
@@ -276,6 +299,7 @@ async function loadAll(){
       db.from('ventas').select('*').order('fecha',{ascending:false})
     ]);
     DATA.filamentos=fil.data||[];
+    DATA.insumos=ins.data||[];
     DATA.productos=pro.data||[];
     DATA.impresoras=imp.data||[];
     DATA.produccion=ope.data||[];
@@ -283,7 +307,7 @@ async function loadAll(){
     DATA.ventas=ven.data||[];
     if(!DATA.impresoras.length)await seedImpresoras();
     renderAll();
-  }catch(e){toast('Error al conectar con la base de datos',false);}
+  }catch(e){toast('Error al conectar con Supabase',false);}
   document.getElementById('loading').style.display='none';
   document.getElementById('app').style.display='flex';
 }
@@ -300,14 +324,30 @@ async function seedImpresoras(){
   DATA.impresoras=data||[];
 }
 
+async function reloadTable(tbl){
+  const ord=(tbl==='compras'||tbl==='ventas')?'fecha':(tbl==='produccion'?'id':'id');
+  const asc=['productos','filamentos','insumos','impresoras'].includes(tbl);
+  const {data}=await db.from(tbl).select('*').order(ord,{ascending:asc});
+  DATA[tbl]=data||[];
+}
+
+function setFilter(type,val,el){
+  filters[type]=val;
+  const prefix=type==='fil'?'fil':'ins';
+  document.querySelectorAll(`[id^="${prefix}-f-"]`).forEach(e=>e.classList.remove('on'));
+  el.classList.add('on');
+  if(type==='fil')renderTbFilamentos();
+  else renderTbInsumos();
+}
+
 function nav(id,el){
   document.querySelectorAll('.sec').forEach(s=>s.className='sec');
   document.getElementById('sec-'+id).className='sec on';
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
   el.classList.add('on');
   curSec=id;
-  const titles={dash:'Dashboard',insumos:'Filamentos',productos:'Catálogo',impresoras:'Impresoras',produccion:'Producción',compras:'Compras',ventas:'Ventas',costos:'Calculadora de costos',reportes:'Reportes'};
-  const btns={dash:'+ Nueva venta',insumos:'+ Agregar filamento',productos:'+ Nuevo producto',impresoras:'+ Agregar impresora',produccion:'+ Nueva orden',compras:'+ Registrar compra',ventas:'+ Nueva venta',costos:'',reportes:''};
+  const titles={dash:'Dashboard',filamentos:'Filamentos',insumos:'Insumos',productos:'Catálogo',impresoras:'Impresoras',produccion:'Producción',compras:'Compras',ventas:'Ventas',costos:'Calculadora',reportes:'Reportes'};
+  const btns={dash:'+ Nueva venta',filamentos:'+ Agregar filamento',insumos:'+ Agregar insumo',productos:'+ Nuevo producto',impresoras:'+ Agregar impresora',produccion:'+ Nueva orden',compras:'+ Registrar compra',ventas:'+ Nueva venta',costos:'',reportes:''};
   document.getElementById('page-title').textContent=titles[id]||id;
   const bb=document.getElementById('tb-btn');
   bb.textContent=btns[id]||'';
@@ -318,12 +358,13 @@ function nav(id,el){
 }
 
 function tbAction(){
-  const map={dash:'venta',insumos:'filamento',productos:'producto',impresoras:'impresora',produccion:'produccion',compras:'compra',ventas:'venta'};
+  const map={dash:'venta',filamentos:'filamento',insumos:'insumo',productos:'producto',impresoras:'impresora',produccion:'produccion',compras:'compra',ventas:'venta'};
   openModal(map[curSec]||'venta','new');
 }
 
 function renderAll(){
   renderDash();
+  renderTbFilamentos();
   renderTbInsumos();
   renderTbProductos();
   renderTbImpresoras();
@@ -331,6 +372,16 @@ function renderAll(){
   renderTbCompras();
   renderTbVentas();
 }
+
+/* helpers estado filamentos */
+const filCls=f=>f.stock<f.minimo?'b-r':f.stock<f.minimo*1.5?'b-a':'b-g';
+const filLbl=f=>f.stock<f.minimo?'Crítico':f.stock<f.minimo*1.5?'Bajo':'OK';
+const filAgotado=f=>f.stock<=0;
+
+/* helpers estado insumos */
+const insDisp=i=>(i.cantidad||0)-(i.consumido||0);
+const insAgotado=i=>insDisp(i)<=0;
+const insPct=i=>i.cantidad>0?Math.min(100,Math.round((i.consumido||0)/i.cantidad*100)):100;
 
 function renderDash(){
   const tv=DATA.ventas.reduce((a,v)=>a+(v.total||0),0);
@@ -353,9 +404,9 @@ function renderDash(){
     </div>`).join('')||'<div class="empty">Sin impresoras</div>';
 
   const acts=[
-    ...DATA.ventas.slice(0,3).map(v=>({text:`Venta — ${v.descripcion||v.producto||'varios productos'}`,sub:fdate(v.fecha)+' · '+ars(v.total),color:'var(--ac)'})),
+    ...DATA.ventas.slice(0,3).map(v=>({text:`Venta — ${v.descripcion||'varios'}`,sub:fdate(v.fecha)+' · '+ars(v.total),color:'var(--ac)'})),
     ...DATA.compras.slice(0,2).map(c=>({text:`Compra — ${c.insumo}`,sub:fdate(c.fecha)+' · '+ars(c.total),color:'#378ADD'})),
-    ...DATA.produccion.filter(p=>p.estado==='en curso').slice(0,2).map(p=>({text:`Producción — ${p.producto}`,sub:fdate(p.fecha)+' · '+p.impresora,color:'#EF9F27'}))
+    ...DATA.produccion.filter(p=>p.estado==='en curso').slice(0,2).map(p=>({text:`Producción — ${p.producto}`,sub:fdate(p.fecha),color:'#EF9F27'}))
   ].slice(0,6);
   document.getElementById('dash-activity').innerHTML=acts.length?acts.map(a=>`
     <div class="act-item">
@@ -363,27 +414,61 @@ function renderDash(){
       <div><div style="font-size:12px">${a.text}</div><div style="font-size:11px;color:var(--text3)">${a.sub}</div></div>
     </div>`).join(''):'<div class="empty">Sin actividad reciente</div>';
 
-  const alerts=DATA.filamentos.filter(f=>f.stock<f.minimo);
-  document.getElementById('dash-alerts').innerHTML=alerts.length
-    ?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`+alerts.map(f=>`
+  const alertsFil=DATA.filamentos.filter(f=>f.stock<f.minimo);
+  const alertsIns=DATA.insumos.filter(i=>insAgotado(i));
+  const allAlerts=[
+    ...alertsFil.map(f=>({nombre:`${f.material} ${f.color}`,val:`${f.stock} kg`,pct:Math.min(100,Math.round(f.stock/f.minimo*100)),color:'var(--danger)',tag:'Filamento'})),
+    ...alertsIns.map(i=>({nombre:i.nombre,val:'Acabado',pct:100,color:'var(--danger)',tag:'Insumo'}))
+  ];
+  document.getElementById('dash-alerts').innerHTML=allAlerts.length
+    ?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`+allAlerts.map(a=>`
       <div style="background:var(--bg3);border-radius:var(--radius);padding:12px">
-        <div style="font-size:12px;font-weight:600">${f.material} ${f.color}</div>
-        <div style="font-size:20px;font-weight:600;color:var(--danger);margin:4px 0">${f.stock} kg</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.min(100,Math.round(f.stock/f.minimo*100))}%;background:var(--danger)"></div></div>
-        <div style="font-size:10px;color:var(--text3);margin-top:4px">Mínimo: ${f.minimo} kg</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">${a.tag}</div>
+        <div style="font-size:12px;font-weight:600">${a.nombre}</div>
+        <div style="font-size:18px;font-weight:600;color:${a.color};margin:4px 0">${a.val}</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${a.pct}%;background:${a.color}"></div></div>
       </div>`).join('')+'</div>'
-    :'<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">Sin alertas de stock — todo OK</div>';
+    :'<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">Sin alertas — todo OK</div>';
+}
+
+function renderTbFilamentos(){
+  const list=filters.fil==='disponible'
+    ?DATA.filamentos.filter(f=>!filAgotado(f))
+    :DATA.filamentos.filter(f=>filAgotado(f));
+  document.getElementById('tb-filamentos').innerHTML=list.map(f=>`<tr>
+    <td>${f.material}</td><td>${f.color}</td><td>${f.marca}</td>
+    <td>${f.stock}</td><td>${f.minimo}</td><td>${ars(f.costo_kg)}</td>
+    <td><span class="badge ${filCls(f)}">${filLbl(f)}</span></td>
+    <td><button class="btn btn-sm" onclick="openModal('filamento','edit',${f.id})">Editar</button></td>
+  </tr>`).join('')||`<tr><td colspan="8" class="empty">Sin filamentos ${filters.fil==='disponible'?'con stock':'agotados'}</td></tr>`;
 }
 
 function renderTbInsumos(){
-  const cls=f=>f.stock<f.minimo?'b-r':f.stock<f.minimo*1.5?'b-a':'b-g';
-  const lbl=f=>f.stock<f.minimo?'Crítico':f.stock<f.minimo*1.5?'Bajo':'OK';
-  document.getElementById('tb-insumos').innerHTML=DATA.filamentos.map(f=>`<tr>
-    <td>${f.material}</td><td>${f.color}</td><td>${f.marca}</td>
-    <td>${f.stock}</td><td>${f.minimo}</td><td>${ars(f.costo_kg)}</td>
-    <td><span class="badge ${cls(f)}">${lbl(f)}</span></td>
-    <td><button class="btn btn-sm" onclick="openModal('filamento','edit',${f.id})">Editar</button></td>
-  </tr>`).join('')||'<tr><td colspan="8" class="empty">Sin filamentos registrados</td></tr>';
+  const list=filters.ins==='disponible'
+    ?DATA.insumos.filter(i=>!insAgotado(i))
+    :DATA.insumos.filter(i=>insAgotado(i));
+  document.getElementById('tb-insumos').innerHTML=list.map(i=>{
+    const disp=insDisp(i);
+    const pct=insPct(i);
+    const barColor=pct>=100?'var(--danger)':pct>=75?'#EF9F27':'var(--ac)';
+    return`<tr>
+      <td>${i.nombre}</td>
+      <td>${i.categoria||'—'}</td>
+      <td>${i.marca||'—'}</td>
+      <td>${i.cantidad} ${i.unidad||''}</td>
+      <td>
+        <div style="font-size:12px">${i.consumido||0} ${i.unidad||''}</div>
+        <div class="consumo-bar"><div class="consumo-fill" style="width:${pct}%;background:${barColor}"></div></div>
+      </td>
+      <td><strong style="color:${disp<=0?'var(--danger)':'var(--text)'}">${disp} ${i.unidad||''}</strong></td>
+      <td>${ars(i.costo)}</td>
+      <td><span class="badge ${insAgotado(i)?'b-r':pct>=75?'b-a':'b-g'}">${insAgotado(i)?'Acabado':pct>=75?'Bajo':'OK'}</span></td>
+      <td style="display:flex;gap:4px">
+        <button class="btn btn-sm" onclick="openModal('consumo','new',${i.id})">Consumir</button>
+        <button class="btn btn-sm" onclick="openModal('insumo','edit',${i.id})">Editar</button>
+      </td>
+    </tr>`;
+  }).join('')||`<tr><td colspan="9" class="empty">Sin insumos ${filters.ins==='disponible'?'disponibles':'acabados'}</td></tr>`;
 }
 
 function renderTbProductos(){
@@ -413,65 +498,61 @@ function renderTbImpresoras(){
 function renderTbProduccion(){
   const bc=s=>s==='en curso'?'b-g':s==='pausa'?'b-a':s==='terminado'?'b-b':'b-r';
   document.getElementById('tb-produccion').innerHTML=DATA.produccion.map(p=>`<tr>
-    <td>#${p.id}</td><td>${p.producto}</td><td>${p.impresora}</td>
-    <td>${p.material}</td><td>${fdate(p.fecha)}</td>
+    <td>#${p.id}</td><td>${p.producto}</td><td>${p.cantidad||1} u.</td>
+    <td>${fdate(p.fecha)}</td>
     <td><span class="badge ${bc(p.estado)}">${p.estado}</span></td>
-    <td><button class="btn btn-sm" onclick="openModal('produccion','edit',${p.id})">Editar</button></td>
-  </tr>`).join('')||'<tr><td colspan="7" class="empty">Sin órdenes de producción</td></tr>';
+    <td style="display:flex;gap:4px">
+      <button class="btn btn-sm" onclick="openModal('produccion','edit',${p.id})">Editar</button>
+      <button class="btn btn-sm btn-danger" onclick="deleteItem('produccion',${p.id})">✕</button>
+    </td>
+  </tr>`).join('')||'<tr><td colspan="6" class="empty">Sin órdenes</td></tr>';
 }
 
 function renderTbCompras(){
   document.getElementById('tb-compras').innerHTML=DATA.compras.map(c=>`<tr>
-    <td>${fdate(c.fecha)}</td><td>${c.proveedor}</td><td>${c.insumo}</td>
-    <td>${c.cantidad}</td><td>${ars(c.total)}</td><td>${c.metodo}</td>
+    <td>${fdate(c.fecha)}</td>
+    <td><span class="badge ${c.tipo_insumo==='insumo'?'b-b':'b-gr'}">${c.tipo_insumo==='insumo'?'Insumo':'Filamento'}</span></td>
+    <td>${c.proveedor}</td><td>${c.insumo}</td>
+    <td>${c.cantidad_num!=null?c.cantidad_num+' '+(c.unidad||''):c.cantidad}</td>
+    <td>${ars(c.total)}</td><td>${c.metodo}</td>
     <td><button class="btn btn-sm btn-danger" onclick="deleteItem('compras',${c.id})">✕</button></td>
-  </tr>`).join('')||'<tr><td colspan="7" class="empty">Sin compras registradas</td></tr>';
+  </tr>`).join('')||'<tr><td colspan="8" class="empty">Sin compras</td></tr>';
 }
 
 function renderTbVentas(){
   const bc=s=>s==='pagada'?'b-g':s==='seña'?'b-a':'b-r';
   document.getElementById('tb-ventas').innerHTML=DATA.ventas.map(v=>{
-    let items=[];
-    try{items=JSON.parse(v.items||'[]');}catch(e){}
+    let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
     const resumen=items.length?items.map(i=>`${i.qty}× ${i.nombre}`).join(', '):(v.descripcion||'—');
-    const cantTotal=items.reduce((a,i)=>a+(i.qty||0),0)||'—';
     return`<tr>
-      <td>${fdate(v.fecha)}</td>
-      <td>${v.cliente||'—'}</td>
-      <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis" title="${resumen}">${resumen}</td>
-      <td>${ars(v.total)}</td>
-      <td>${v.canal}</td>
+      <td>${fdate(v.fecha)}</td><td>${v.cliente||'—'}</td>
+      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis" title="${resumen}">${resumen}</td>
+      <td>${ars(v.total)}</td><td>${v.canal}</td>
       <td><span class="badge ${bc(v.estado)}">${v.estado}</span></td>
       <td style="display:flex;gap:4px">
         <button class="btn btn-sm" onclick="verVenta(${v.id})">Ver</button>
         <button class="btn btn-sm btn-danger" onclick="deleteItem('ventas',${v.id})">✕</button>
       </td>
     </tr>`;
-  }).join('')||'<tr><td colspan="7" class="empty">Sin ventas registradas</td></tr>';
+  }).join('')||'<tr><td colspan="7" class="empty">Sin ventas</td></tr>';
 }
 
 function verVenta(id){
-  const v=DATA.ventas.find(x=>x.id===id);
-  if(!v)return;
-  let items=[];
-  try{items=JSON.parse(v.items||'[]');}catch(e){}
-  const detalleHtml=items.length?`
-    <div class="detalle-items" style="margin:12px 0">
-      ${items.map(i=>`<div class="detalle-item"><span>${i.qty}× ${i.nombre}</span><span>${ars(i.precio_unit)} c/u = ${ars(i.qty*i.precio_unit)}</span></div>`).join('')}
-      <div class="detalle-item" style="font-weight:600;border-top:0.5px solid var(--border);margin-top:4px;padding-top:8px"><span>Total</span><span>${ars(v.total)}</span></div>
-    </div>`:'';
+  const v=DATA.ventas.find(x=>x.id===id);if(!v)return;
+  let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
   document.getElementById('modal-title').textContent='Detalle de venta #'+v.id;
   document.getElementById('modal-body').innerHTML=`
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;font-size:13px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;font-size:13px">
       <div><span style="color:var(--text2)">Fecha:</span> ${fdate(v.fecha)}</div>
       <div><span style="color:var(--text2)">Cliente:</span> ${v.cliente||'—'}</div>
       <div><span style="color:var(--text2)">Canal:</span> ${v.canal}</div>
       <div><span style="color:var(--text2)">Estado:</span> <span class="badge ${v.estado==='pagada'?'b-g':v.estado==='seña'?'b-a':'b-r'}">${v.estado}</span></div>
     </div>
-    <div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px">Productos</div>
-    ${detalleHtml}`;
+    <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">Productos</div>
+    ${items.map(i=>`<div class="detalle-item"><span>${i.qty}× ${i.nombre}</span><span>${ars(i.precio_unit)} c/u = <strong>${ars(i.qty*i.precio_unit)}</strong></span></div>`).join('')}
+    <div class="detalle-item" style="font-weight:600;margin-top:4px"><span>Total</span><span>${ars(v.total)}</span></div>`;
+  document.getElementById('modal-btns').innerHTML='<button class="btn btn-sm" onclick="closeModal()">Cerrar</button>';
   document.getElementById('modal-bg').className='modal-bg open';
-  document.querySelector('.fbtns').innerHTML='<button class="btn btn-sm" onclick="closeModal()">Cerrar</button>';
 }
 
 function renderReportes(){
@@ -483,7 +564,6 @@ function renderReportes(){
     <div class="kcard"><div class="klbl">Total compras</div><div class="kval">${ars(tc)}</div></div>
     <div class="kcard"><div class="klbl">Ganancia bruta</div><div class="kval">${ars(tv-tc)}</div></div>
     <div class="kcard"><div class="klbl">Margen</div><div class="kval">${mg}%</div></div>`;
-
   const bar=(data,color)=>{
     const keys=Object.keys(data).sort((a,b)=>data[b]-data[a]);
     const max=keys.length?data[keys[0]]:1;
@@ -493,21 +573,14 @@ function renderReportes(){
         <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(data[k]/max*100)}%;background:${color}"></div></div>
       </div>`).join(''):'<div class="empty">Sin datos</div>';
   };
-
-  const canales={};
-  DATA.ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+(v.total||0)});
+  const canales={};DATA.ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+(v.total||0)});
   document.getElementById('rep-canales').innerHTML=bar(canales,'var(--ac)');
-
-  const mats={};
-  DATA.compras.forEach(c=>{mats[c.insumo]=(mats[c.insumo]||0)+(c.total||0)});
+  const mats={};DATA.compras.forEach(c=>{mats[c.insumo]=(mats[c.insumo]||0)+(c.total||0)});
   document.getElementById('rep-mats').innerHTML=bar(mats,'#378ADD');
-
   const prods={};
   DATA.ventas.forEach(v=>{
-    let items=[];
-    try{items=JSON.parse(v.items||'[]');}catch(e){}
+    let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
     items.forEach(i=>{prods[i.nombre]=(prods[i.nombre]||0)+(i.qty*i.precio_unit);});
-    if(!items.length&&v.descripcion) prods[v.descripcion]=(prods[v.descripcion]||0)+(v.total||0);
   });
   document.getElementById('rep-prods').innerHTML=bar(prods,'#7F77DD');
 }
@@ -525,87 +598,51 @@ function calcCosto(){
     <div class="kcard"><div class="klbl">Precio sugerido</div><div class="kval" style="color:var(--ac)">${ars(sug)}</div><div class="kdelta up">Margen ${margen}%</div></div>`;
 }
 
-/* ---- MODAL VENTA MULTI-PRODUCTO ---- */
-function buildVentaModal(){
-  const opts=DATA.productos.map(p=>`<option value="${p.id}" data-precio="${p.precio}">${p.nombre} (${ars(p.precio)})</option>`).join('');
+/* ---- MODALES ---- */
+function buildCompraModal(){
   return`
-    <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Cliente</label><input type="text" id="m-cliente" placeholder="Nombre o —"></div></div>
-    <div class="frow"><div><label class="fl">Canal</label><select id="m-canal"><option>Instagram</option><option>WhatsApp</option><option>Feria</option><option>Directo</option><option>MercadoLibre</option><option>Otro</option></select></div><div><label class="fl">Estado</label><select id="m-estado"><option value="pagada">Pagada</option><option value="seña">Seña</option><option value="pendiente">Pendiente</option></select></div></div>
-    <label class="fl" style="margin-bottom:8px">Productos</label>
-    <div class="venta-items">
-      <div class="venta-item-head"><span>Producto</span><span>Cant.</span><span>Precio unit.</span><span></span></div>
-      <div id="venta-lines"></div>
+    <div class="frow1">
+      <label class="fl">Tipo de compra</label>
+      <select id="m-tipo-insumo" onchange="onCompraTipoChange()">
+        <option value="filamento">Filamento</option>
+        <option value="insumo">Insumo general</option>
+      </select>
     </div>
-    <button class="btn btn-sm" onclick="addVentaLine()" style="margin-bottom:12px">+ Agregar producto</button>
-    <div class="venta-total-row">
-      <span class="venta-total-label">Total</span>
-      <span class="venta-total-val" id="venta-total-display">${ars(0)}</span>
-    </div>`;
-}
-
-function addVentaLine(productoId=null, qty=1, precioUnit=null){
-  const opts=DATA.productos.map(p=>`<option value="${p.id}" data-precio="${p.precio}" ${productoId==p.id?'selected':''}>${p.nombre}</option>`).join('');
-  const idx=ventaItems.length;
-  ventaItems.push({idx});
-  const precio=precioUnit!==null?precioUnit:(productoId?DATA.productos.find(p=>p.id==productoId)?.precio||0:0);
-  const div=document.createElement('div');
-  div.className='venta-item-row';
-  div.id='vline-'+idx;
-  div.innerHTML=`
-    <select onchange="onVentaLineChange(${idx})">${opts}</select>
-    <input type="number" min="1" value="${qty}" style="width:100%" onchange="updateVentaTotal()">
-    <input type="number" min="0" value="${precio}" style="width:100%" onchange="updateVentaTotal()">
-    <button class="btn-ghost" onclick="removeVentaLine(${idx})">✕</button>`;
-  document.getElementById('venta-lines').appendChild(div);
-  updateVentaTotal();
-}
-
-function onVentaLineChange(idx){
-  const row=document.getElementById('vline-'+idx);
-  if(!row)return;
-  const sel=row.querySelector('select');
-  const pid=sel.value;
-  const prod=DATA.productos.find(p=>p.id==pid);
-  if(prod){row.querySelectorAll('input')[1].value=prod.precio;}
-  updateVentaTotal();
-}
-
-function removeVentaLine(idx){
-  const row=document.getElementById('vline-'+idx);
-  if(row)row.remove();
-  updateVentaTotal();
-}
-
-function getVentaLines(){
-  const lines=document.querySelectorAll('#venta-lines .venta-item-row');
-  return Array.from(lines).map(row=>{
-    const sel=row.querySelector('select');
-    const inputs=row.querySelectorAll('input');
-    const pid=parseInt(sel.value);
-    const prod=DATA.productos.find(p=>p.id===pid);
-    return{
-      producto_id:pid,
-      nombre:prod?prod.nombre:sel.options[sel.selectedIndex]?.text||'',
-      qty:parseInt(inputs[0].value)||1,
-      precio_unit:parseFloat(inputs[1].value)||0
-    };
-  });
-}
-
-function updateVentaTotal(){
-  const lines=getVentaLines();
-  const total=lines.reduce((a,l)=>a+(l.qty*l.precio_unit),0);
-  const el=document.getElementById('venta-total-display');
-  if(el)el.textContent=ars(total);
-}
-
-/* ---- MODALES RESTO ---- */
-const MODALS={
-  compra:()=>`
     <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Proveedor</label><input type="text" id="m-proveedor" placeholder="Nombre proveedor"></div></div>
-    <div class="frow1"><label class="fl">Insumo</label><input type="text" id="m-insumo" placeholder="Ej: PLA+ Negro 1kg"></div>
-    <div class="frow"><div><label class="fl">Cantidad</label><input type="text" id="m-cantidad" placeholder="Ej: 2 kg"></div><div><label class="fl">Total ARS</label><input type="number" id="m-total" placeholder="0"></div></div>
-    <div class="frow1"><label class="fl">Método de pago</label><select id="m-metodo"><option>Transferencia</option><option>Efectivo</option><option>Tarjeta</option><option>Débito</option></select></div>`,
+    <div id="compra-insumo-select" style="display:none">
+      <div class="frow1"><label class="fl">Insumo</label>
+        <select id="m-insumo-id">
+          <option value="">— Seleccionar insumo existente —</option>
+          ${DATA.insumos.map(i=>`<option value="${i.id}">${i.nombre} (${i.categoria||''})</option>`).join('')}
+          <option value="nuevo">+ Ingresar nombre manualmente</option>
+        </select>
+      </div>
+      <div id="compra-insumo-manual" style="display:none">
+        <div class="frow1"><label class="fl">Nombre del insumo</label><input type="text" id="m-insumo-manual" placeholder="Ej: Cinta de embalaje"></div>
+      </div>
+    </div>
+    <div id="compra-fil-nombre">
+      <div class="frow1"><label class="fl">Descripción (filamento)</label><input type="text" id="m-insumo" placeholder="Ej: PLA+ Negro 1kg"></div>
+    </div>
+    <div class="frow">
+      <div><label class="fl">Cantidad</label><input type="number" id="m-cantidad-num" placeholder="0" min="0" step="0.01"></div>
+      <div><label class="fl">Unidad</label><input type="text" id="m-unidad" placeholder="kg, u, m, l..."></div>
+    </div>
+    <div class="frow"><div><label class="fl">Total ARS</label><input type="number" id="m-total" placeholder="0"></div><div><label class="fl">Método de pago</label><select id="m-metodo"><option>Transferencia</option><option>Efectivo</option><option>Tarjeta</option><option>Débito</option></select></div></div>`;
+}
+
+function onCompraTipoChange(){
+  const tipo=gv('m-tipo-insumo');
+  document.getElementById('compra-insumo-select').style.display=tipo==='insumo'?'':'none';
+  document.getElementById('compra-fil-nombre').style.display=tipo==='filamento'?'':'none';
+  const sel=document.getElementById('m-insumo-id');
+  if(sel)sel.onchange=()=>{
+    const manual=document.getElementById('compra-insumo-manual');
+    if(manual)manual.style.display=sel.value==='nuevo'?'':'none';
+  };
+}
+
+const MODALS={
   producto:()=>`
     <div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Nombre del producto"></div>
     <div class="frow"><div><label class="fl">Tipo</label><select id="m-tipo"><option value="catalogo">Catálogo</option><option value="medida">A medida</option></select></div><div><label class="fl">Stock (u.)</label><input type="number" id="m-stock" value="0" min="0"></div></div>
@@ -614,118 +651,284 @@ const MODALS={
     <div class="frow"><div><label class="fl">Material</label><input type="text" id="m-material" placeholder="PLA+, PETG, ABS..."></div><div><label class="fl">Color</label><input type="text" id="m-color" placeholder="Negro, Blanco..."></div></div>
     <div class="frow"><div><label class="fl">Marca</label><input type="text" id="m-marca" placeholder="Polymaker, Bambu..."></div><div><label class="fl">Stock actual (kg)</label><input type="number" id="m-stock" step="0.01" value="1"></div></div>
     <div class="frow"><div><label class="fl">Stock mínimo (kg)</label><input type="number" id="m-minimo" step="0.01" value="0.5"></div><div><label class="fl">Costo por kg (ARS)</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
+  insumo:()=>`
+    <div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Ej: Cinta de embalaje, Bolsas, Acetona..."></div>
+    <div class="frow"><div><label class="fl">Categoría</label><input type="text" id="m-categoria" placeholder="Ej: Packaging, Limpieza, Adhesivos..."></div><div><label class="fl">Marca</label><input type="text" id="m-marca" placeholder="Marca o proveedor"></div></div>
+    <div class="frow"><div><label class="fl">Cantidad total</label><input type="number" id="m-cantidad" step="0.01" value="1" min="0"></div><div><label class="fl">Unidad</label><input type="text" id="m-unidad" placeholder="u, m, l, g, rollo..."></div></div>
+    <div class="frow"><div><label class="fl">Ya consumido</label><input type="number" id="m-consumido" step="0.01" value="0" min="0"></div><div><label class="fl">Costo total (ARS)</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
   impresora:()=>`
     <div class="frow"><div><label class="fl">Nombre corto</label><input type="text" id="m-nombre" placeholder="Ej: Bambu A1 #1"></div><div><label class="fl">Modelo</label><input type="text" id="m-modelo" placeholder="Ej: Bambu Lab A1"></div></div>
     <div class="frow"><div><label class="fl">Colores disponibles</label><input type="number" id="m-colores" value="1" min="1" max="16"></div><div><label class="fl">Horas acumuladas</label><input type="number" id="m-horas" value="0" min="0"></div></div>
-    <div class="frow1"><label class="fl">Estado</label><select id="m-estado"><option value="libre">Libre</option><option value="imprimiendo">Imprimiendo</option><option value="pausa">En pausa</option><option value="mantenimiento">Mantenimiento</option></select></div>`,
-  produccion:()=>`
-    <div class="frow1"><label class="fl">Producto / descripción</label><input type="text" id="m-producto" placeholder="Ej: Maceta geométrica S (x4)"></div>
-    <div class="frow"><div><label class="fl">Impresora</label><select id="m-impresora">${DATA.impresoras.map(i=>`<option value="${i.nombre}">${i.nombre}</option>`).join('')}</select></div><div><label class="fl">Material</label><input type="text" id="m-material" placeholder="PLA+ Negro"></div></div>
-    <div class="frow"><div><label class="fl">Fecha inicio</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Estado</label><select id="m-estado"><option value="en curso">En curso</option><option value="pausa">En pausa</option><option value="terminado">Terminado</option><option value="cancelado">Cancelado</option></select></div></div>`
+    <div class="frow1"><label class="fl">Estado</label><select id="m-estado"><option value="libre">Libre</option><option value="imprimiendo">Imprimiendo</option><option value="pausa">En pausa</option><option value="mantenimiento">Mantenimiento</option></select></div>`
 };
 
-const typeLabel=t=>({venta:'venta',compra:'compra',producto:'producto',filamento:'filamento',impresora:'impresora',produccion:'orden de producción'}[t]||t);
-const tableOf=t=>({venta:'ventas',compra:'compras',producto:'productos',filamento:'filamentos',impresora:'impresoras',produccion:'produccion'}[t]);
+const typeLabel=t=>({venta:'venta',compra:'compra',producto:'producto',filamento:'filamento',insumo:'insumo',impresora:'impresora',produccion:'orden',consumo:'consumo'}[t]||t);
+const tableOf=t=>({venta:'ventas',compra:'compras',producto:'productos',filamento:'filamentos',insumo:'insumos',impresora:'impresoras',produccion:'produccion'}[t]);
 
 function openModal(type,mode,id=null){
-  modalMode=type;modalId=id;
-  ventaItems=[];
-  document.getElementById('modal-title').textContent=(mode==='new'?'Nueva ':'Editar ')+typeLabel(type);
+  modalMode=type;modalId=id;ventaLineIdx=0;
+  document.getElementById('modal-btns').innerHTML='<button class="btn btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-p btn-sm" onclick="saveModal()">Guardar</button>';
+
+  if(type==='consumo'){
+    const ins=DATA.insumos.find(x=>x.id===id);if(!ins)return;
+    const disp=insDisp(ins);
+    document.getElementById('modal-title').textContent='Registrar consumo — '+ins.nombre;
+    document.getElementById('modal-body').innerHTML=`
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px;margin-bottom:14px;font-size:13px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="color:var(--text2)">Disponible actual</span>
+          <strong>${disp} ${ins.unidad||''}</strong>
+        </div>
+        <div class="consumo-bar" style="height:8px"><div class="consumo-fill" style="width:${insPct(ins)}%;background:${insPct(ins)>=100?'var(--danger)':insPct(ins)>=75?'#EF9F27':'var(--ac)'}"></div></div>
+      </div>
+      <div class="frow1"><label class="fl">Cantidad a consumir (${ins.unidad||'unidades'})</label><input type="number" id="m-consumo-qty" placeholder="0" min="0.01" step="0.01" max="${disp}"></div>
+      <div class="frow1"><label class="fl">Nota (opcional)</label><input type="text" id="m-consumo-nota" placeholder="Ej: Impresión de lote #41"></div>`;
+    document.getElementById('modal-bg').className='modal-bg open';
+    return;
+  }
 
   if(type==='venta'){
+    document.getElementById('modal-title').textContent=(mode==='new'?'Nueva ':'Editar ')+typeLabel(type);
     document.getElementById('modal-body').innerHTML=buildVentaModal();
-    if(mode==='new'){
-      addVentaLine();
-    } else if(id){
+    if(mode==='new'){addVentaLine();}
+    else if(id){
       const v=DATA.ventas.find(x=>x.id===id);
       if(v){
-        const s=id=>{const el=document.getElementById(id);return el;};
-        if(s('m-fecha'))s('m-fecha').value=v.fecha;
-        if(s('m-cliente'))s('m-cliente').value=v.cliente||'';
-        if(s('m-canal'))s('m-canal').value=v.canal;
-        if(s('m-estado'))s('m-estado').value=v.estado;
-        let items=[];
-        try{items=JSON.parse(v.items||'[]');}catch(e){}
-        if(items.length){items.forEach(i=>addVentaLine(i.producto_id,i.qty,i.precio_unit));}
-        else{addVentaLine();}
+        const s=(eid,val)=>{const el=document.getElementById(eid);if(el)el.value=val||'';};
+        s('m-fecha',v.fecha);s('m-cliente',v.cliente);s('m-canal',v.canal);s('m-estado',v.estado);
+        let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
+        items.length?items.forEach(i=>addVentaLine(i.producto_id,i.qty,i.precio_unit)):addVentaLine();
       }
     }
+  } else if(type==='compra'){
+    document.getElementById('modal-title').textContent='Registrar compra';
+    document.getElementById('modal-body').innerHTML=buildCompraModal();
+    onCompraTipoChange();
+  } else if(type==='produccion'){
+    const item=id?DATA.produccion.find(x=>x.id===id):null;
+    document.getElementById('modal-title').textContent=(mode==='new'?'Nueva ':'Editar ')+typeLabel(type);
+    const opts=DATA.productos.map(p=>`<option value="${p.id}" ${item&&item.producto_id==p.id?'selected':''}>${p.nombre} (stock: ${p.stock} u.)</option>`).join('');
+    document.getElementById('modal-body').innerHTML=`
+      <div class="info-box">Al marcar como <strong>terminado</strong> el stock del producto sube automáticamente.</div>
+      <div class="frow1"><label class="fl">Producto</label><select id="m-prod-id">${opts}</select></div>
+      <div class="frow"><div><label class="fl">Cantidad a producir</label><input type="number" id="m-cantidad" value="${item?item.cantidad:1}" min="1"></div><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${item?item.fecha:today()}"></div></div>
+      <div class="frow1"><label class="fl">Estado</label><select id="m-estado">
+        <option value="en curso" ${item&&item.estado==='en curso'?'selected':''}>En curso</option>
+        <option value="pausa" ${item&&item.estado==='pausa'?'selected':''}>En pausa</option>
+        <option value="terminado" ${item&&item.estado==='terminado'?'selected':''}>Terminado</option>
+        <option value="cancelado" ${item&&item.estado==='cancelado'?'selected':''}>Cancelado</option>
+      </select></div>`;
   } else {
+    document.getElementById('modal-title').textContent=(mode==='new'?'Nuevo ':'Editar ')+typeLabel(type);
     document.getElementById('modal-body').innerHTML=MODALS[type]?MODALS[type]():'';
     if(mode==='edit'&&id){
-      const arr=DATA[tableOf(type)];
-      const item=arr&&arr.find(x=>x.id===id);
+      const item=DATA[tableOf(type)]?.find(x=>x.id===id);
       if(item)fillForm(type,item);
     }
   }
-  document.querySelector('.fbtns').innerHTML='<button class="btn btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-p btn-sm" onclick="saveModal()">Guardar</button>';
   document.getElementById('modal-bg').className='modal-bg open';
 }
 
 function fillForm(type,item){
   const s=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v??'';};
-  if(type==='compra'){s('m-fecha',item.fecha);s('m-proveedor',item.proveedor);s('m-insumo',item.insumo);s('m-cantidad',item.cantidad);s('m-total',item.total);s('m-metodo',item.metodo);}
-  if(type==='producto'){s('m-nombre',item.nombre);s('m-tipo',item.tipo);s('m-stock',item.stock);s('m-costo',item.costo);s('m-precio',item.precio);}
   if(type==='filamento'){s('m-material',item.material);s('m-color',item.color);s('m-marca',item.marca);s('m-stock',item.stock);s('m-minimo',item.minimo);s('m-costo',item.costo_kg);}
+  if(type==='insumo'){s('m-nombre',item.nombre);s('m-categoria',item.categoria);s('m-marca',item.marca);s('m-cantidad',item.cantidad);s('m-unidad',item.unidad);s('m-consumido',item.consumido||0);s('m-costo',item.costo);}
+  if(type==='producto'){s('m-nombre',item.nombre);s('m-tipo',item.tipo);s('m-stock',item.stock);s('m-costo',item.costo);s('m-precio',item.precio);}
   if(type==='impresora'){s('m-nombre',item.nombre);s('m-modelo',item.modelo);s('m-colores',item.colores);s('m-horas',item.horas);s('m-estado',item.estado);}
-  if(type==='produccion'){s('m-producto',item.producto);s('m-impresora',item.impresora);s('m-material',item.material);s('m-fecha',item.fecha);s('m-estado',item.estado);}
+}
+
+/* venta multi-producto */
+function buildVentaModal(){
+  const opts=DATA.productos.map(p=>`<option value="${p.id}" data-precio="${p.precio}">${p.nombre} (${ars(p.precio)})</option>`).join('');
+  return`
+    <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Cliente</label><input type="text" id="m-cliente" placeholder="Nombre o —"></div></div>
+    <div class="frow"><div><label class="fl">Canal</label><select id="m-canal"><option>Instagram</option><option>WhatsApp</option><option>Feria</option><option>Directo</option><option>MercadoLibre</option><option>Otro</option></select></div><div><label class="fl">Estado</label><select id="m-estado"><option value="pagada">Pagada</option><option value="seña">Seña</option><option value="pendiente">Pendiente</option></select></div></div>
+    <label class="fl" style="margin-bottom:8px">Productos</label>
+    <div class="venta-items"><div class="venta-item-head"><span>Producto</span><span>Cant.</span><span>Precio unit.</span><span></span></div><div id="venta-lines"></div></div>
+    <button class="btn btn-sm" onclick="addVentaLine()" style="margin-bottom:14px">+ Agregar producto</button>
+    <div class="venta-total-row"><span style="font-size:13px;color:var(--text2)">Total</span><span class="venta-total-val" id="venta-total-display">${ars(0)}</span></div>`;
+}
+
+function addVentaLine(productoId=null,qty=1,precioUnit=null){
+  const opts=DATA.productos.map(p=>`<option value="${p.id}" ${productoId==p.id?'selected':''}>${p.nombre}</option>`).join('');
+  const idx=ventaLineIdx++;
+  const precio=precioUnit!==null?precioUnit:(productoId?DATA.productos.find(p=>p.id==productoId)?.precio||0:DATA.productos[0]?.precio||0);
+  const div=document.createElement('div');
+  div.className='venta-item-row';div.id='vline-'+idx;
+  div.innerHTML=`
+    <select onchange="onVentaLineChange(${idx})">${opts}</select>
+    <input type="number" min="1" value="${qty}" oninput="updateVentaTotal()">
+    <input type="number" min="0" value="${precio}" oninput="updateVentaTotal()">
+    <button class="btn-ghost" onclick="document.getElementById('vline-${idx}').remove();updateVentaTotal()">✕</button>`;
+  document.getElementById('venta-lines').appendChild(div);
+  updateVentaTotal();
+}
+
+function onVentaLineChange(idx){
+  const row=document.getElementById('vline-'+idx);if(!row)return;
+  const prod=DATA.productos.find(p=>p.id==row.querySelector('select').value);
+  if(prod)row.querySelectorAll('input')[1].value=prod.precio;
+  updateVentaTotal();
+}
+
+function getVentaLines(){
+  return Array.from(document.querySelectorAll('#venta-lines .venta-item-row')).map(row=>{
+    const sel=row.querySelector('select');
+    const inputs=row.querySelectorAll('input');
+    const pid=parseInt(sel.value);
+    const prod=DATA.productos.find(p=>p.id===pid);
+    return{producto_id:pid,nombre:prod?prod.nombre:sel.options[sel.selectedIndex]?.text||'',qty:parseInt(inputs[0].value)||1,precio_unit:parseFloat(inputs[1].value)||0};
+  });
+}
+
+function updateVentaTotal(){
+  const total=getVentaLines().reduce((a,l)=>a+(l.qty*l.precio_unit),0);
+  const el=document.getElementById('venta-total-display');
+  if(el)el.textContent=ars(total);
 }
 
 async function saveModal(){
   const type=modalMode,id=modalId;
-  const tbl=tableOf(type);
-  let obj={};
 
+  /* --- CONSUMO --- */
+  if(type==='consumo'){
+    const ins=DATA.insumos.find(x=>x.id===id);if(!ins)return;
+    const qty=parseFloat(gv('m-consumo-qty'))||0;
+    if(qty<=0){toast('Ingresá una cantidad válida',false);return;}
+    const disp=insDisp(ins);
+    if(qty>disp){toast(`Solo hay ${disp} ${ins.unidad||'u.'} disponibles`,false);return;}
+    const nuevoConsumo=(ins.consumido||0)+qty;
+    const {error}=await db.from('insumos').update({consumido:nuevoConsumo}).eq('id',id);
+    if(error){toast('Error: '+error.message,false);return;}
+    toast(`Consumo registrado — quedan ${Math.max(0,disp-qty)} ${ins.unidad||'u.'}`);
+    closeModal();
+    await reloadTable('insumos');renderAll();
+    return;
+  }
+
+  /* --- VENTA --- */
   if(type==='venta'){
     const lines=getVentaLines();
     if(!lines.length){toast('Agregá al menos un producto',false);return;}
     const total=lines.reduce((a,l)=>a+(l.qty*l.precio_unit),0);
     const descripcion=lines.map(l=>`${l.qty}× ${l.nombre}`).join(', ');
-    obj={
-      fecha:gv('m-fecha'),
-      cliente:gv('m-cliente')||'—',
-      canal:gv('m-canal'),
-      estado:gv('m-estado'),
-      total:total,
-      descripcion:descripcion,
-      items:JSON.stringify(lines)
-    };
-  } else if(type==='compra'){
-    obj={fecha:gv('m-fecha'),proveedor:gv('m-proveedor'),insumo:gv('m-insumo'),cantidad:gv('m-cantidad'),total:gn('m-total'),metodo:gv('m-metodo')};
-  } else if(type==='producto'){
-    obj={nombre:gv('m-nombre'),tipo:gv('m-tipo'),stock:gn('m-stock'),costo:gn('m-costo'),precio:gn('m-precio')};
-  } else if(type==='filamento'){
-    obj={material:gv('m-material'),color:gv('m-color'),marca:gv('m-marca'),stock:parseFloat(gv('m-stock'))||0,minimo:parseFloat(gv('m-minimo'))||0,costo_kg:gn('m-costo')};
-  } else if(type==='impresora'){
-    obj={nombre:gv('m-nombre'),modelo:gv('m-modelo'),colores:gn('m-colores'),horas:gn('m-horas'),estado:gv('m-estado')};
-  } else if(type==='produccion'){
-    obj={producto:gv('m-producto'),impresora:gv('m-impresora'),material:gv('m-material'),fecha:gv('m-fecha'),estado:gv('m-estado')};
+    const obj={fecha:gv('m-fecha'),cliente:gv('m-cliente')||'—',canal:gv('m-canal'),estado:gv('m-estado'),total,descripcion,items:JSON.stringify(lines)};
+    let err;
+    if(id){const r=await db.from('ventas').update(obj).eq('id',id);err=r.error;}
+    else{const r=await db.from('ventas').insert(obj);err=r.error;}
+    if(err){toast('Error: '+err.message,false);return;}
+    for(const l of lines){
+      const prod=DATA.productos.find(p=>p.id===l.producto_id);
+      if(prod&&prod.tipo==='catalogo'){
+        await db.from('productos').update({stock:Math.max(0,(prod.stock||0)-l.qty)}).eq('id',prod.id);
+      }
+    }
+    toast('Venta guardada — stock actualizado');
+    closeModal();
+    await reloadTable('ventas');await reloadTable('productos');
+    renderAll();if(curSec==='reportes')renderReportes();
+    return;
   }
 
+  /* --- COMPRA --- */
+  if(type==='compra'){
+    const tipoInsumo=gv('m-tipo-insumo');
+    const cantNum=parseFloat(gv('m-cantidad-num'))||0;
+    const unidad=gv('m-unidad');
+    let nombreInsumo='';
+    let insumoId=null;
+
+    if(tipoInsumo==='insumo'){
+      const sel=document.getElementById('m-insumo-id');
+      if(sel&&sel.value&&sel.value!=='nuevo'&&sel.value!==''){
+        insumoId=parseInt(sel.value);
+        const ins=DATA.insumos.find(i=>i.id===insumoId);
+        nombreInsumo=ins?ins.nombre:'';
+        // sumar cantidad al insumo existente
+        if(ins){
+          const nuevaCantidad=(ins.cantidad||0)+cantNum;
+          await db.from('insumos').update({cantidad:nuevaCantidad}).eq('id',insumoId);
+        }
+      } else {
+        nombreInsumo=gv('m-insumo-manual');
+        // crear insumo nuevo automáticamente
+        if(nombreInsumo){
+          const {data:newIns}=await db.from('insumos').insert({nombre:nombreInsumo,cantidad:cantNum,consumido:0,unidad,costo:gn('m-total')}).select().single();
+          if(newIns)insumoId=newIns.id;
+        }
+      }
+    } else {
+      nombreInsumo=gv('m-insumo');
+    }
+
+    const obj={
+      fecha:gv('m-fecha'),
+      proveedor:gv('m-proveedor'),
+      insumo:nombreInsumo,
+      cantidad:cantNum+' '+(unidad||''),
+      cantidad_num:cantNum,
+      unidad,
+      total:gn('m-total'),
+      metodo:gv('m-metodo'),
+      tipo_insumo:tipoInsumo,
+      insumo_id:insumoId
+    };
+    const {error}=await db.from('compras').insert(obj);
+    if(error){toast('Error: '+error.message,false);return;}
+    toast('Compra registrada'+(tipoInsumo==='insumo'&&insumoId?' — inventario actualizado':''));
+    closeModal();
+    await reloadTable('compras');await reloadTable('insumos');
+    renderAll();
+    return;
+  }
+
+  /* --- PRODUCCION --- */
+  if(type==='produccion'){
+    const prodId=parseInt(gv('m-prod-id'));
+    const cantidad=parseInt(gv('m-cantidad'))||1;
+    const estado=gv('m-estado');
+    const fecha=gv('m-fecha');
+    const prod=DATA.productos.find(p=>p.id===prodId);
+    if(!prod){toast('Seleccioná un producto válido',false);return;}
+    const prevEstado=id?DATA.produccion.find(x=>x.id===id)?.estado:null;
+    const obj={producto_id:prodId,producto:prod.nombre,cantidad,fecha,estado};
+    let err;
+    if(id){const r=await db.from('produccion').update(obj).eq('id',id);err=r.error;}
+    else{const r=await db.from('produccion').insert(obj);err=r.error;}
+    if(err){toast('Error: '+err.message,false);return;}
+    if(estado==='terminado'&&prevEstado!=='terminado'&&prod.tipo==='catalogo'){
+      await db.from('productos').update({stock:(prod.stock||0)+cantidad}).eq('id',prodId);
+      toast(`Terminado — +${cantidad} u. sumadas al stock`);
+    } else {toast('Orden guardada');}
+    closeModal();
+    await reloadTable('produccion');await reloadTable('productos');
+    renderAll();
+    return;
+  }
+
+  /* --- RESTO --- */
+  const tbl=tableOf(type);
+  let obj={};
+  if(type==='filamento')obj={material:gv('m-material'),color:gv('m-color'),marca:gv('m-marca'),stock:parseFloat(gv('m-stock'))||0,minimo:parseFloat(gv('m-minimo'))||0,costo_kg:gn('m-costo')};
+  if(type==='insumo')obj={nombre:gv('m-nombre'),categoria:gv('m-categoria'),marca:gv('m-marca'),cantidad:parseFloat(gv('m-cantidad'))||0,unidad:gv('m-unidad'),consumido:parseFloat(gv('m-consumido'))||0,costo:gn('m-costo')};
+  if(type==='producto')obj={nombre:gv('m-nombre'),tipo:gv('m-tipo'),stock:gn('m-stock'),costo:gn('m-costo'),precio:gn('m-precio')};
+  if(type==='impresora')obj={nombre:gv('m-nombre'),modelo:gv('m-modelo'),colores:gn('m-colores'),horas:gn('m-horas'),estado:gv('m-estado')};
   let err;
-  if(id){const {error}=await db.from(tbl).update(obj).eq('id',id);err=error;}
-  else{const {error}=await db.from(tbl).insert(obj);err=error;}
-  if(err){toast('Error al guardar: '+err.message,false);return;}
-  toast('Guardado correctamente');
+  if(id){const r=await db.from(tbl).update(obj).eq('id',id);err=r.error;}
+  else{const r=await db.from(tbl).insert(obj);err=r.error;}
+  if(err){toast('Error: '+err.message,false);return;}
+  toast('Guardado');
   closeModal();
-  const ord=tbl==='compras'||tbl==='ventas'?'fecha':'id';
-  const asc=tbl!=='compras'&&tbl!=='ventas'&&tbl!=='produccion';
-  const {data}=await db.from(tbl).select('*').order(ord,{ascending:asc});
-  DATA[tbl]=data||[];
-  renderAll();
-  if(curSec==='reportes')renderReportes();
+  await reloadTable(tbl);
+  renderAll();if(curSec==='reportes')renderReportes();
 }
 
 async function deleteItem(tbl,id){
-  if(!confirm('¿Eliminar este registro? Esta acción no se puede deshacer.'))return;
+  if(!confirm('¿Eliminar este registro?'))return;
   const {error}=await db.from(tbl).delete().eq('id',id);
   if(error){toast('Error al eliminar',false);return;}
   toast('Eliminado');
-  const ord=tbl==='compras'||tbl==='ventas'?'fecha':'id';
-  const asc=tbl!=='compras'&&tbl!=='ventas';
-  const {data}=await db.from(tbl).select('*').order(ord,{ascending:asc});
-  DATA[tbl]=data||[];
-  renderAll();
+  await reloadTable(tbl);renderAll();
 }
 
 function closeModal(){document.getElementById('modal-bg').className='modal-bg';}
