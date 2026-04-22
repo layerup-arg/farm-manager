@@ -611,42 +611,54 @@ function addConsLine(tipo){
   const div=document.createElement('div');
   div.className='ci-row';div.id='cline-'+idx;
   div.innerHTML=`
-    <input type="date" value="${today()}" style="font-size:11px;padding:4px 6px">
-    <select onchange="onConsLineChange(${idx})">${opts}</select>
-    <input type="number" min="0" step="0.01" value="1" oninput="updateCostoLine(${idx})">
+    <input type="date" id="cfecha-${idx}" value="${today()}" style="font-size:11px;padding:4px 6px">
+    <select id="csel-${idx}" onchange="onConsLineChange(${idx})">${opts}</select>
+    <input type="number" id="ccant-${idx}" min="0" step="0.01" value="1">
     <input type="text" id="cunit-${idx}" placeholder="kg" style="background:var(--bg3)">
     <input type="number" id="ccost-${idx}" min="0" step="0.01" value="0">
     <button class="btn-ghost" onclick="document.getElementById('cline-${idx}').remove()">✕</button>`;
   document.getElementById('cons-lines').appendChild(div);
-  // set initial values
-  const sel=div.querySelector('select');
-  const opt=sel.options[sel.selectedIndex];
-  div.querySelector('#cunit-'+idx).value=opt?.dataset?.unidad||'';
-  div.querySelector('#ccost-'+idx).value=opt?.dataset?.costo||0;
+  const sel=document.getElementById('csel-'+idx);
+  const opt=sel?.options[sel.selectedIndex];
+  if(opt){
+    document.getElementById('cunit-'+idx).value=opt.dataset?.unidad||'';
+    document.getElementById('ccost-'+idx).value=opt.dataset?.costo||0;
+  }
 }
 
 function onConsLineChange(idx){
-  const row=document.getElementById('cline-'+idx);if(!row)return;
-  const sel=row.querySelector('select');
+  const sel=document.getElementById('csel-'+idx);if(!sel)return;
   const opt=sel.options[sel.selectedIndex];
-  row.querySelector('#cunit-'+idx).value=opt?.dataset?.unidad||'';
-  row.querySelector('#ccost-'+idx).value=opt?.dataset?.costo||0;
+  if(opt){
+    document.getElementById('cunit-'+idx).value=opt.dataset?.unidad||'';
+    document.getElementById('ccost-'+idx).value=opt.dataset?.costo||0;
+  }
 }
 
-function updateCostoLine(idx){}
-
 function getConsLines(){
-  return Array.from(document.querySelectorAll('#cons-lines .ci-row')).map(row=>{
-    const inputs=row.querySelectorAll('input');
-    const sel=row.querySelector('select');
-    const val=sel.value; // fil_X or ins_X
+  const rows=document.querySelectorAll('#cons-lines .ci-row');
+  const result=[];
+  rows.forEach(row=>{
+    const id=row.id.replace('cline-','');
+    const sel=document.getElementById('csel-'+id);
+    if(!sel)return;
+    const val=sel.value;
+    if(!val)return;
     const tipo=val.startsWith('fil')?'filamento':'insumo';
     const itemId=parseInt(val.split('_')[1]);
+    if(isNaN(itemId))return;
     let itemNombre='';
     if(tipo==='filamento'){const f=DATA.filamentos.find(x=>x.id===itemId);itemNombre=f?`${f.material} ${f.color}`:'?';}
     else{const i=DATA.insumos.find(x=>x.id===itemId);itemNombre=i?i.nombre:'?';}
-    return{fecha:inputs[0].value,tipo,item_id:itemId,item_nombre:itemNombre,cantidad:parseFloat(inputs[2].value)||0,unidad:inputs[3].value,costo_unitario:parseFloat(inputs[4].value)||0};
+    result.push({
+      fecha:document.getElementById('cfecha-'+id)?.value||today(),
+      tipo,item_id:itemId,item_nombre:itemNombre,
+      cantidad:parseFloat(document.getElementById('ccant-'+id)?.value)||0,
+      unidad:document.getElementById('cunit-'+id)?.value||'',
+      costo_unitario:parseFloat(document.getElementById('ccost-'+id)?.value)||0
+    });
   });
+  return result;
 }
 
 /* ---- MODALES ---- */
