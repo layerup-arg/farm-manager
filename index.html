@@ -37,11 +37,12 @@ nav{flex:1;padding:8px;overflow-y:auto}
 .btn-p:hover{background:var(--ac-d)}
 .btn-sm{padding:5px 10px;font-size:11px}
 .btn-danger{background:var(--danger-l);color:var(--danger);border-color:var(--danger)}
-.btn-ghost{background:none;border:none;color:var(--text2);cursor:pointer;padding:4px 6px;border-radius:var(--radius);font-size:12px}
+.btn-ghost{background:none;border:none;color:var(--text2);cursor:pointer;padding:4px 6px;border-radius:var(--radius);font-size:13px;line-height:1}
 .btn-ghost:hover{background:var(--bg3);color:var(--text)}
 #cont{flex:1;overflow-y:auto;padding:20px}
 .sec{display:none}.sec.on{display:block}
 .kgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.kgrid3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .kgrid6{grid-template-columns:repeat(6,minmax(0,1fr))}
 .kcard{background:var(--bg3);border-radius:var(--radius);padding:14px 16px}
 .klbl{font-size:11px;color:var(--text2);margin-bottom:5px}
@@ -64,19 +65,20 @@ table.dt tr:hover td{background:var(--bg3)}
 .b-r{background:var(--danger-l);color:var(--danger)}
 .b-b{background:var(--info-l);color:var(--info)}
 .b-gr{background:var(--bg3);color:var(--text2)}
-.b-dark{background:var(--bg3);color:var(--text3)}
+.b-pu{background:#EEEDFE;color:#3C3489}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .bar-wrap{height:5px;background:var(--bg3);border-radius:3px;margin-top:6px;overflow:hidden}
 .bar-fill{height:100%;border-radius:3px}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:flex-start;justify-content:center;padding-top:40px;overflow-y:auto}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:flex-start;justify-content:center;padding-top:30px;overflow-y:auto}
 .modal-bg.open{display:flex}
-.modal{background:var(--bg2);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:22px;width:560px;margin-bottom:40px}
+.modal{background:var(--bg2);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:22px;width:620px;margin-bottom:40px}
 .modal h2{font-size:15px;font-weight:600;margin-bottom:16px;color:var(--text)}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .frow1{margin-bottom:12px}
 label.fl{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:500}
 input,select,textarea{width:100%;font-size:13px;padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(29,158,117,.15)}
+input:focus,select:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(29,158,117,.15)}
 .fbtns{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
 .empty{text-align:center;padding:36px;color:var(--text3);font-size:13px}
 .act-item{display:flex;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border)}
@@ -90,19 +92,24 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
 .pr-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .pr-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .venta-items{border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
-.venta-item-head{display:grid;grid-template-columns:1fr 80px 110px 32px;gap:8px;padding:7px 10px;background:var(--bg3);font-size:11px;font-weight:500;color:var(--text2)}
-.venta-item-row{display:grid;grid-template-columns:1fr 80px 110px 32px;gap:8px;padding:8px 10px;border-top:0.5px solid var(--border);align-items:center}
-.venta-item-row select,.venta-item-row input{padding:5px 8px;font-size:12px}
-.venta-total-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;border-top:0.5px solid var(--border);margin-top:4px}
-.venta-total-val{font-size:18px;font-weight:600;color:var(--text)}
+.vi-head{display:grid;grid-template-columns:1fr 80px 110px 32px;gap:8px;padding:7px 10px;background:var(--bg3);font-size:11px;font-weight:500;color:var(--text2)}
+.vi-row{display:grid;grid-template-columns:1fr 80px 110px 32px;gap:8px;padding:8px 10px;border-top:0.5px solid var(--border);align-items:center}
+.vi-row select,.vi-row input{padding:5px 8px;font-size:12px}
+.cons-items{border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:8px}
+.ci-head{display:grid;grid-template-columns:100px 1fr 80px 90px 100px 32px;gap:6px;padding:7px 10px;background:var(--bg3);font-size:11px;font-weight:500;color:var(--text2)}
+.ci-row{display:grid;grid-template-columns:100px 1fr 80px 90px 100px 32px;gap:6px;padding:8px 10px;border-top:0.5px solid var(--border);align-items:center}
+.ci-row select,.ci-row input{padding:5px 8px;font-size:12px}
 .detalle-item{display:flex;justify-content:space-between;padding:5px 0;border-bottom:0.5px solid var(--border);font-size:12px}
 .detalle-item:last-child{border-bottom:none}
 .info-box{background:var(--ac-l);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--ac-d);margin-bottom:12px}
 .filter-tabs{display:flex;gap:6px}
-.ftab{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2);transition:background .12s}
+.ftab{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:var(--bg2);color:var(--text2)}
 .ftab.on{background:var(--ac-l);color:var(--ac-d);border-color:var(--ac-l)}
-.consumo-bar{height:6px;background:var(--bg3);border-radius:3px;margin-top:5px;overflow:hidden;min-width:80px}
-.consumo-fill{height:100%;border-radius:3px;transition:width .3s}
+.consumo-bar{height:6px;background:var(--bg3);border-radius:3px;margin-top:5px;overflow:hidden}
+.consumo-fill{height:100%;border-radius:3px}
+.sec-divider{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;padding-bottom:6px;border-bottom:0.5px solid var(--border)}
+.rep-period{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.rep-period select{width:auto;font-size:12px;padding:6px 10px}
 </style>
 </head>
 <body>
@@ -121,7 +128,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
 </div>
 
 <div id="loading">
-  <div class="logo-box" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px"><svg viewBox="0 0 24 24" style="width:22px;height:22px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
+  <div class="logo-box" style="width:44px;height:44px;border-radius:12px;margin-bottom:4px;background:var(--ac);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:white;fill:none;stroke-width:2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></div>
   <div class="spin"></div>
   <p style="font-size:13px;color:var(--text2)">Cargando...</p>
 </div>
@@ -153,10 +160,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
 </div>
 
 <div id="main">
-  <div id="tb">
-    <h1 id="page-title">Dashboard</h1>
-    <button class="btn btn-p btn-sm" id="tb-btn" onclick="tbAction()">+ Nueva venta</button>
-  </div>
+  <div id="tb"><h1 id="page-title">Dashboard</h1><button class="btn btn-p btn-sm" id="tb-btn" onclick="tbAction()">+ Nueva venta</button></div>
   <div id="cont">
 
     <div id="sec-dash" class="sec on">
@@ -170,11 +174,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
 
     <div id="sec-filamentos" class="sec">
       <div class="card">
-        <div class="ch">
-          <span class="ct">Filamentos</span>
+        <div class="ch"><span class="ct">Filamentos</span>
           <div class="filter-tabs">
-            <div class="ftab on" id="fil-f-disp" onclick="setFilter('fil','disponible',this)">Con stock</div>
-            <div class="ftab" id="fil-f-agot" onclick="setFilter('fil','agotado',this)">Agotados</div>
+            <div class="ftab on" onclick="setFilter('fil','disponible',this)">Con stock</div>
+            <div class="ftab" onclick="setFilter('fil','agotado',this)">Agotados</div>
           </div>
         </div>
         <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Material</th><th>Color</th><th>Marca</th><th>Stock (kg)</th><th>Mínimo</th><th>Costo/kg</th><th>Estado</th><th></th></tr></thead><tbody id="tb-filamentos"></tbody></table></div>
@@ -183,11 +186,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
 
     <div id="sec-insumos" class="sec">
       <div class="card">
-        <div class="ch">
-          <span class="ct">Insumos</span>
+        <div class="ch"><span class="ct">Insumos</span>
           <div class="filter-tabs">
-            <div class="ftab on" id="ins-f-disp" onclick="setFilter('ins','disponible',this)">Disponibles</div>
-            <div class="ftab" id="ins-f-agot" onclick="setFilter('ins','agotado',this)">Acabados</div>
+            <div class="ftab on" onclick="setFilter('ins','disponible',this)">Disponibles</div>
+            <div class="ftab" onclick="setFilter('ins','agotado',this)">Acabados</div>
           </div>
         </div>
         <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Nombre</th><th>Categoría</th><th>Marca</th><th>Cantidad</th><th>Consumido</th><th>Disponible</th><th>Costo</th><th>Estado</th><th></th></tr></thead><tbody id="tb-insumos"></tbody></table></div>
@@ -195,7 +197,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
     </div>
 
     <div id="sec-productos" class="sec">
-      <div class="card"><div class="ch"><span class="ct">Catálogo de productos</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Producto</th><th>Tipo</th><th>Stock u.</th><th>Costo</th><th>Precio</th><th>Margen</th><th></th></tr></thead><tbody id="tb-productos"></tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">Catálogo</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Producto</th><th>Tipo</th><th>Stock u.</th><th>Costo</th><th>Precio</th><th>Margen</th><th></th></tr></thead><tbody id="tb-productos"></tbody></table></div></div>
     </div>
 
     <div id="sec-impresoras" class="sec">
@@ -203,7 +205,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
     </div>
 
     <div id="sec-produccion" class="sec">
-      <div class="card"><div class="ch"><span class="ct">Órdenes de producción</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>#</th><th>Producto</th><th>Cant.</th><th>Fecha</th><th>Estado</th><th></th></tr></thead><tbody id="tb-produccion"></tbody></table></div></div>
+      <div class="card"><div class="ch"><span class="ct">Órdenes de producción</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>#</th><th>Producto</th><th>Cant.</th><th>Fecha</th><th>Estado</th><th>Consumos</th><th></th></tr></thead><tbody id="tb-produccion"></tbody></table></div></div>
     </div>
 
     <div id="sec-compras" class="sec">
@@ -234,12 +236,25 @@ input:focus,select:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 
     </div>
 
     <div id="sec-reportes" class="sec">
+      <div class="rep-period">
+        <label class="fl" style="margin:0;white-space:nowrap">Período:</label>
+        <select id="rep-periodo" onchange="renderReportes()" style="width:160px">
+          <option value="todo">Todo el tiempo</option>
+          <option value="mes" selected>Este mes</option>
+          <option value="mes_ant">Mes anterior</option>
+          <option value="anio">Este año</option>
+        </select>
+      </div>
       <div class="kgrid" id="rep-kpis"></div>
       <div class="row2">
-        <div class="card"><div class="ch"><span class="ct">Ventas por canal</span></div><div class="cb" id="rep-canales"></div></div>
-        <div class="card"><div class="ch"><span class="ct">Materiales más comprados</span></div><div class="cb" id="rep-mats"></div></div>
+        <div class="card"><div class="ch"><span class="ct">Ingresos por canal de venta</span></div><div class="cb" id="rep-canales"></div></div>
+        <div class="card"><div class="ch"><span class="ct">Egresos por tipo</span></div><div class="cb" id="rep-egresos"></div></div>
       </div>
-      <div class="card"><div class="ch"><span class="ct">Productos más vendidos</span></div><div class="cb" id="rep-prods"></div></div>
+      <div class="row2">
+        <div class="card"><div class="ch"><span class="ct">Productos más vendidos</span></div><div class="cb" id="rep-prods"></div></div>
+        <div class="card"><div class="ch"><span class="ct">Materiales más consumidos</span></div><div class="cb" id="rep-consumos"></div></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Detalle de movimientos</span></div><div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Tipo</th><th>Descripción</th><th>Monto</th></tr></thead><tbody id="rep-movimientos"></tbody></table></div></div>
     </div>
 
   </div>
@@ -257,9 +272,9 @@ const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const {createClient}=supabase;
 const db=createClient(SUPA_URL,SUPA_KEY);
 
-let DATA={filamentos:[],insumos:[],productos:[],impresoras:[],produccion:[],compras:[],ventas:[]};
+let DATA={filamentos:[],insumos:[],productos:[],impresoras:[],produccion:[],compras:[],ventas:[],consumos:[]};
 let modalMode='',modalId=null,curSec='dash';
-let ventaLineIdx=0;
+let ventaLineIdx=0,consLineIdx=0;
 let filters={fil:'disponible',ins:'disponible'};
 
 const ars=n=>'$'+Math.round(n||0).toLocaleString('es-AR');
@@ -289,22 +304,19 @@ function toast(msg,ok=true){
 
 async function loadAll(){
   try{
-    const [fil,ins,pro,imp,ope,com,ven]=await Promise.all([
+    const [fil,ins,pro,imp,ope,com,ven,cons]=await Promise.all([
       db.from('filamentos').select('*').order('id'),
       db.from('insumos').select('*').order('id'),
       db.from('productos').select('*').order('id'),
       db.from('impresoras').select('*').order('id'),
       db.from('produccion').select('*').order('id',{ascending:false}),
       db.from('compras').select('*').order('fecha',{ascending:false}),
-      db.from('ventas').select('*').order('fecha',{ascending:false})
+      db.from('ventas').select('*').order('fecha',{ascending:false}),
+      db.from('consumos').select('*').order('fecha',{ascending:false})
     ]);
-    DATA.filamentos=fil.data||[];
-    DATA.insumos=ins.data||[];
-    DATA.productos=pro.data||[];
-    DATA.impresoras=imp.data||[];
-    DATA.produccion=ope.data||[];
-    DATA.compras=com.data||[];
-    DATA.ventas=ven.data||[];
+    DATA.filamentos=fil.data||[];DATA.insumos=ins.data||[];DATA.productos=pro.data||[];
+    DATA.impresoras=imp.data||[];DATA.produccion=ope.data||[];DATA.compras=com.data||[];
+    DATA.ventas=ven.data||[];DATA.consumos=cons.data||[];
     if(!DATA.impresoras.length)await seedImpresoras();
     renderAll();
   }catch(e){toast('Error al conectar con Supabase',false);}
@@ -313,20 +325,14 @@ async function loadAll(){
 }
 
 async function seedImpresoras(){
-  const imp=[
-    {nombre:'K2 Plus',modelo:'Creality K2 Plus',colores:8,estado:'libre',horas:0},
-    {nombre:'Bambu A1 #1',modelo:'Bambu Lab A1',colores:4,estado:'libre',horas:0},
-    {nombre:'Bambu A1 #2',modelo:'Bambu Lab A1',colores:4,estado:'libre',horas:0},
-    {nombre:'Ender V3 KE',modelo:'Creality Ender V3 KE',colores:1,estado:'libre',horas:0},
-    {nombre:'K1C',modelo:'Creality K1C',colores:1,estado:'libre',horas:0}
-  ];
+  const imp=[{nombre:'K2 Plus',modelo:'Creality K2 Plus',colores:8,estado:'libre',horas:0},{nombre:'Bambu A1 #1',modelo:'Bambu Lab A1',colores:4,estado:'libre',horas:0},{nombre:'Bambu A1 #2',modelo:'Bambu Lab A1',colores:4,estado:'libre',horas:0},{nombre:'Ender V3 KE',modelo:'Creality Ender V3 KE',colores:1,estado:'libre',horas:0},{nombre:'K1C',modelo:'Creality K1C',colores:1,estado:'libre',horas:0}];
   const {data}=await db.from('impresoras').insert(imp).select();
   DATA.impresoras=data||[];
 }
 
 async function reloadTable(tbl){
-  const ord=(tbl==='compras'||tbl==='ventas')?'fecha':(tbl==='produccion'?'id':'id');
   const asc=['productos','filamentos','insumos','impresoras'].includes(tbl);
+  const ord=['compras','ventas','consumos'].includes(tbl)?'fecha':tbl==='produccion'?'id':'id';
   const {data}=await db.from(tbl).select('*').order(ord,{ascending:asc});
   DATA[tbl]=data||[];
 }
@@ -334,26 +340,21 @@ async function reloadTable(tbl){
 function setFilter(type,val,el){
   filters[type]=val;
   const prefix=type==='fil'?'fil':'ins';
-  document.querySelectorAll(`[id^="${prefix}-f-"]`).forEach(e=>e.classList.remove('on'));
+  el.closest('.filter-tabs').querySelectorAll('.ftab').forEach(e=>e.classList.remove('on'));
   el.classList.add('on');
-  if(type==='fil')renderTbFilamentos();
-  else renderTbInsumos();
+  if(type==='fil')renderTbFilamentos();else renderTbInsumos();
 }
 
 function nav(id,el){
   document.querySelectorAll('.sec').forEach(s=>s.className='sec');
   document.getElementById('sec-'+id).className='sec on';
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  el.classList.add('on');
-  curSec=id;
+  el.classList.add('on');curSec=id;
   const titles={dash:'Dashboard',filamentos:'Filamentos',insumos:'Insumos',productos:'Catálogo',impresoras:'Impresoras',produccion:'Producción',compras:'Compras',ventas:'Ventas',costos:'Calculadora',reportes:'Reportes'};
   const btns={dash:'+ Nueva venta',filamentos:'+ Agregar filamento',insumos:'+ Agregar insumo',productos:'+ Nuevo producto',impresoras:'+ Agregar impresora',produccion:'+ Nueva orden',compras:'+ Registrar compra',ventas:'+ Nueva venta',costos:'',reportes:''};
   document.getElementById('page-title').textContent=titles[id]||id;
-  const bb=document.getElementById('tb-btn');
-  bb.textContent=btns[id]||'';
-  bb.style.display=btns[id]?'':'none';
-  if(id==='costos')calcCosto();
-  if(id==='reportes')renderReportes();
+  const bb=document.getElementById('tb-btn');bb.textContent=btns[id]||'';bb.style.display=btns[id]?'':'none';
+  if(id==='costos')calcCosto();if(id==='reportes')renderReportes();
   renderAll();
 }
 
@@ -363,22 +364,12 @@ function tbAction(){
 }
 
 function renderAll(){
-  renderDash();
-  renderTbFilamentos();
-  renderTbInsumos();
-  renderTbProductos();
-  renderTbImpresoras();
-  renderTbProduccion();
-  renderTbCompras();
-  renderTbVentas();
+  renderDash();renderTbFilamentos();renderTbInsumos();renderTbProductos();
+  renderTbImpresoras();renderTbProduccion();renderTbCompras();renderTbVentas();
 }
 
-/* helpers estado filamentos */
 const filCls=f=>f.stock<f.minimo?'b-r':f.stock<f.minimo*1.5?'b-a':'b-g';
 const filLbl=f=>f.stock<f.minimo?'Crítico':f.stock<f.minimo*1.5?'Bajo':'OK';
-const filAgotado=f=>f.stock<=0;
-
-/* helpers estado insumos */
 const insDisp=i=>(i.cantidad||0)-(i.consumido||0);
 const insAgotado=i=>insDisp(i)<=0;
 const insPct=i=>i.cantidad>0?Math.min(100,Math.round((i.consumido||0)/i.cantidad*100)):100;
@@ -391,121 +382,70 @@ function renderDash(){
   document.getElementById('dash-kpis').innerHTML=`
     <div class="kcard"><div class="klbl">Ventas registradas</div><div class="kval">${ars(tv)}</div><div class="kdelta">${DATA.ventas.length} operaciones</div></div>
     <div class="kcard"><div class="klbl">Órdenes activas</div><div class="kval">${act}</div><div class="kdelta">En producción</div></div>
-    <div class="kcard"><div class="klbl">Costo insumos</div><div class="kval">${ars(tc)}</div><div class="kdelta">${tv?Math.round(tc/tv*100):0}% de ventas</div></div>
-    <div class="kcard"><div class="klbl">Margen estimado</div><div class="kval">${mg}%</div><div class="kdelta ${mg>=50?'up':'dn'}">${mg>=50?'Saludable':'Revisar costos'}</div></div>`;
+    <div class="kcard"><div class="klbl">Total compras</div><div class="kval">${ars(tc)}</div></div>
+    <div class="kcard"><div class="klbl">Margen estimado</div><div class="kval">${mg}%</div><div class="kdelta ${mg>=50?'up':'dn'}">${mg>=50?'Saludable':'Revisar'}</div></div>`;
 
-  const dotColor=s=>s==='imprimiendo'?'var(--ac)':s==='pausa'?'#EF9F27':'var(--border2)';
-  const badgeCls=s=>s==='imprimiendo'?'b-g':s==='pausa'?'b-a':s==='mantenimiento'?'b-r':'b-gr';
-  document.getElementById('dash-printers').innerHTML=DATA.impresoras.map(p=>`
-    <div class="pr-row">
-      <div class="pr-dot" style="background:${dotColor(p.estado)}"></div>
-      <span style="flex:1;font-size:13px">${p.nombre}</span>
-      <span class="badge ${badgeCls(p.estado)}">${p.estado}</span>
-    </div>`).join('')||'<div class="empty">Sin impresoras</div>';
+  const dc=s=>s==='imprimiendo'?'var(--ac)':s==='pausa'?'#EF9F27':'var(--border2)';
+  const bc=s=>s==='imprimiendo'?'b-g':s==='pausa'?'b-a':s==='mantenimiento'?'b-r':'b-gr';
+  document.getElementById('dash-printers').innerHTML=DATA.impresoras.map(p=>`<div class="pr-row"><div class="pr-dot" style="background:${dc(p.estado)}"></div><span style="flex:1;font-size:13px">${p.nombre}</span><span class="badge ${bc(p.estado)}">${p.estado}</span></div>`).join('')||'<div class="empty">Sin impresoras</div>';
 
   const acts=[
-    ...DATA.ventas.slice(0,3).map(v=>({text:`Venta — ${v.descripcion||'varios'}`,sub:fdate(v.fecha)+' · '+ars(v.total),color:'var(--ac)'})),
+    ...DATA.ventas.slice(0,2).map(v=>({text:`Venta — ${v.descripcion||'varios'}`,sub:fdate(v.fecha)+' · '+ars(v.total),color:'var(--ac)'})),
     ...DATA.compras.slice(0,2).map(c=>({text:`Compra — ${c.insumo}`,sub:fdate(c.fecha)+' · '+ars(c.total),color:'#378ADD'})),
     ...DATA.produccion.filter(p=>p.estado==='en curso').slice(0,2).map(p=>({text:`Producción — ${p.producto}`,sub:fdate(p.fecha),color:'#EF9F27'}))
   ].slice(0,6);
-  document.getElementById('dash-activity').innerHTML=acts.length?acts.map(a=>`
-    <div class="act-item">
-      <div class="act-dot" style="background:${a.color}"></div>
-      <div><div style="font-size:12px">${a.text}</div><div style="font-size:11px;color:var(--text3)">${a.sub}</div></div>
-    </div>`).join(''):'<div class="empty">Sin actividad reciente</div>';
+  document.getElementById('dash-activity').innerHTML=acts.length?acts.map(a=>`<div class="act-item"><div class="act-dot" style="background:${a.color}"></div><div><div style="font-size:12px">${a.text}</div><div style="font-size:11px;color:var(--text3)">${a.sub}</div></div></div>`).join(''):'<div class="empty">Sin actividad</div>';
 
-  const alertsFil=DATA.filamentos.filter(f=>f.stock<f.minimo);
-  const alertsIns=DATA.insumos.filter(i=>insAgotado(i));
-  const allAlerts=[
-    ...alertsFil.map(f=>({nombre:`${f.material} ${f.color}`,val:`${f.stock} kg`,pct:Math.min(100,Math.round(f.stock/f.minimo*100)),color:'var(--danger)',tag:'Filamento'})),
-    ...alertsIns.map(i=>({nombre:i.nombre,val:'Acabado',pct:100,color:'var(--danger)',tag:'Insumo'}))
-  ];
-  document.getElementById('dash-alerts').innerHTML=allAlerts.length
-    ?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px">`+allAlerts.map(a=>`
-      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px">
-        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">${a.tag}</div>
-        <div style="font-size:12px;font-weight:600">${a.nombre}</div>
-        <div style="font-size:18px;font-weight:600;color:${a.color};margin:4px 0">${a.val}</div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${a.pct}%;background:${a.color}"></div></div>
-      </div>`).join('')+'</div>'
-    :'<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">Sin alertas — todo OK</div>';
+  const af=DATA.filamentos.filter(f=>f.stock<f.minimo);
+  const ai=DATA.insumos.filter(i=>insAgotado(i));
+  const all=[...af.map(f=>({n:`${f.material} ${f.color}`,v:`${f.stock} kg`,pct:Math.min(100,Math.round(f.stock/f.minimo*100)),tag:'Filamento'})),...ai.map(i=>({n:i.nombre,v:'Acabado',pct:100,tag:'Insumo'}))];
+  document.getElementById('dash-alerts').innerHTML=all.length?`<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">`+all.map(a=>`<div style="background:var(--bg3);border-radius:var(--radius);padding:12px"><div style="font-size:10px;color:var(--text3)">${a.tag}</div><div style="font-size:12px;font-weight:600">${a.n}</div><div style="font-size:18px;font-weight:600;color:var(--danger);margin:4px 0">${a.v}</div><div class="bar-wrap"><div class="bar-fill" style="width:${a.pct}%;background:var(--danger)"></div></div></div>`).join('')+'</div>':'<div style="text-align:center;padding:20px;color:var(--text2);font-size:13px">Sin alertas — todo OK</div>';
 }
 
 function renderTbFilamentos(){
-  const list=filters.fil==='disponible'
-    ?DATA.filamentos.filter(f=>!filAgotado(f))
-    :DATA.filamentos.filter(f=>filAgotado(f));
-  document.getElementById('tb-filamentos').innerHTML=list.map(f=>`<tr>
-    <td>${f.material}</td><td>${f.color}</td><td>${f.marca}</td>
-    <td>${f.stock}</td><td>${f.minimo}</td><td>${ars(f.costo_kg)}</td>
-    <td><span class="badge ${filCls(f)}">${filLbl(f)}</span></td>
-    <td><button class="btn btn-sm" onclick="openModal('filamento','edit',${f.id})">Editar</button></td>
-  </tr>`).join('')||`<tr><td colspan="8" class="empty">Sin filamentos ${filters.fil==='disponible'?'con stock':'agotados'}</td></tr>`;
+  const list=filters.fil==='disponible'?DATA.filamentos.filter(f=>f.stock>0):DATA.filamentos.filter(f=>f.stock<=0);
+  document.getElementById('tb-filamentos').innerHTML=list.map(f=>`<tr><td>${f.material}</td><td>${f.color}</td><td>${f.marca}</td><td>${f.stock}</td><td>${f.minimo}</td><td>${ars(f.costo_kg)}</td><td><span class="badge ${filCls(f)}">${filLbl(f)}</span></td><td><button class="btn btn-sm" onclick="openModal('filamento','edit',${f.id})">Editar</button></td></tr>`).join('')||`<tr><td colspan="8" class="empty">Sin filamentos ${filters.fil==='disponible'?'con stock':'agotados'}</td></tr>`;
 }
 
 function renderTbInsumos(){
-  const list=filters.ins==='disponible'
-    ?DATA.insumos.filter(i=>!insAgotado(i))
-    :DATA.insumos.filter(i=>insAgotado(i));
+  const list=filters.ins==='disponible'?DATA.insumos.filter(i=>!insAgotado(i)):DATA.insumos.filter(i=>insAgotado(i));
   document.getElementById('tb-insumos').innerHTML=list.map(i=>{
-    const disp=insDisp(i);
-    const pct=insPct(i);
-    const barColor=pct>=100?'var(--danger)':pct>=75?'#EF9F27':'var(--ac)';
-    return`<tr>
-      <td>${i.nombre}</td>
-      <td>${i.categoria||'—'}</td>
-      <td>${i.marca||'—'}</td>
-      <td>${i.cantidad} ${i.unidad||''}</td>
-      <td>
-        <div style="font-size:12px">${i.consumido||0} ${i.unidad||''}</div>
-        <div class="consumo-bar"><div class="consumo-fill" style="width:${pct}%;background:${barColor}"></div></div>
-      </td>
+    const disp=insDisp(i),pct=insPct(i);
+    const bc=pct>=100?'var(--danger)':pct>=75?'#EF9F27':'var(--ac)';
+    return`<tr><td>${i.nombre}</td><td>${i.categoria||'—'}</td><td>${i.marca||'—'}</td><td>${i.cantidad} ${i.unidad||''}</td>
+      <td><div style="font-size:12px">${i.consumido||0} ${i.unidad||''}</div><div class="consumo-bar"><div class="consumo-fill" style="width:${pct}%;background:${bc}"></div></div></td>
       <td><strong style="color:${disp<=0?'var(--danger)':'var(--text)'}">${disp} ${i.unidad||''}</strong></td>
       <td>${ars(i.costo)}</td>
       <td><span class="badge ${insAgotado(i)?'b-r':pct>=75?'b-a':'b-g'}">${insAgotado(i)?'Acabado':pct>=75?'Bajo':'OK'}</span></td>
-      <td style="display:flex;gap:4px">
-        <button class="btn btn-sm" onclick="openModal('consumo','new',${i.id})">Consumir</button>
-        <button class="btn btn-sm" onclick="openModal('insumo','edit',${i.id})">Editar</button>
-      </td>
-    </tr>`;
+      <td style="display:flex;gap:4px"><button class="btn btn-sm" onclick="openModal('insumo','edit',${i.id})">Editar</button></td></tr>`;
   }).join('')||`<tr><td colspan="9" class="empty">Sin insumos ${filters.ins==='disponible'?'disponibles':'acabados'}</td></tr>`;
 }
 
 function renderTbProductos(){
   document.getElementById('tb-productos').innerHTML=DATA.productos.map(p=>{
     const mg=p.precio&&p.costo?Math.round((p.precio-p.costo)/p.precio*100):null;
-    return`<tr>
-      <td>${p.nombre}</td>
-      <td><span class="badge ${p.tipo==='catalogo'?'b-b':'b-a'}">${p.tipo==='catalogo'?'Catálogo':'A medida'}</span></td>
-      <td>${p.tipo==='catalogo'?p.stock:'—'}</td>
-      <td>${p.costo?ars(p.costo):'—'}</td><td>${ars(p.precio)}</td>
-      <td>${mg!==null?mg+'%':'—'}</td>
-      <td><button class="btn btn-sm" onclick="openModal('producto','edit',${p.id})">Editar</button></td>
-    </tr>`;
+    return`<tr><td>${p.nombre}</td><td><span class="badge ${p.tipo==='catalogo'?'b-b':'b-a'}">${p.tipo==='catalogo'?'Catálogo':'A medida'}</span></td><td>${p.tipo==='catalogo'?p.stock:'—'}</td><td>${p.costo?ars(p.costo):'—'}</td><td>${ars(p.precio)}</td><td>${mg!==null?mg+'%':'—'}</td><td><button class="btn btn-sm" onclick="openModal('producto','edit',${p.id})">Editar</button></td></tr>`;
   }).join('')||'<tr><td colspan="7" class="empty">Sin productos</td></tr>';
 }
 
 function renderTbImpresoras(){
   const bc=s=>s==='imprimiendo'?'b-g':s==='pausa'?'b-a':s==='mantenimiento'?'b-r':'b-gr';
-  document.getElementById('tb-impresoras').innerHTML=DATA.impresoras.map(p=>`<tr>
-    <td>${p.nombre}</td><td>${p.modelo}</td><td>${p.colores}</td>
-    <td><span class="badge ${bc(p.estado)}">${p.estado}</span></td>
-    <td>${p.horas} hs</td>
-    <td><button class="btn btn-sm" onclick="openModal('impresora','edit',${p.id})">Editar</button></td>
-  </tr>`).join('')||'<tr><td colspan="6" class="empty">Sin impresoras</td></tr>';
+  document.getElementById('tb-impresoras').innerHTML=DATA.impresoras.map(p=>`<tr><td>${p.nombre}</td><td>${p.modelo}</td><td>${p.colores}</td><td><span class="badge ${bc(p.estado)}">${p.estado}</span></td><td>${p.horas} hs</td><td><button class="btn btn-sm" onclick="openModal('impresora','edit',${p.id})">Editar</button></td></tr>`).join('')||'<tr><td colspan="6" class="empty">Sin impresoras</td></tr>';
 }
 
 function renderTbProduccion(){
   const bc=s=>s==='en curso'?'b-g':s==='pausa'?'b-a':s==='terminado'?'b-b':'b-r';
-  document.getElementById('tb-produccion').innerHTML=DATA.produccion.map(p=>`<tr>
-    <td>#${p.id}</td><td>${p.producto}</td><td>${p.cantidad||1} u.</td>
-    <td>${fdate(p.fecha)}</td>
-    <td><span class="badge ${bc(p.estado)}">${p.estado}</span></td>
-    <td style="display:flex;gap:4px">
-      <button class="btn btn-sm" onclick="openModal('produccion','edit',${p.id})">Editar</button>
-      <button class="btn btn-sm btn-danger" onclick="deleteItem('produccion',${p.id})">✕</button>
-    </td>
-  </tr>`).join('')||'<tr><td colspan="6" class="empty">Sin órdenes</td></tr>';
+  document.getElementById('tb-produccion').innerHTML=DATA.produccion.map(p=>{
+    const ncons=DATA.consumos.filter(c=>c.produccion_id===p.id).length;
+    return`<tr><td>#${p.id}</td><td>${p.producto}</td><td>${p.cantidad||1} u.</td><td>${fdate(p.fecha)}</td>
+      <td><span class="badge ${bc(p.estado)}">${p.estado}</span></td>
+      <td><span style="font-size:12px;color:var(--text2)">${ncons} ítem${ncons!==1?'s':''}</span></td>
+      <td style="display:flex;gap:4px">
+        <button class="btn btn-sm" onclick="openModal('produccion','edit',${p.id})">Editar</button>
+        <button class="btn btn-sm b-pu" style="background:#EEEDFE;color:#3C3489;border-color:#EEEDFE" onclick="verConsumosProduccion(${p.id})">Consumos</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteItem('produccion',${p.id})">✕</button>
+      </td></tr>`;
+  }).join('')||'<tr><td colspan="7" class="empty">Sin órdenes</td></tr>';
 }
 
 function renderTbCompras(){
@@ -523,17 +463,9 @@ function renderTbVentas(){
   const bc=s=>s==='pagada'?'b-g':s==='seña'?'b-a':'b-r';
   document.getElementById('tb-ventas').innerHTML=DATA.ventas.map(v=>{
     let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
-    const resumen=items.length?items.map(i=>`${i.qty}× ${i.nombre}`).join(', '):(v.descripcion||'—');
-    return`<tr>
-      <td>${fdate(v.fecha)}</td><td>${v.cliente||'—'}</td>
-      <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis" title="${resumen}">${resumen}</td>
-      <td>${ars(v.total)}</td><td>${v.canal}</td>
-      <td><span class="badge ${bc(v.estado)}">${v.estado}</span></td>
-      <td style="display:flex;gap:4px">
-        <button class="btn btn-sm" onclick="verVenta(${v.id})">Ver</button>
-        <button class="btn btn-sm btn-danger" onclick="deleteItem('ventas',${v.id})">✕</button>
-      </td>
-    </tr>`;
+    const res=items.length?items.map(i=>`${i.qty}× ${i.nombre}`).join(', '):(v.descripcion||'—');
+    return`<tr><td>${fdate(v.fecha)}</td><td>${v.cliente||'—'}</td><td style="max-width:180px;overflow:hidden;text-overflow:ellipsis" title="${res}">${res}</td><td>${ars(v.total)}</td><td>${v.canal}</td><td><span class="badge ${bc(v.estado)}">${v.estado}</span></td>
+      <td style="display:flex;gap:4px"><button class="btn btn-sm" onclick="verVenta(${v.id})">Ver</button><button class="btn btn-sm btn-danger" onclick="deleteItem('ventas',${v.id})">✕</button></td></tr>`;
   }).join('')||'<tr><td colspan="7" class="empty">Sin ventas</td></tr>';
 }
 
@@ -543,10 +475,8 @@ function verVenta(id){
   document.getElementById('modal-title').textContent='Detalle de venta #'+v.id;
   document.getElementById('modal-body').innerHTML=`
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;font-size:13px">
-      <div><span style="color:var(--text2)">Fecha:</span> ${fdate(v.fecha)}</div>
-      <div><span style="color:var(--text2)">Cliente:</span> ${v.cliente||'—'}</div>
-      <div><span style="color:var(--text2)">Canal:</span> ${v.canal}</div>
-      <div><span style="color:var(--text2)">Estado:</span> <span class="badge ${v.estado==='pagada'?'b-g':v.estado==='seña'?'b-a':'b-r'}">${v.estado}</span></div>
+      <div><span style="color:var(--text2)">Fecha:</span> ${fdate(v.fecha)}</div><div><span style="color:var(--text2)">Cliente:</span> ${v.cliente||'—'}</div>
+      <div><span style="color:var(--text2)">Canal:</span> ${v.canal}</div><div><span style="color:var(--text2)">Estado:</span> <span class="badge ${v.estado==='pagada'?'b-g':v.estado==='seña'?'b-a':'b-r'}">${v.estado}</span></div>
     </div>
     <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">Productos</div>
     ${items.map(i=>`<div class="detalle-item"><span>${i.qty}× ${i.nombre}</span><span>${ars(i.precio_unit)} c/u = <strong>${ars(i.qty*i.precio_unit)}</strong></span></div>`).join('')}
@@ -555,34 +485,90 @@ function verVenta(id){
   document.getElementById('modal-bg').className='modal-bg open';
 }
 
+function verConsumosProduccion(opId){
+  const op=DATA.produccion.find(x=>x.id===opId);if(!op)return;
+  const cons=DATA.consumos.filter(c=>c.produccion_id===opId);
+  const totalCosto=cons.reduce((a,c)=>a+(c.cantidad||0)*(c.costo_unitario||0),0);
+  document.getElementById('modal-title').textContent=`Consumos — Orden #${opId} (${op.producto})`;
+  document.getElementById('modal-body').innerHTML=`
+    ${cons.length?`<table class="dt"><thead><tr><th>Fecha</th><th>Tipo</th><th>Item</th><th>Cantidad</th><th>Costo unit.</th><th>Subtotal</th></tr></thead><tbody>
+    ${cons.map(c=>`<tr><td>${fdate(c.fecha)}</td><td><span class="badge ${c.tipo==='filamento'?'b-gr':'b-b'}">${c.tipo}</span></td><td>${c.item_nombre}</td><td>${c.cantidad} ${c.unidad||''}</td><td>${ars(c.costo_unitario)}</td><td>${ars((c.cantidad||0)*(c.costo_unitario||0))}</td></tr>`).join('')}
+    </tbody></table>
+    <div style="display:flex;justify-content:flex-end;margin-top:12px;font-size:13px;font-weight:600">Costo total consumos: ${ars(totalCosto)}</div>`
+    :'<div class="empty">Sin consumos registrados para esta orden</div>'}`;
+  document.getElementById('modal-btns').innerHTML='<button class="btn btn-sm btn-p" onclick="closeModal();openModal(\'produccion\',\'edit\','+opId+')">Agregar consumos</button><button class="btn btn-sm" onclick="closeModal()">Cerrar</button>';
+  document.getElementById('modal-bg').className='modal-bg open';
+}
+
+/* ---- REPORTES ---- */
+function getPeriodDates(){
+  const now=new Date();const m=now.getMonth(),y=now.getFullYear();
+  const p=gv('rep-periodo');
+  if(p==='todo')return{desde:null,hasta:null};
+  if(p==='mes'){const d=new Date(y,m,1);const h=new Date(y,m+1,0);return{desde:d.toISOString().slice(0,10),hasta:h.toISOString().slice(0,10)};}
+  if(p==='mes_ant'){const d=new Date(y,m-1,1);const h=new Date(y,m,0);return{desde:d.toISOString().slice(0,10),hasta:h.toISOString().slice(0,10)};}
+  if(p==='anio'){return{desde:`${y}-01-01`,hasta:`${y}-12-31`};}
+  return{desde:null,hasta:null};
+}
+
+function filterByPeriod(arr,campo='fecha'){
+  const {desde,hasta}=getPeriodDates();
+  if(!desde)return arr;
+  return arr.filter(x=>x[campo]&&x[campo]>=desde&&x[campo]<=hasta);
+}
+
 function renderReportes(){
-  const tv=DATA.ventas.reduce((a,v)=>a+(v.total||0),0);
-  const tc=DATA.compras.reduce((a,c)=>a+(c.total||0),0);
-  const mg=tv?Math.round((tv-tc)/tv*100):0;
+  const ventas=filterByPeriod(DATA.ventas);
+  const compras=filterByPeriod(DATA.compras);
+  const consumos=filterByPeriod(DATA.consumos);
+
+  const tv=ventas.reduce((a,v)=>a+(v.total||0),0);
+  const tc=compras.reduce((a,c)=>a+(c.total||0),0);
+  const tcons=consumos.reduce((a,c)=>a+(c.cantidad||0)*(c.costo_unitario||0),0);
+  const ganancia=tv-tc;
+  const mg=tv?Math.round(ganancia/tv*100):0;
+
   document.getElementById('rep-kpis').innerHTML=`
-    <div class="kcard"><div class="klbl">Total ventas</div><div class="kval">${ars(tv)}</div></div>
-    <div class="kcard"><div class="klbl">Total compras</div><div class="kval">${ars(tc)}</div></div>
-    <div class="kcard"><div class="klbl">Ganancia bruta</div><div class="kval">${ars(tv-tc)}</div></div>
-    <div class="kcard"><div class="klbl">Margen</div><div class="kval">${mg}%</div></div>`;
-  const bar=(data,color)=>{
-    const keys=Object.keys(data).sort((a,b)=>data[b]-data[a]);
+    <div class="kcard"><div class="klbl">Ingresos (ventas)</div><div class="kval" style="color:var(--ac)">${ars(tv)}</div><div class="kdelta">${ventas.length} ventas</div></div>
+    <div class="kcard"><div class="klbl">Egresos (compras)</div><div class="kval" style="color:var(--danger)">${ars(tc)}</div><div class="kdelta">${compras.length} compras</div></div>
+    <div class="kcard"><div class="klbl">Costo de consumos</div><div class="kval">${ars(tcons)}</div><div class="kdelta">${consumos.length} consumos</div></div>
+    <div class="kcard"><div class="klbl">Ganancia bruta</div><div class="kval" style="color:${ganancia>=0?'var(--ac)':'var(--danger)'}">${ars(ganancia)}</div><div class="kdelta ${mg>=0?'up':'dn'}">Margen ${mg}%</div></div>`;
+
+  const bar=(data,color,prefix='')=>{
+    const keys=Object.keys(data).sort((a,b)=>data[b]-data[a]).slice(0,6);
     const max=keys.length?data[keys[0]]:1;
-    return keys.length?keys.map(k=>`
-      <div style="margin-bottom:10px">
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${k}</span><span>${ars(data[k])}</span></div>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(data[k]/max*100)}%;background:${color}"></div></div>
-      </div>`).join(''):'<div class="empty">Sin datos</div>';
+    return keys.length?keys.map(k=>`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${k}</span><span>${prefix}${ars(data[k])}</span></div><div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(data[k]/max*100)}%;background:${color}"></div></div></div>`).join(''):'<div class="empty">Sin datos</div>';
   };
-  const canales={};DATA.ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+(v.total||0)});
+
+  const canales={};ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+(v.total||0)});
   document.getElementById('rep-canales').innerHTML=bar(canales,'var(--ac)');
-  const mats={};DATA.compras.forEach(c=>{mats[c.insumo]=(mats[c.insumo]||0)+(c.total||0)});
-  document.getElementById('rep-mats').innerHTML=bar(mats,'#378ADD');
+
+  const egresos={'Compras filamentos':0,'Compras insumos':0,'Consumos prod.':tcons};
+  compras.forEach(c=>{const k=c.tipo_insumo==='insumo'?'Compras insumos':'Compras filamentos';egresos[k]=(egresos[k]||0)+(c.total||0);});
+  document.getElementById('rep-egresos').innerHTML=bar(egresos,'var(--danger)');
+
   const prods={};
-  DATA.ventas.forEach(v=>{
-    let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
-    items.forEach(i=>{prods[i.nombre]=(prods[i.nombre]||0)+(i.qty*i.precio_unit);});
-  });
+  ventas.forEach(v=>{let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}items.forEach(i=>{prods[i.nombre]=(prods[i.nombre]||0)+(i.qty*i.precio_unit);});});
   document.getElementById('rep-prods').innerHTML=bar(prods,'#7F77DD');
+
+  const matcons={};
+  consumos.forEach(c=>{matcons[c.item_nombre]=(matcons[c.item_nombre]||0)+(c.cantidad||0);});
+  const matkeys=Object.keys(matcons).sort((a,b)=>matcons[b]-matcons[a]).slice(0,6);
+  const maxM=matkeys.length?matcons[matkeys[0]]:1;
+  document.getElementById('rep-consumos').innerHTML=matkeys.length?matkeys.map(k=>`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${k}</span><span>${matcons[k]}</span></div><div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(matcons[k]/maxM*100)}%;background:#378ADD"></div></div></div>`).join(''):'<div class="empty">Sin datos</div>';
+
+  // movimientos unificados
+  const movs=[
+    ...ventas.map(v=>({fecha:v.fecha,tipo:'ingreso',desc:v.descripcion||'Venta',monto:v.total})),
+    ...compras.map(c=>({fecha:c.fecha,tipo:'egreso',desc:`Compra ${c.insumo}`,monto:-c.total})),
+    ...consumos.map(c=>({fecha:c.fecha,tipo:'consumo',desc:`Consumo ${c.item_nombre} (Orden #${c.produccion_id})`,monto:-(c.cantidad||0)*(c.costo_unitario||0)}))
+  ].sort((a,b)=>b.fecha?.localeCompare(a.fecha||'')||0);
+  document.getElementById('rep-movimientos').innerHTML=movs.length?movs.map(m=>`<tr>
+    <td>${fdate(m.fecha)}</td>
+    <td><span class="badge ${m.tipo==='ingreso'?'b-g':m.tipo==='egreso'?'b-r':'b-a'}">${m.tipo}</span></td>
+    <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis">${m.desc}</td>
+    <td style="font-weight:600;color:${m.monto>=0?'var(--ac)':'var(--danger)'}">${m.monto>=0?'+':''}${ars(Math.abs(m.monto))}</td>
+  </tr>`).join(''):'<tr><td colspan="4" class="empty">Sin movimientos</td></tr>';
 }
 
 function calcCosto(){
@@ -598,107 +584,152 @@ function calcCosto(){
     <div class="kcard"><div class="klbl">Precio sugerido</div><div class="kval" style="color:var(--ac)">${ars(sug)}</div><div class="kdelta up">Margen ${margen}%</div></div>`;
 }
 
-/* ---- MODALES ---- */
-function buildCompraModal(){
+/* ---- CONSUMOS EN PRODUCCION ---- */
+function buildConsumosSection(opId){
+  const filOpts=DATA.filamentos.map(f=>`<option value="fil_${f.id}" data-costo="${f.costo_kg}" data-unidad="kg">${f.material} ${f.color} (${ars(f.costo_kg)}/kg)</option>`).join('');
+  const insOpts=DATA.insumos.map(i=>`<option value="ins_${i.id}" data-costo="${i.costo&&i.cantidad?i.costo/i.cantidad:0}" data-unidad="${i.unidad||'u'}">${i.nombre} (disp: ${insDisp(i)} ${i.unidad||'u'})</option>`).join('');
   return`
-    <div class="frow1">
-      <label class="fl">Tipo de compra</label>
-      <select id="m-tipo-insumo" onchange="onCompraTipoChange()">
-        <option value="filamento">Filamento</option>
-        <option value="insumo">Insumo general</option>
-      </select>
+    <div class="sec-divider">Consumos de materiales</div>
+    <div class="cons-items">
+      <div class="ci-head"><span>Fecha</span><span>Item</span><span>Cant.</span><span>Unidad</span><span>Costo unit.</span><span></span></div>
+      <div id="cons-lines"></div>
     </div>
+    <button class="btn btn-sm" onclick="addConsLine('filamento','${filOpts.replace(/'/g,"\\'")}','${insOpts.replace(/'/g,"\\'")}')">+ Filamento</button>
+    <button class="btn btn-sm" style="margin-left:6px" onclick="addConsLine('insumo','${filOpts.replace(/'/g,"\\'")}','${insOpts.replace(/'/g,"\\'")}')">+ Insumo</button>`;
+}
+
+let consFilOpts='',consInsOpts='';
+function initConsumosSection(opId){
+  consFilOpts=DATA.filamentos.map(f=>`<option value="fil_${f.id}" data-costo="${f.costo_kg}" data-unidad="kg">${f.material} ${f.color} (${ars(f.costo_kg)}/kg)</option>`).join('');
+  consInsOpts=DATA.insumos.map(i=>`<option value="ins_${i.id}" data-costo="${i.costo&&i.cantidad?+(i.costo/i.cantidad).toFixed(4):0}" data-unidad="${i.unidad||'u'}">${i.nombre} (disp: ${insDisp(i)} ${i.unidad||'u'})</option>`).join('');
+}
+
+function addConsLine(tipo){
+  const opts=tipo==='filamento'?consFilOpts:consInsOpts;
+  if(!opts){toast('No hay '+(tipo==='filamento'?'filamentos':'insumos')+' cargados',false);return;}
+  const idx=consLineIdx++;
+  const div=document.createElement('div');
+  div.className='ci-row';div.id='cline-'+idx;
+  div.innerHTML=`
+    <input type="date" value="${today()}" style="font-size:11px;padding:4px 6px">
+    <select onchange="onConsLineChange(${idx})">${opts}</select>
+    <input type="number" min="0" step="0.01" value="1" oninput="updateCostoLine(${idx})">
+    <input type="text" id="cunit-${idx}" placeholder="kg" style="background:var(--bg3)">
+    <input type="number" id="ccost-${idx}" min="0" step="0.01" value="0">
+    <button class="btn-ghost" onclick="document.getElementById('cline-${idx}').remove()">✕</button>`;
+  document.getElementById('cons-lines').appendChild(div);
+  // set initial values
+  const sel=div.querySelector('select');
+  const opt=sel.options[sel.selectedIndex];
+  div.querySelector('#cunit-'+idx).value=opt?.dataset?.unidad||'';
+  div.querySelector('#ccost-'+idx).value=opt?.dataset?.costo||0;
+}
+
+function onConsLineChange(idx){
+  const row=document.getElementById('cline-'+idx);if(!row)return;
+  const sel=row.querySelector('select');
+  const opt=sel.options[sel.selectedIndex];
+  row.querySelector('#cunit-'+idx).value=opt?.dataset?.unidad||'';
+  row.querySelector('#ccost-'+idx).value=opt?.dataset?.costo||0;
+}
+
+function updateCostoLine(idx){}
+
+function getConsLines(){
+  return Array.from(document.querySelectorAll('#cons-lines .ci-row')).map(row=>{
+    const inputs=row.querySelectorAll('input');
+    const sel=row.querySelector('select');
+    const val=sel.value; // fil_X or ins_X
+    const tipo=val.startsWith('fil')?'filamento':'insumo';
+    const itemId=parseInt(val.split('_')[1]);
+    let itemNombre='';
+    if(tipo==='filamento'){const f=DATA.filamentos.find(x=>x.id===itemId);itemNombre=f?`${f.material} ${f.color}`:'?';}
+    else{const i=DATA.insumos.find(x=>x.id===itemId);itemNombre=i?i.nombre:'?';}
+    return{fecha:inputs[0].value,tipo,item_id:itemId,item_nombre:itemNombre,cantidad:parseFloat(inputs[2].value)||0,unidad:inputs[3].value,costo_unitario:parseFloat(inputs[4].value)||0};
+  });
+}
+
+/* ---- MODALES ---- */
+function buildVentaModal(){
+  const opts=DATA.productos.map(p=>`<option value="${p.id}">${p.nombre} (${ars(p.precio)})</option>`).join('');
+  return`<div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Cliente</label><input type="text" id="m-cliente" placeholder="—"></div></div>
+    <div class="frow"><div><label class="fl">Canal</label><select id="m-canal"><option>Instagram</option><option>WhatsApp</option><option>Feria</option><option>Directo</option><option>MercadoLibre</option><option>Otro</option></select></div><div><label class="fl">Estado</label><select id="m-estado"><option value="pagada">Pagada</option><option value="seña">Seña</option><option value="pendiente">Pendiente</option></select></div></div>
+    <label class="fl" style="margin-bottom:8px">Productos</label>
+    <div class="venta-items"><div class="vi-head"><span>Producto</span><span>Cant.</span><span>Precio unit.</span><span></span></div><div id="venta-lines"></div></div>
+    <button class="btn btn-sm" onclick="addVentaLine()" style="margin-bottom:14px">+ Agregar producto</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;border-top:0.5px solid var(--border)"><span style="font-size:13px;color:var(--text2)">Total</span><span style="font-size:18px;font-weight:600" id="venta-total-display">${ars(0)}</span></div>`;
+}
+
+function addVentaLine(pid=null,qty=1,pu=null){
+  const opts=DATA.productos.map(p=>`<option value="${p.id}" ${pid==p.id?'selected':''}>${p.nombre}</option>`).join('');
+  const idx=ventaLineIdx++;
+  const precio=pu!==null?pu:(pid?DATA.productos.find(p=>p.id==pid)?.precio||0:DATA.productos[0]?.precio||0);
+  const div=document.createElement('div');div.className='vi-row';div.id='vline-'+idx;
+  div.innerHTML=`<select onchange="onVentaLineChange(${idx})">${opts}</select><input type="number" min="1" value="${qty}" oninput="updateVentaTotal()"><input type="number" min="0" value="${precio}" oninput="updateVentaTotal()"><button class="btn-ghost" onclick="document.getElementById('vline-${idx}').remove();updateVentaTotal()">✕</button>`;
+  document.getElementById('venta-lines').appendChild(div);updateVentaTotal();
+}
+
+function onVentaLineChange(idx){
+  const row=document.getElementById('vline-'+idx);if(!row)return;
+  const prod=DATA.productos.find(p=>p.id==row.querySelector('select').value);
+  if(prod)row.querySelectorAll('input')[1].value=prod.precio;updateVentaTotal();
+}
+
+function getVentaLines(){
+  return Array.from(document.querySelectorAll('#venta-lines .vi-row')).map(row=>{
+    const sel=row.querySelector('select'),inputs=row.querySelectorAll('input');
+    const pid=parseInt(sel.value),prod=DATA.productos.find(p=>p.id===pid);
+    return{producto_id:pid,nombre:prod?prod.nombre:sel.options[sel.selectedIndex]?.text||'',qty:parseInt(inputs[0].value)||1,precio_unit:parseFloat(inputs[1].value)||0};
+  });
+}
+
+function updateVentaTotal(){
+  const t=getVentaLines().reduce((a,l)=>a+(l.qty*l.precio_unit),0);
+  const el=document.getElementById('venta-total-display');if(el)el.textContent=ars(t);
+}
+
+function buildCompraModal(){
+  return`<div class="frow1"><label class="fl">Tipo de compra</label><select id="m-tipo-insumo" onchange="onCompraTipoChange()"><option value="filamento">Filamento</option><option value="insumo">Insumo general</option></select></div>
     <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Proveedor</label><input type="text" id="m-proveedor" placeholder="Nombre proveedor"></div></div>
-    <div id="compra-insumo-select" style="display:none">
-      <div class="frow1"><label class="fl">Insumo</label>
-        <select id="m-insumo-id">
-          <option value="">— Seleccionar insumo existente —</option>
-          ${DATA.insumos.map(i=>`<option value="${i.id}">${i.nombre} (${i.categoria||''})</option>`).join('')}
-          <option value="nuevo">+ Ingresar nombre manualmente</option>
-        </select>
-      </div>
-      <div id="compra-insumo-manual" style="display:none">
-        <div class="frow1"><label class="fl">Nombre del insumo</label><input type="text" id="m-insumo-manual" placeholder="Ej: Cinta de embalaje"></div>
-      </div>
-    </div>
-    <div id="compra-fil-nombre">
-      <div class="frow1"><label class="fl">Descripción (filamento)</label><input type="text" id="m-insumo" placeholder="Ej: PLA+ Negro 1kg"></div>
-    </div>
-    <div class="frow">
-      <div><label class="fl">Cantidad</label><input type="number" id="m-cantidad-num" placeholder="0" min="0" step="0.01"></div>
-      <div><label class="fl">Unidad</label><input type="text" id="m-unidad" placeholder="kg, u, m, l..."></div>
-    </div>
+    <div id="compra-insumo-select" style="display:none"><div class="frow1"><label class="fl">Insumo</label><select id="m-insumo-id" onchange="onInsSelectChange()">${'<option value="">— Seleccionar —</option>'+DATA.insumos.map(i=>`<option value="${i.id}">${i.nombre}</option>`).join('')}<option value="nuevo">+ Nuevo insumo</option></select></div><div id="compra-insumo-manual" style="display:none"><div class="frow1"><label class="fl">Nombre del insumo</label><input type="text" id="m-insumo-manual" placeholder="Ej: Cinta de embalaje"></div></div></div>
+    <div id="compra-fil-nombre"><div class="frow1"><label class="fl">Descripción</label><input type="text" id="m-insumo" placeholder="Ej: PLA+ Negro 1kg"></div></div>
+    <div class="frow"><div><label class="fl">Cantidad</label><input type="number" id="m-cantidad-num" placeholder="0" min="0" step="0.01"></div><div><label class="fl">Unidad</label><input type="text" id="m-unidad" placeholder="kg, u, m, l..."></div></div>
     <div class="frow"><div><label class="fl">Total ARS</label><input type="number" id="m-total" placeholder="0"></div><div><label class="fl">Método de pago</label><select id="m-metodo"><option>Transferencia</option><option>Efectivo</option><option>Tarjeta</option><option>Débito</option></select></div></div>`;
 }
 
 function onCompraTipoChange(){
-  const tipo=gv('m-tipo-insumo');
-  document.getElementById('compra-insumo-select').style.display=tipo==='insumo'?'':'none';
-  document.getElementById('compra-fil-nombre').style.display=tipo==='filamento'?'':'none';
-  const sel=document.getElementById('m-insumo-id');
-  if(sel)sel.onchange=()=>{
-    const manual=document.getElementById('compra-insumo-manual');
-    if(manual)manual.style.display=sel.value==='nuevo'?'':'none';
-  };
+  const t=gv('m-tipo-insumo');
+  document.getElementById('compra-insumo-select').style.display=t==='insumo'?'':'none';
+  document.getElementById('compra-fil-nombre').style.display=t==='filamento'?'':'none';
+}
+function onInsSelectChange(){
+  const v=gv('m-insumo-id');
+  const m=document.getElementById('compra-insumo-manual');
+  if(m)m.style.display=v==='nuevo'?'':'none';
 }
 
 const MODALS={
-  producto:()=>`
-    <div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Nombre del producto"></div>
-    <div class="frow"><div><label class="fl">Tipo</label><select id="m-tipo"><option value="catalogo">Catálogo</option><option value="medida">A medida</option></select></div><div><label class="fl">Stock (u.)</label><input type="number" id="m-stock" value="0" min="0"></div></div>
-    <div class="frow"><div><label class="fl">Costo ARS</label><input type="number" id="m-costo" placeholder="0"></div><div><label class="fl">Precio venta ARS</label><input type="number" id="m-precio" placeholder="0"></div></div>`,
-  filamento:()=>`
-    <div class="frow"><div><label class="fl">Material</label><input type="text" id="m-material" placeholder="PLA+, PETG, ABS..."></div><div><label class="fl">Color</label><input type="text" id="m-color" placeholder="Negro, Blanco..."></div></div>
-    <div class="frow"><div><label class="fl">Marca</label><input type="text" id="m-marca" placeholder="Polymaker, Bambu..."></div><div><label class="fl">Stock actual (kg)</label><input type="number" id="m-stock" step="0.01" value="1"></div></div>
-    <div class="frow"><div><label class="fl">Stock mínimo (kg)</label><input type="number" id="m-minimo" step="0.01" value="0.5"></div><div><label class="fl">Costo por kg (ARS)</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
-  insumo:()=>`
-    <div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Ej: Cinta de embalaje, Bolsas, Acetona..."></div>
-    <div class="frow"><div><label class="fl">Categoría</label><input type="text" id="m-categoria" placeholder="Ej: Packaging, Limpieza, Adhesivos..."></div><div><label class="fl">Marca</label><input type="text" id="m-marca" placeholder="Marca o proveedor"></div></div>
-    <div class="frow"><div><label class="fl">Cantidad total</label><input type="number" id="m-cantidad" step="0.01" value="1" min="0"></div><div><label class="fl">Unidad</label><input type="text" id="m-unidad" placeholder="u, m, l, g, rollo..."></div></div>
-    <div class="frow"><div><label class="fl">Ya consumido</label><input type="number" id="m-consumido" step="0.01" value="0" min="0"></div><div><label class="fl">Costo total (ARS)</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
-  impresora:()=>`
-    <div class="frow"><div><label class="fl">Nombre corto</label><input type="text" id="m-nombre" placeholder="Ej: Bambu A1 #1"></div><div><label class="fl">Modelo</label><input type="text" id="m-modelo" placeholder="Ej: Bambu Lab A1"></div></div>
-    <div class="frow"><div><label class="fl">Colores disponibles</label><input type="number" id="m-colores" value="1" min="1" max="16"></div><div><label class="fl">Horas acumuladas</label><input type="number" id="m-horas" value="0" min="0"></div></div>
-    <div class="frow1"><label class="fl">Estado</label><select id="m-estado"><option value="libre">Libre</option><option value="imprimiendo">Imprimiendo</option><option value="pausa">En pausa</option><option value="mantenimiento">Mantenimiento</option></select></div>`
+  producto:()=>`<div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Nombre"></div><div class="frow"><div><label class="fl">Tipo</label><select id="m-tipo"><option value="catalogo">Catálogo</option><option value="medida">A medida</option></select></div><div><label class="fl">Stock</label><input type="number" id="m-stock" value="0"></div></div><div class="frow"><div><label class="fl">Costo ARS</label><input type="number" id="m-costo" placeholder="0"></div><div><label class="fl">Precio venta</label><input type="number" id="m-precio" placeholder="0"></div></div>`,
+  filamento:()=>`<div class="frow"><div><label class="fl">Material</label><input type="text" id="m-material" placeholder="PLA+..."></div><div><label class="fl">Color</label><input type="text" id="m-color" placeholder="Negro..."></div></div><div class="frow"><div><label class="fl">Marca</label><input type="text" id="m-marca"></div><div><label class="fl">Stock (kg)</label><input type="number" id="m-stock" step="0.01" value="1"></div></div><div class="frow"><div><label class="fl">Mínimo (kg)</label><input type="number" id="m-minimo" step="0.01" value="0.5"></div><div><label class="fl">Costo/kg</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
+  insumo:()=>`<div class="frow1"><label class="fl">Nombre</label><input type="text" id="m-nombre" placeholder="Ej: Cinta de embalaje..."></div><div class="frow"><div><label class="fl">Categoría</label><input type="text" id="m-categoria" placeholder="Packaging..."></div><div><label class="fl">Marca</label><input type="text" id="m-marca"></div></div><div class="frow"><div><label class="fl">Cantidad total</label><input type="number" id="m-cantidad" step="0.01" value="1"></div><div><label class="fl">Unidad</label><input type="text" id="m-unidad" placeholder="u, m, l..."></div></div><div class="frow"><div><label class="fl">Ya consumido</label><input type="number" id="m-consumido" step="0.01" value="0"></div><div><label class="fl">Costo total ARS</label><input type="number" id="m-costo" placeholder="0"></div></div>`,
+  impresora:()=>`<div class="frow"><div><label class="fl">Nombre</label><input type="text" id="m-nombre"></div><div><label class="fl">Modelo</label><input type="text" id="m-modelo"></div></div><div class="frow"><div><label class="fl">Colores</label><input type="number" id="m-colores" value="1"></div><div><label class="fl">Horas</label><input type="number" id="m-horas" value="0"></div></div><div class="frow1"><label class="fl">Estado</label><select id="m-estado"><option value="libre">Libre</option><option value="imprimiendo">Imprimiendo</option><option value="pausa">En pausa</option><option value="mantenimiento">Mantenimiento</option></select></div>`
 };
 
-const typeLabel=t=>({venta:'venta',compra:'compra',producto:'producto',filamento:'filamento',insumo:'insumo',impresora:'impresora',produccion:'orden',consumo:'consumo'}[t]||t);
 const tableOf=t=>({venta:'ventas',compra:'compras',producto:'productos',filamento:'filamentos',insumo:'insumos',impresora:'impresoras',produccion:'produccion'}[t]);
 
 function openModal(type,mode,id=null){
-  modalMode=type;modalId=id;ventaLineIdx=0;
+  modalMode=type;modalId=id;ventaLineIdx=0;consLineIdx=0;
   document.getElementById('modal-btns').innerHTML='<button class="btn btn-sm" onclick="closeModal()">Cancelar</button><button class="btn btn-p btn-sm" onclick="saveModal()">Guardar</button>';
 
-  if(type==='consumo'){
-    const ins=DATA.insumos.find(x=>x.id===id);if(!ins)return;
-    const disp=insDisp(ins);
-    document.getElementById('modal-title').textContent='Registrar consumo — '+ins.nombre;
-    document.getElementById('modal-body').innerHTML=`
-      <div style="background:var(--bg3);border-radius:var(--radius);padding:12px;margin-bottom:14px;font-size:13px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-          <span style="color:var(--text2)">Disponible actual</span>
-          <strong>${disp} ${ins.unidad||''}</strong>
-        </div>
-        <div class="consumo-bar" style="height:8px"><div class="consumo-fill" style="width:${insPct(ins)}%;background:${insPct(ins)>=100?'var(--danger)':insPct(ins)>=75?'#EF9F27':'var(--ac)'}"></div></div>
-      </div>
-      <div class="frow1"><label class="fl">Cantidad a consumir (${ins.unidad||'unidades'})</label><input type="number" id="m-consumo-qty" placeholder="0" min="0.01" step="0.01" max="${disp}"></div>
-      <div class="frow1"><label class="fl">Nota (opcional)</label><input type="text" id="m-consumo-nota" placeholder="Ej: Impresión de lote #41"></div>`;
-    document.getElementById('modal-bg').className='modal-bg open';
-    return;
-  }
-
   if(type==='venta'){
-    document.getElementById('modal-title').textContent=(mode==='new'?'Nueva ':'Editar ')+typeLabel(type);
+    document.getElementById('modal-title').textContent=mode==='new'?'Nueva venta':'Editar venta';
     document.getElementById('modal-body').innerHTML=buildVentaModal();
     if(mode==='new'){addVentaLine();}
     else if(id){
       const v=DATA.ventas.find(x=>x.id===id);
-      if(v){
-        const s=(eid,val)=>{const el=document.getElementById(eid);if(el)el.value=val||'';};
-        s('m-fecha',v.fecha);s('m-cliente',v.cliente);s('m-canal',v.canal);s('m-estado',v.estado);
+      if(v){const s=(e,val)=>{const el=document.getElementById(e);if(el)el.value=val||'';};s('m-fecha',v.fecha);s('m-cliente',v.cliente);s('m-canal',v.canal);s('m-estado',v.estado);
         let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
-        items.length?items.forEach(i=>addVentaLine(i.producto_id,i.qty,i.precio_unit)):addVentaLine();
-      }
+        items.length?items.forEach(i=>addVentaLine(i.producto_id,i.qty,i.precio_unit)):addVentaLine();}
     }
   } else if(type==='compra'){
     document.getElementById('modal-title').textContent='Registrar compra';
@@ -706,10 +737,11 @@ function openModal(type,mode,id=null){
     onCompraTipoChange();
   } else if(type==='produccion'){
     const item=id?DATA.produccion.find(x=>x.id===id):null;
-    document.getElementById('modal-title').textContent=(mode==='new'?'Nueva ':'Editar ')+typeLabel(type);
+    document.getElementById('modal-title').textContent=mode==='new'?'Nueva orden de producción':'Editar orden #'+id;
+    initConsumosSection(id);
     const opts=DATA.productos.map(p=>`<option value="${p.id}" ${item&&item.producto_id==p.id?'selected':''}>${p.nombre} (stock: ${p.stock} u.)</option>`).join('');
     document.getElementById('modal-body').innerHTML=`
-      <div class="info-box">Al marcar como <strong>terminado</strong> el stock del producto sube automáticamente.</div>
+      <div class="info-box">Al marcar como <strong>terminado</strong> el stock del producto sube. Los consumos impactan en los inventarios al guardar.</div>
       <div class="frow1"><label class="fl">Producto</label><select id="m-prod-id">${opts}</select></div>
       <div class="frow"><div><label class="fl">Cantidad a producir</label><input type="number" id="m-cantidad" value="${item?item.cantidad:1}" min="1"></div><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${item?item.fecha:today()}"></div></div>
       <div class="frow1"><label class="fl">Estado</label><select id="m-estado">
@@ -717,14 +749,17 @@ function openModal(type,mode,id=null){
         <option value="pausa" ${item&&item.estado==='pausa'?'selected':''}>En pausa</option>
         <option value="terminado" ${item&&item.estado==='terminado'?'selected':''}>Terminado</option>
         <option value="cancelado" ${item&&item.estado==='cancelado'?'selected':''}>Cancelado</option>
-      </select></div>`;
+      </select></div>
+      <div class="sec-divider">Consumos de materiales</div>
+      <div class="cons-items"><div class="ci-head"><span>Fecha</span><span>Item</span><span>Cant.</span><span>Unidad</span><span>Costo unit.</span><span></span></div><div id="cons-lines"></div></div>
+      <div style="display:flex;gap:8px;margin-bottom:4px">
+        <button class="btn btn-sm" onclick="addConsLine('filamento')">+ Filamento</button>
+        <button class="btn btn-sm" onclick="addConsLine('insumo')">+ Insumo</button>
+      </div>`;
   } else {
-    document.getElementById('modal-title').textContent=(mode==='new'?'Nuevo ':'Editar ')+typeLabel(type);
+    document.getElementById('modal-title').textContent=(mode==='new'?'Nuevo ':'Editar ')+type;
     document.getElementById('modal-body').innerHTML=MODALS[type]?MODALS[type]():'';
-    if(mode==='edit'&&id){
-      const item=DATA[tableOf(type)]?.find(x=>x.id===id);
-      if(item)fillForm(type,item);
-    }
+    if(mode==='edit'&&id){const item=DATA[tableOf(type)]?.find(x=>x.id===id);if(item)fillForm(type,item);}
   }
   document.getElementById('modal-bg').className='modal-bg open';
 }
@@ -737,178 +772,88 @@ function fillForm(type,item){
   if(type==='impresora'){s('m-nombre',item.nombre);s('m-modelo',item.modelo);s('m-colores',item.colores);s('m-horas',item.horas);s('m-estado',item.estado);}
 }
 
-/* venta multi-producto */
-function buildVentaModal(){
-  const opts=DATA.productos.map(p=>`<option value="${p.id}" data-precio="${p.precio}">${p.nombre} (${ars(p.precio)})</option>`).join('');
-  return`
-    <div class="frow"><div><label class="fl">Fecha</label><input type="date" id="m-fecha" value="${today()}"></div><div><label class="fl">Cliente</label><input type="text" id="m-cliente" placeholder="Nombre o —"></div></div>
-    <div class="frow"><div><label class="fl">Canal</label><select id="m-canal"><option>Instagram</option><option>WhatsApp</option><option>Feria</option><option>Directo</option><option>MercadoLibre</option><option>Otro</option></select></div><div><label class="fl">Estado</label><select id="m-estado"><option value="pagada">Pagada</option><option value="seña">Seña</option><option value="pendiente">Pendiente</option></select></div></div>
-    <label class="fl" style="margin-bottom:8px">Productos</label>
-    <div class="venta-items"><div class="venta-item-head"><span>Producto</span><span>Cant.</span><span>Precio unit.</span><span></span></div><div id="venta-lines"></div></div>
-    <button class="btn btn-sm" onclick="addVentaLine()" style="margin-bottom:14px">+ Agregar producto</button>
-    <div class="venta-total-row"><span style="font-size:13px;color:var(--text2)">Total</span><span class="venta-total-val" id="venta-total-display">${ars(0)}</span></div>`;
-}
-
-function addVentaLine(productoId=null,qty=1,precioUnit=null){
-  const opts=DATA.productos.map(p=>`<option value="${p.id}" ${productoId==p.id?'selected':''}>${p.nombre}</option>`).join('');
-  const idx=ventaLineIdx++;
-  const precio=precioUnit!==null?precioUnit:(productoId?DATA.productos.find(p=>p.id==productoId)?.precio||0:DATA.productos[0]?.precio||0);
-  const div=document.createElement('div');
-  div.className='venta-item-row';div.id='vline-'+idx;
-  div.innerHTML=`
-    <select onchange="onVentaLineChange(${idx})">${opts}</select>
-    <input type="number" min="1" value="${qty}" oninput="updateVentaTotal()">
-    <input type="number" min="0" value="${precio}" oninput="updateVentaTotal()">
-    <button class="btn-ghost" onclick="document.getElementById('vline-${idx}').remove();updateVentaTotal()">✕</button>`;
-  document.getElementById('venta-lines').appendChild(div);
-  updateVentaTotal();
-}
-
-function onVentaLineChange(idx){
-  const row=document.getElementById('vline-'+idx);if(!row)return;
-  const prod=DATA.productos.find(p=>p.id==row.querySelector('select').value);
-  if(prod)row.querySelectorAll('input')[1].value=prod.precio;
-  updateVentaTotal();
-}
-
-function getVentaLines(){
-  return Array.from(document.querySelectorAll('#venta-lines .venta-item-row')).map(row=>{
-    const sel=row.querySelector('select');
-    const inputs=row.querySelectorAll('input');
-    const pid=parseInt(sel.value);
-    const prod=DATA.productos.find(p=>p.id===pid);
-    return{producto_id:pid,nombre:prod?prod.nombre:sel.options[sel.selectedIndex]?.text||'',qty:parseInt(inputs[0].value)||1,precio_unit:parseFloat(inputs[1].value)||0};
-  });
-}
-
-function updateVentaTotal(){
-  const total=getVentaLines().reduce((a,l)=>a+(l.qty*l.precio_unit),0);
-  const el=document.getElementById('venta-total-display');
-  if(el)el.textContent=ars(total);
-}
-
 async function saveModal(){
   const type=modalMode,id=modalId;
 
-  /* --- CONSUMO --- */
-  if(type==='consumo'){
-    const ins=DATA.insumos.find(x=>x.id===id);if(!ins)return;
-    const qty=parseFloat(gv('m-consumo-qty'))||0;
-    if(qty<=0){toast('Ingresá una cantidad válida',false);return;}
-    const disp=insDisp(ins);
-    if(qty>disp){toast(`Solo hay ${disp} ${ins.unidad||'u.'} disponibles`,false);return;}
-    const nuevoConsumo=(ins.consumido||0)+qty;
-    const {error}=await db.from('insumos').update({consumido:nuevoConsumo}).eq('id',id);
-    if(error){toast('Error: '+error.message,false);return;}
-    toast(`Consumo registrado — quedan ${Math.max(0,disp-qty)} ${ins.unidad||'u.'}`);
-    closeModal();
-    await reloadTable('insumos');renderAll();
-    return;
-  }
-
-  /* --- VENTA --- */
   if(type==='venta'){
     const lines=getVentaLines();
     if(!lines.length){toast('Agregá al menos un producto',false);return;}
     const total=lines.reduce((a,l)=>a+(l.qty*l.precio_unit),0);
-    const descripcion=lines.map(l=>`${l.qty}× ${l.nombre}`).join(', ');
-    const obj={fecha:gv('m-fecha'),cliente:gv('m-cliente')||'—',canal:gv('m-canal'),estado:gv('m-estado'),total,descripcion,items:JSON.stringify(lines)};
+    const obj={fecha:gv('m-fecha'),cliente:gv('m-cliente')||'—',canal:gv('m-canal'),estado:gv('m-estado'),total,descripcion:lines.map(l=>`${l.qty}× ${l.nombre}`).join(', '),items:JSON.stringify(lines)};
     let err;
     if(id){const r=await db.from('ventas').update(obj).eq('id',id);err=r.error;}
     else{const r=await db.from('ventas').insert(obj);err=r.error;}
     if(err){toast('Error: '+err.message,false);return;}
-    for(const l of lines){
-      const prod=DATA.productos.find(p=>p.id===l.producto_id);
-      if(prod&&prod.tipo==='catalogo'){
-        await db.from('productos').update({stock:Math.max(0,(prod.stock||0)-l.qty)}).eq('id',prod.id);
-      }
-    }
-    toast('Venta guardada — stock actualizado');
-    closeModal();
-    await reloadTable('ventas');await reloadTable('productos');
-    renderAll();if(curSec==='reportes')renderReportes();
-    return;
+    for(const l of lines){const prod=DATA.productos.find(p=>p.id===l.producto_id);if(prod&&prod.tipo==='catalogo')await db.from('productos').update({stock:Math.max(0,(prod.stock||0)-l.qty)}).eq('id',prod.id);}
+    toast('Venta guardada');closeModal();
+    await Promise.all([reloadTable('ventas'),reloadTable('productos')]);
+    renderAll();if(curSec==='reportes')renderReportes();return;
   }
 
-  /* --- COMPRA --- */
   if(type==='compra'){
-    const tipoInsumo=gv('m-tipo-insumo');
-    const cantNum=parseFloat(gv('m-cantidad-num'))||0;
-    const unidad=gv('m-unidad');
-    let nombreInsumo='';
-    let insumoId=null;
-
+    const tipoInsumo=gv('m-tipo-insumo'),cantNum=parseFloat(gv('m-cantidad-num'))||0,unidad=gv('m-unidad');
+    let nombreInsumo='',insumoId=null;
     if(tipoInsumo==='insumo'){
-      const sel=document.getElementById('m-insumo-id');
-      if(sel&&sel.value&&sel.value!=='nuevo'&&sel.value!==''){
-        insumoId=parseInt(sel.value);
+      const selVal=gv('m-insumo-id');
+      if(selVal&&selVal!=='nuevo'&&selVal!==''){
+        insumoId=parseInt(selVal);
         const ins=DATA.insumos.find(i=>i.id===insumoId);
         nombreInsumo=ins?ins.nombre:'';
-        // sumar cantidad al insumo existente
-        if(ins){
-          const nuevaCantidad=(ins.cantidad||0)+cantNum;
-          await db.from('insumos').update({cantidad:nuevaCantidad}).eq('id',insumoId);
-        }
+        if(ins)await db.from('insumos').update({cantidad:(ins.cantidad||0)+cantNum}).eq('id',insumoId);
       } else {
         nombreInsumo=gv('m-insumo-manual');
-        // crear insumo nuevo automáticamente
-        if(nombreInsumo){
-          const {data:newIns}=await db.from('insumos').insert({nombre:nombreInsumo,cantidad:cantNum,consumido:0,unidad,costo:gn('m-total')}).select().single();
-          if(newIns)insumoId=newIns.id;
-        }
+        if(nombreInsumo){const {data:ni}=await db.from('insumos').insert({nombre:nombreInsumo,cantidad:cantNum,consumido:0,unidad,costo:gn('m-total')}).select().single();if(ni)insumoId=ni.id;}
       }
-    } else {
-      nombreInsumo=gv('m-insumo');
-    }
-
-    const obj={
-      fecha:gv('m-fecha'),
-      proveedor:gv('m-proveedor'),
-      insumo:nombreInsumo,
-      cantidad:cantNum+' '+(unidad||''),
-      cantidad_num:cantNum,
-      unidad,
-      total:gn('m-total'),
-      metodo:gv('m-metodo'),
-      tipo_insumo:tipoInsumo,
-      insumo_id:insumoId
-    };
+    } else {nombreInsumo=gv('m-insumo');}
+    const obj={fecha:gv('m-fecha'),proveedor:gv('m-proveedor'),insumo:nombreInsumo,cantidad:cantNum+' '+(unidad||''),cantidad_num:cantNum,unidad,total:gn('m-total'),metodo:gv('m-metodo'),tipo_insumo:tipoInsumo,insumo_id:insumoId};
     const {error}=await db.from('compras').insert(obj);
     if(error){toast('Error: '+error.message,false);return;}
-    toast('Compra registrada'+(tipoInsumo==='insumo'&&insumoId?' — inventario actualizado':''));
-    closeModal();
-    await reloadTable('compras');await reloadTable('insumos');
-    renderAll();
-    return;
+    toast('Compra registrada');closeModal();
+    await Promise.all([reloadTable('compras'),reloadTable('insumos')]);
+    renderAll();return;
   }
 
-  /* --- PRODUCCION --- */
   if(type==='produccion'){
-    const prodId=parseInt(gv('m-prod-id'));
-    const cantidad=parseInt(gv('m-cantidad'))||1;
-    const estado=gv('m-estado');
-    const fecha=gv('m-fecha');
+    const prodId=parseInt(gv('m-prod-id')),cantidad=parseInt(gv('m-cantidad'))||1;
+    const estado=gv('m-estado'),fecha=gv('m-fecha');
     const prod=DATA.productos.find(p=>p.id===prodId);
-    if(!prod){toast('Seleccioná un producto válido',false);return;}
+    if(!prod){toast('Seleccioná un producto',false);return;}
     const prevEstado=id?DATA.produccion.find(x=>x.id===id)?.estado:null;
     const obj={producto_id:prodId,producto:prod.nombre,cantidad,fecha,estado};
-    let err;
-    if(id){const r=await db.from('produccion').update(obj).eq('id',id);err=r.error;}
-    else{const r=await db.from('produccion').insert(obj);err=r.error;}
-    if(err){toast('Error: '+err.message,false);return;}
+    let opId=id;
+    if(id){const {error}=await db.from('produccion').update(obj).eq('id',id);if(error){toast('Error: '+error.message,false);return;}}
+    else{const {data:newOp,error}=await db.from('produccion').insert(obj).select().single();if(error){toast('Error: '+error.message,false);return;}opId=newOp.id;}
+
+    // guardar consumos nuevos
+    const consLines=getConsLines();
+    if(consLines.length){
+      const consRows=consLines.map(c=>({...c,produccion_id:opId}));
+      const {error:cerr}=await db.from('consumos').insert(consRows);
+      if(cerr){toast('Orden guardada pero error en consumos: '+cerr.message,false);}
+      else{
+        // impactar inventarios
+        for(const c of consLines){
+          if(c.tipo==='filamento'){
+            const f=DATA.filamentos.find(x=>x.id===c.item_id);
+            if(f){const ns=Math.max(0,(f.stock||0)-c.cantidad);await db.from('filamentos').update({stock:ns}).eq('id',f.id);}
+          } else {
+            const i=DATA.insumos.find(x=>x.id===c.item_id);
+            if(i){const nc=Math.min(i.cantidad||0,(i.consumido||0)+c.cantidad);await db.from('insumos').update({consumido:nc}).eq('id',i.id);}
+          }
+        }
+      }
+    }
+
     if(estado==='terminado'&&prevEstado!=='terminado'&&prod.tipo==='catalogo'){
       await db.from('productos').update({stock:(prod.stock||0)+cantidad}).eq('id',prodId);
-      toast(`Terminado — +${cantidad} u. sumadas al stock`);
-    } else {toast('Orden guardada');}
+      toast(`Terminado — +${cantidad} u. al stock${consLines.length?' · consumos registrados':''}`);
+    } else {toast('Orden guardada'+(consLines.length?` · ${consLines.length} consumo(s) registrados`:''));}
     closeModal();
-    await reloadTable('produccion');await reloadTable('productos');
-    renderAll();
-    return;
+    await Promise.all([reloadTable('produccion'),reloadTable('productos'),reloadTable('filamentos'),reloadTable('insumos'),reloadTable('consumos')]);
+    renderAll();if(curSec==='reportes')renderReportes();return;
   }
 
-  /* --- RESTO --- */
-  const tbl=tableOf(type);
-  let obj={};
+  const tbl=tableOf(type);let obj={};
   if(type==='filamento')obj={material:gv('m-material'),color:gv('m-color'),marca:gv('m-marca'),stock:parseFloat(gv('m-stock'))||0,minimo:parseFloat(gv('m-minimo'))||0,costo_kg:gn('m-costo')};
   if(type==='insumo')obj={nombre:gv('m-nombre'),categoria:gv('m-categoria'),marca:gv('m-marca'),cantidad:parseFloat(gv('m-cantidad'))||0,unidad:gv('m-unidad'),consumido:parseFloat(gv('m-consumido'))||0,costo:gn('m-costo')};
   if(type==='producto')obj={nombre:gv('m-nombre'),tipo:gv('m-tipo'),stock:gn('m-stock'),costo:gn('m-costo'),precio:gn('m-precio')};
@@ -917,18 +862,14 @@ async function saveModal(){
   if(id){const r=await db.from(tbl).update(obj).eq('id',id);err=r.error;}
   else{const r=await db.from(tbl).insert(obj);err=r.error;}
   if(err){toast('Error: '+err.message,false);return;}
-  toast('Guardado');
-  closeModal();
-  await reloadTable(tbl);
-  renderAll();if(curSec==='reportes')renderReportes();
+  toast('Guardado');closeModal();await reloadTable(tbl);renderAll();if(curSec==='reportes')renderReportes();
 }
 
 async function deleteItem(tbl,id){
   if(!confirm('¿Eliminar este registro?'))return;
   const {error}=await db.from(tbl).delete().eq('id',id);
-  if(error){toast('Error al eliminar',false);return;}
-  toast('Eliminado');
-  await reloadTable(tbl);renderAll();
+  if(error){toast('Error',false);return;}
+  toast('Eliminado');await reloadTable(tbl);renderAll();
 }
 
 function closeModal(){document.getElementById('modal-bg').className='modal-bg';}
