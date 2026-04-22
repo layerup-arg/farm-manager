@@ -797,6 +797,13 @@ function fillForm(type,item){
 
 async function saveModal(){
   const type=modalMode,id=modalId;
+  const saveBtn=document.querySelector('#modal-btns .btn-p');
+  if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Guardando...';}
+  try{ await _saveModal(type,id); }catch(e){toast('Error inesperado',false);}
+  finally{if(saveBtn){saveBtn.disabled=false;saveBtn.textContent='Guardar';}}
+}
+
+async function _saveModal(type,id){
 
   if(type==='venta'){
     const lines=getVentaLines();
@@ -856,31 +863,31 @@ async function saveModal(){
   }
 
   if(type==='produccion'){
+  if(type==='produccion'){
     const prodId=parseInt(gv('m-prod-id')),cantidad=parseInt(gv('m-cantidad'))||1;
     const estado=gv('m-estado'),fecha=gv('m-fecha');
     const prod=DATA.productos.find(p=>p.id===prodId);
     if(!prod){toast('Seleccioná un producto',false);return;}
     const prevEstado=id?DATA.produccion.find(x=>x.id===id)?.estado:null;
-    const obj={producto_id:prodId,producto:prod.nombre,cantidad,fecha,estado};
+    const objOp={producto_id:prodId,producto:prod.nombre,cantidad,fecha,estado};
     let opId=id;
-    if(id){const {error}=await db.from('produccion').update(obj).eq('id',id);if(error){toast('Error: '+error.message,false);return;}}
-    else{const {data:newOp,error}=await db.from('produccion').insert(obj).select().single();if(error){toast('Error: '+error.message,false);return;}opId=newOp.id;}
+    if(id){const {error}=await db.from('produccion').update(objOp).eq('id',id);if(error){toast('Error: '+error.message,false);return;}}
+    else{const {data:newOp,error}=await db.from('produccion').insert(objOp).select().single();if(error){toast('Error: '+error.message,false);return;}opId=newOp.id;}
 
-    // guardar consumos nuevos
+    // guardar consumos nuevos e impactar inventarios
     const consLines=getConsLines();
     if(consLines.length){
       const consRows=consLines.map(c=>({...c,produccion_id:opId}));
       const {error:cerr}=await db.from('consumos').insert(consRows);
       if(cerr){toast('Orden guardada pero error en consumos: '+cerr.message,false);}
       else{
-        // impactar inventarios
         for(const c of consLines){
           if(c.tipo==='filamento'){
             const f=DATA.filamentos.find(x=>x.id===c.item_id);
-            if(f){const ns=Math.max(0,(f.stock||0)-c.cantidad);await db.from('filamentos').update({stock:ns}).eq('id',f.id);}
+            if(f){await db.from('filamentos').update({stock:Math.max(0,(f.stock||0)-c.cantidad)}).eq('id',f.id);}
           } else {
             const i=DATA.insumos.find(x=>x.id===c.item_id);
-            if(i){const nc=Math.min(i.cantidad||0,(i.consumido||0)+c.cantidad);await db.from('insumos').update({consumido:nc}).eq('id',i.id);}
+            if(i){await db.from('insumos').update({consumido:Math.min(i.cantidad||0,(i.consumido||0)+c.cantidad)}).eq('id',i.id);}
           }
         }
       }
@@ -905,6 +912,7 @@ async function saveModal(){
   else{const r=await db.from(tbl).insert(obj);err=r.error;}
   if(err){toast('Error: '+err.message,false);return;}
   toast('Guardado');closeModal();await reloadTable(tbl);renderAll();if(curSec==='reportes')renderReportes();
+}
 }
 
 async function deleteItem(tbl,id){
