@@ -225,7 +225,7 @@ input:focus,select:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(29,158
 
     <div id="sec-ventas" class="sec">
       <div class="card"><div class="ch"><span class="ct">Registro de ventas</span></div>
-        <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Cliente</th><th>Productos</th><th>Total</th><th>Canal</th><th>Estado</th><th></th></tr></thead><tbody id="tb-ventas"></tbody></table></div>
+        <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Cliente</th><th>Productos</th><th>Recibido neto</th><th>Canal</th><th>Estado</th><th></th></tr></thead><tbody id="tb-ventas"></tbody></table></div>
       </div>
     </div>
 
@@ -263,7 +263,10 @@ input:focus,select:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(29,158
       </div>
       <div class="row2">
         <div class="card"><div class="ch"><span class="ct">Productos más vendidos</span></div><div class="cb" id="rep-prods"></div></div>
-        <div class="card"><div class="ch"><span class="ct">Materiales más consumidos</span></div><div class="cb" id="rep-consumos"></div></div>
+        <div class="card"><div class="ch"><span class="ct">Costo por material consumido</span></div><div class="cb" id="rep-consumos"></div></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Resultado por producto</span></div>
+        <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Producto</th><th>Unidades</th><th>Ing. brutos</th><th>Costo prod.</th><th>Costos adic.</th><th>Ganancia</th><th>Margen</th></tr></thead><tbody id="rep-por-producto"></tbody></table></div>
       </div>
       <div class="card"><div class="ch"><span class="ct">Movimientos</span></div>
         <div class="tbl-wrap cb"><table class="dt"><thead><tr><th>Fecha</th><th>Tipo</th><th>Descripción</th><th>Monto</th></tr></thead><tbody id="rep-movimientos"></tbody></table></div>
@@ -409,7 +412,7 @@ function renderAll(){
 }
 
 function renderDash(){
-  const tv=DATA.ventas.reduce((a,v)=>a+(v.total||0),0);
+  const tv=DATA.ventas.reduce((a,v)=>a+ventaNeto(v),0);
   const tc=DATA.compras.reduce((a,c)=>a+(c.total||0),0);
   const mg=tv?Math.round((tv-tc)/tv*100):0;
   const act=DATA.produccion.filter(p=>p.estado==='en curso').length;
@@ -512,7 +515,7 @@ function renderTbVentas(){
     const res=items.length?items.map(i=>`${i.qty}× ${i.nombre}`).join(', '):(v.descripcion||'—');
     return`<tr><td>${fdate(v.fecha)}</td><td>${v.cliente||'—'}</td>
       <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis" title="${res}">${res}</td>
-      <td>${ars(v.total)}</td><td>${v.canal}</td>
+      <td>${ars(ventaNeto(v))}</td><td>${v.canal}</td>
       <td><span class="badge ${bc(v.estado)}">${v.estado}</span></td>
       <td style="display:flex;gap:4px"><button class="btn btn-sm" onclick="verVenta(${v.id})">Ver</button><button class="btn btn-sm btn-danger" onclick="deleteItem('ventas',${v.id})">✕</button></td></tr>`;
   }).join('')||'<tr><td colspan="7" class="empty">Sin ventas</td></tr>';
@@ -529,7 +532,10 @@ function verVenta(id){
     </div>
     <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">Productos</div>
     ${items.map(i=>`<div class="detalle-item"><span>${i.qty}× ${i.nombre}</span><span>${ars(i.precio_unit)} c/u = <strong>${ars(i.qty*i.precio_unit)}</strong></span></div>`).join('')}
-    <div class="detalle-item" style="font-weight:600;margin-top:4px"><span>Total</span><span>${ars(v.total)}</span></div>`;
+    <div class="detalle-item" style="margin-top:6px;color:var(--text2)"><span>Subtotal productos</span><span>${ars(v.total)}</span></div>
+    ${(v.comision||0)>0?`<div class="detalle-item" style="color:var(--text2)"><span>− Comisión</span><span>${ars(v.comision)}</span></div>`:''}
+    ${(v.envio||0)>0?`<div class="detalle-item" style="color:var(--text2)"><span>− Envío</span><span>${ars(v.envio)}</span></div>`:''}
+    <div class="detalle-item" style="font-weight:600;margin-top:4px"><span>Recibido neto</span><span style="color:var(--ac)">${ars(ventaNeto(v))}</span></div>`;
   document.getElementById('modal-btns').innerHTML='<button class="btn btn-sm" onclick="closeModal()">Cerrar</button>';
   document.getElementById('modal-bg').className='modal-bg open';
 }
@@ -564,12 +570,12 @@ function filterByPeriod(arr,campo='fecha'){
 }
 function renderReportes(){
   const ventas=filterByPeriod(DATA.ventas),compras=filterByPeriod(DATA.compras),consumos=filterByPeriod(DATA.consumos);
-  const tv=ventas.reduce((a,v)=>a+(v.total||0),0);
+  const tv=ventas.reduce((a,v)=>a+ventaNeto(v),0);
   const tc=compras.reduce((a,c)=>a+(c.total||0),0);
   const tcons=consumos.reduce((a,c)=>a+(c.cantidad||0)*(c.costo_unitario||0),0);
   const ganancia=tv-tc,mg=tv?Math.round(ganancia/tv*100):0;
   document.getElementById('rep-kpis').innerHTML=`
-    <div class="kcard"><div class="klbl">Ingresos</div><div class="kval" style="color:var(--ac)">${ars(tv)}</div><div class="kdelta">${ventas.length} ventas</div></div>
+    <div class="kcard"><div class="klbl">Ingresos netos</div><div class="kval" style="color:var(--ac)">${ars(tv)}</div><div class="kdelta">${ventas.length} ventas</div></div>
     <div class="kcard"><div class="klbl">Egresos (compras)</div><div class="kval" style="color:var(--danger)">${ars(tc)}</div></div>
     <div class="kcard"><div class="klbl">Costo consumos</div><div class="kval">${ars(tcons)}</div></div>
     <div class="kcard"><div class="klbl">Ganancia bruta</div><div class="kval" style="color:${ganancia>=0?'var(--ac)':'var(--danger)'}">${ars(ganancia)}</div><div class="kdelta ${mg>=0?'up':'dn'}">Margen ${mg}%</div></div>`;
@@ -583,17 +589,37 @@ function renderReportes(){
     const max=keys.length?data[keys[0]]:1;
     return keys.length?keys.map(k=>`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${k}</span><span>${Math.round(data[k]*100)/100}</span></div><div class="bar-wrap"><div class="bar-fill" style="width:${Math.round(data[k]/max*100)}%;background:${color}"></div></div></div>`).join(''):'<div class="empty">Sin datos</div>';
   };
-  const canales={};ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+(v.total||0)});
+  const canales={};ventas.forEach(v=>{canales[v.canal]=(canales[v.canal]||0)+ventaNeto(v)});
   document.getElementById('rep-canales').innerHTML=bar(canales,'var(--ac)');
-  const egresos={'Compras filamentos':0,'Compras insumos':0,'Consumos producción':tcons};
+  const egresos={'Compras filamentos':0,'Compras insumos':0};
   compras.forEach(c=>{const k=c.tipo_insumo==='insumo'?'Compras insumos':'Compras filamentos';egresos[k]=(egresos[k]||0)+(c.total||0);});
   document.getElementById('rep-egresos').innerHTML=bar(egresos,'var(--danger)');
   const prods={};ventas.forEach(v=>{let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}items.forEach(i=>{prods[i.nombre]=(prods[i.nombre]||0)+(i.qty*i.precio_unit);});});
   document.getElementById('rep-prods').innerHTML=bar(prods,'#7F77DD');
-  const matcons={};consumos.forEach(c=>{matcons[c.item_nombre]=(matcons[c.item_nombre]||0)+(c.cantidad||0);});
-  document.getElementById('rep-consumos').innerHTML=barQty(matcons,'#378ADD');
+  const matcons={};consumos.forEach(c=>{matcons[c.item_nombre]=(matcons[c.item_nombre]||0)+(c.cantidad||0)*(c.costo_unitario||0);});
+  document.getElementById('rep-consumos').innerHTML=bar(matcons,'#378ADD');
+  const porProd={};
+  ventas.forEach(v=>{
+    let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
+    const subtotal=items.reduce((a,i)=>a+i.qty*i.precio_unit,0);
+    const adicTotal=(v.comision||0)+(v.envio||0);
+    items.forEach(i=>{
+      if(!porProd[i.nombre])porProd[i.nombre]={qty:0,bruto:0,costo:0,adicionales:0};
+      const p=porProd[i.nombre];
+      p.qty+=i.qty;
+      p.bruto+=i.qty*i.precio_unit;
+      p.costo+=i.qty*(i.costo_unit||0);
+      p.adicionales+=subtotal>0?(i.qty*i.precio_unit/subtotal)*adicTotal:0;
+    });
+  });
+  const ppRows=Object.entries(porProd).sort((a,b)=>b[1].bruto-a[1].bruto);
+  document.getElementById('rep-por-producto').innerHTML=ppRows.length?ppRows.map(([nombre,p])=>{
+    const gan=p.bruto-p.costo-p.adicionales;
+    const mg=p.bruto?Math.round(gan/p.bruto*100):0;
+    return`<tr><td>${nombre}</td><td>${p.qty}</td><td>${ars(p.bruto)}</td><td>${ars(Math.round(p.costo))}</td><td>${ars(Math.round(p.adicionales))}</td><td style="font-weight:600;color:${gan>=0?'var(--ac)':'var(--danger)'}">${ars(Math.round(gan))}</td><td><span class="badge ${mg>=30?'b-g':mg>=10?'b-a':'b-r'}">${mg}%</span></td></tr>`;
+  }).join(''):'<tr><td colspan="7" class="empty">Sin datos</td></tr>';
   const movs=[
-    ...ventas.map(v=>({fecha:v.fecha,tipo:'ingreso',desc:v.descripcion||'Venta',monto:v.total})),
+    ...ventas.map(v=>({fecha:v.fecha,tipo:'ingreso',desc:v.descripcion||'Venta',monto:ventaNeto(v)})),
     ...compras.map(c=>({fecha:c.fecha,tipo:'egreso',desc:`Compra ${c.insumo}`,monto:-c.total})),
     ...consumos.map(c=>({fecha:c.fecha,tipo:'consumo',desc:`Consumo ${c.item_nombre}`,monto:-(c.cantidad||0)*(c.costo_unitario||0)}))
   ].sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
@@ -734,7 +760,13 @@ function buildVentaModal(){
     <label class="fl" style="margin-bottom:8px">Productos</label>
     <div class="vi-items"><div class="vi-head"><span>Producto</span><span>Cant.</span><span>Precio unit.</span><span></span></div><div id="venta-lines"></div></div>
     <button class="btn btn-sm" onclick="addVentaLine()" style="margin-bottom:14px">+ Agregar producto</button>
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;border-top:0.5px solid var(--border)"><span style="font-size:13px;color:var(--text2)">Total</span><span style="font-size:18px;font-weight:600" id="venta-total-display">${ars(0)}</span></div>`;
+    <div class="frow" style="margin-bottom:10px"><div><label class="fl">Comisión</label><input type="number" id="m-comision" value="0" min="0" step="0.01" oninput="updateVentaTotal()"></div><div><label class="fl">Envío</label><input type="number" id="m-envio" value="0" min="0" step="0.01" oninput="updateVentaTotal()"></div></div>
+    <div style="padding:10px 0 0;border-top:0.5px solid var(--border);font-size:13px">
+      <div style="display:flex;justify-content:space-between;color:var(--text2);margin-bottom:3px"><span>Subtotal productos</span><span id="venta-subtotal-display">${ars(0)}</span></div>
+      <div style="display:flex;justify-content:space-between;color:var(--text2);margin-bottom:3px"><span>− Comisión</span><span id="venta-comision-display">${ars(0)}</span></div>
+      <div style="display:flex;justify-content:space-between;color:var(--text2);margin-bottom:6px"><span>− Envío</span><span id="venta-envio-display">${ars(0)}</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-weight:600"><span>Recibido neto</span><span style="font-size:18px;color:var(--ac)" id="venta-total-display">${ars(0)}</span></div>
+    </div>`;
 }
 function addVentaLine(pid=null,qty=1,pu=null){
   const opts=DATA.productos.map(p=>`<option value="${p.id}" ${pid==p.id?'selected':''}>${p.nombre}</option>`).join('');
@@ -757,9 +789,14 @@ function getVentaLines(){
   });
 }
 function updateVentaTotal(){
-  const t=getVentaLines().reduce((a,l)=>a+(l.qty*l.precio_unit),0);
-  const el=document.getElementById('venta-total-display');if(el)el.textContent=ars(t);
+  const sub=getVentaLines().reduce((a,l)=>a+(l.qty*l.precio_unit),0);
+  const com=parseFloat(document.getElementById('m-comision')?.value)||0;
+  const env=parseFloat(document.getElementById('m-envio')?.value)||0;
+  const neto=sub-com-env;
+  const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+  set('venta-subtotal-display',ars(sub));set('venta-comision-display',ars(com));set('venta-envio-display',ars(env));set('venta-total-display',ars(neto));
 }
+function ventaNeto(v){return v.neto!=null?v.neto:(v.total||0)-(v.comision||0)-(v.envio||0);}
 
 function buildCompraModal(){
   const filOpts='<option value="">— Seleccionar filamento —</option>'+DATA.filamentos.map(f=>`<option value="${f.id}">${f.material} ${f.color} — ${f.marca||''} (stock: ${f.stock} kg)</option>`).join('')+'<option value="nuevo">+ Nuevo filamento</option>';
@@ -886,8 +923,10 @@ function openModal(type,mode,id=null){
       if(v){
         const s=(e,val)=>{const el=document.getElementById(e);if(el)el.value=val||'';};
         s('m-fecha',v.fecha);s('m-cliente',v.cliente);s('m-canal',v.canal);s('m-estado',v.estado);
+        s('m-comision',v.comision||0);s('m-envio',v.envio||0);
         let items=[];try{items=JSON.parse(v.items||'[]');}catch(e){}
         items.length?items.forEach(i=>addVentaLine(i.producto_id,i.qty,i.precio_unit)):addVentaLine();
+        updateVentaTotal();
       }
     }
   } else if(type==='compra'){
@@ -941,10 +980,13 @@ async function doSave(){
   const type=modalMode, id=modalId;
 
   if(type==='venta'){
-    const lines=getVentaLines();
+    const lines=getVentaLines().map(l=>({...l,costo_unit:DATA.productos.find(p=>p.id===l.producto_id)?.costo||0}));
     if(!lines.length){toast('Agregá al menos un producto',false);return;}
     const total=lines.reduce((a,l)=>a+(l.qty*l.precio_unit),0);
-    const obj={fecha:gv('m-fecha'),cliente:gv('m-cliente')||'—',canal:gv('m-canal'),estado:gv('m-estado'),total,descripcion:lines.map(l=>`${l.qty}× ${l.nombre}`).join(', '),items:JSON.stringify(lines)};
+    const comision=parseFloat(document.getElementById('m-comision')?.value)||0;
+    const envio=parseFloat(document.getElementById('m-envio')?.value)||0;
+    const neto=total-comision-envio;
+    const obj={fecha:gv('m-fecha'),cliente:gv('m-cliente')||'—',canal:gv('m-canal'),estado:gv('m-estado'),total,comision,envio,neto,descripcion:lines.map(l=>`${l.qty}× ${l.nombre}`).join(', '),items:JSON.stringify(lines)};
     const {error}=id?await db.from('ventas').update(obj).eq('id',id):await db.from('ventas').insert(obj);
     if(error){toast('Error: '+error.message,false);return;}
     for(const l of lines){
